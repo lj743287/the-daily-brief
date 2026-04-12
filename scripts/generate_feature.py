@@ -8,36 +8,75 @@ from pathlib import Path
 import feedparser
 from openai import OpenAI
 
+MODEL_NAME = os.getenv("OPENAI_MODEL", "gpt-5")
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 BASE_DIR = Path(".")
 DATA_DIR = BASE_DIR / "data"
 FEATURES_DIR = BASE_DIR / "features"
 
-feeds = [
+FEEDS = [
     "https://feeds.bbci.co.uk/news/world/rss.xml",
     "https://feeds.bbci.co.uk/news/business/rss.xml",
-    "https://feeds.bbci.co.uk/news/uk/rss.xml"
+    "https://feeds.bbci.co.uk/news/uk/rss.xml",
+    "https://feeds.bbci.co.uk/news/technology/rss.xml",
+    "https://feeds.bbci.co.uk/sport/rss.xml",
+    "https://www.theguardian.com/world/rss",
+    "https://www.theguardian.com/business/rss",
+    "https://www.theguardian.com/uk-news/rss",
+    "https://www.theguardian.com/uk/technology/rss",
+    "https://www.theguardian.com/uk/sport/rss",
+    "https://apnews.com/hub/apf-topnews?output=rss",
 ]
 
-def slugify(text):
+def slugify(text: str) -> str:
     text = text.lower().strip()
     text = re.sub(r"[^a-z0-9\s-]", "", text)
     text = re.sub(r"\s+", "-", text)
     text = re.sub(r"-+", "-", text)
     return text[:80].strip("-") or "feature"
 
-def get_headlines():
-    headlines = []
-    for url in feeds:
-        feed = feedparser.parse(url)
-        for entry in feed.entries[:8]:
-            title = entry.get("title", "").strip()
-            if title and title not in headlines:
-                headlines.append(title)
-    return headlines[:20]
+def clean_text(raw_text: str) -> str:
+    if not raw_text:
+        return ""
+    text = re.sub(r"<[^>]+>", " ", raw_text)
+    text = html.unescape(text)
+    text = re.sub(r"\s+", " ", text)
+    return text.strip()
 
-def build_feature_page(title, standfirst, body_paragraphs, updated_time):
+def get_headline_signals() -> list[dict]:
+    signals = []
+    seen_titles = set()
+
+    for url in FEEDS:
+        try:
+            parsed = feedparser.parse(url)
+        except Exception as exc:
+            print(f"Warning: failed to parse {url}: {exc}")
+            continue
+
+        for entry in parsed.entries[:8]:
+            title = clean_text(entry.get("title", ""))
+            summary = clean_text(entry.get("summary", ""))
+            link = entry.get("link", "").strip()
+
+            if not title:
+                continue
+
+            normalised = re.sub(r"\s+", " ", title.lower()).strip()
+            if normalised in seen_titles:
+                continue
+
+            seen_titles.add(normalised)
+            signals.append({
+                "title": title,
+                "summary": summary,
+                "link": link,
+            })
+
+    return signals[:40]
+
+def build_feature_page(title: str, standfirst: str, body_paragraphs: list[str], updated_time: str) -> str:
     body_html = "\n".join(f"<p>{html.escape(p)}</p>" for p in body_paragraphs)
 
     return f"""<!DOCTYPE html>
@@ -134,13 +173,25 @@ def build_feature_page(title, standfirst, body_paragraphs, updated_time):
 </html>
 """
 
-headlines = get_headlines()
+signals = get_headline_signals()
 
 prompt = f"""
-You are writing the daily long-read feature for The Daily Brief, a premium newspaper.
+You are writing the daily long-read feature for The Daily Brief, a serious premium digital newspaper.
 
-Use these latest headlines as the live news signal:
-{headlines}
+SOURCE SIGNALS:
+{json.dumps(signals, ensure_ascii=False, indent=2)}
+
+EDITORIAL RULES:
+- British English.
+- Professional, elegant, serious newspaper prose.
+- This is a substantial feature, not a summary.
+- Global-first rather than UK-first.
+- Use context, structure, history where relevant, and likely future developments.
+- Distinguish fact from claim.
+- Show both sides where relevant, but do not create false balance.
+- Do not invent direct quotes.
+- Do not make up unsupported precise figures.
+- Avoid generic filler.
 
 Return valid JSON only in exactly this structure:
 
@@ -157,29 +208,17 @@ Return valid JSON only in exactly this structure:
     "Paragraph 7",
     "Paragraph 8",
     "Paragraph 9",
-    "Paragraph 10",
-    "Paragraph 11",
-    "Paragraph 12"
+    "Paragraph 10"
   ]
 }}
-
-Rules:
-- British English
-- Professional, elegant, serious newspaper prose
-- This is a substantial feature, not a summary
-- Aim for a proper long read with depth, context, both sides where relevant, evidence and implications
-- No markdown
-- No code fences
-- No extra text outside the JSON
 """
 
 response = client.responses.create(
-    model="gpt-5",
+    model=MODEL_NAME,
     input=prompt
 )
 
-raw = response.output_text.strip()
-data = json.loads(raw)
+data = json.loads(response.output_text.strip())
 
 now = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
 today = datetime.datetime.utcnow().strftime("%Y-%m-%d")
@@ -202,6 +241,7 @@ with open(FEATURES_DIR / filename, "w", encoding="utf-8") as f:
 with open(DATA_DIR / "feature.json", "w", encoding="utf-8") as f:
     json.dump({
         "last_updated": now,
+        "model_used": MODEL_NAME,
         "title": data["title"],
         "standfirst": data["standfirst"],
         "url": f"features/{filename}"
