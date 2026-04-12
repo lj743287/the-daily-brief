@@ -193,21 +193,9 @@ SOURCE_CONFIG = [
 ]
 
 FEATURE_PACKS = [
-    {
-        "key": "world",
-        "label": "World Feature",
-        "section": "World",
-    },
-    {
-        "key": "technology",
-        "label": "Technology Feature",
-        "section": "Science & Technology",
-    },
-    {
-        "key": "markets",
-        "label": "Markets Feature",
-        "section": "Markets & Economy",
-    },
+    {"key": "world", "label": "World Feature", "section": "World"},
+    {"key": "technology", "label": "Technology Feature", "section": "Science & Technology"},
+    {"key": "markets", "label": "Markets Feature", "section": "Markets & Economy"},
 ]
 
 
@@ -310,6 +298,23 @@ def extract_image_from_entry(entry):
     return ""
 
 
+def extract_published_at(entry):
+    struct_time_value = entry.get("published_parsed") or entry.get("updated_parsed")
+    if struct_time_value:
+        try:
+            dt = datetime.datetime(*struct_time_value[:6], tzinfo=datetime.timezone.utc)
+            return dt.strftime("%Y-%m-%d %H:%M:%S UTC")
+        except Exception:
+            pass
+
+    for key in ["published", "updated"]:
+        value = entry.get(key, "")
+        if isinstance(value, str) and value.strip():
+            return value.strip()
+
+    return ""
+
+
 def parse_rss_source(config, max_items=20):
     parsed = feedparser.parse(config["url"])
     signals = []
@@ -319,6 +324,7 @@ def parse_rss_source(config, max_items=20):
         summary = clean_text(entry.get("summary", ""))
         link = entry.get("link", "").strip()
         image_url = extract_image_from_entry(entry)
+        published_at = extract_published_at(entry)
 
         if not title:
             continue
@@ -332,6 +338,7 @@ def parse_rss_source(config, max_items=20):
             "summary": summary,
             "link": link,
             "image_url": image_url,
+            "published_at": published_at,
         })
 
     return signals
@@ -352,8 +359,11 @@ def parse_aljazeera_sitemap(config, max_items=20):
         news_node = url_node.find("news:news", ns)
 
         title = ""
+        published_at = ""
+
         if news_node is not None:
             title = news_node.findtext("news:title", default="", namespaces=ns).strip()
+            published_at = news_node.findtext("news:publication_date", default="", namespaces=ns).strip()
 
         if not title and loc:
             slug = loc.rstrip("/").split("/")[-1]
@@ -371,6 +381,7 @@ def parse_aljazeera_sitemap(config, max_items=20):
             "summary": "",
             "link": loc,
             "image_url": "",
+            "published_at": published_at,
         })
 
     return signals
@@ -402,7 +413,11 @@ def get_source_signals():
     return signals[:180]
 
 
-def build_story_page(title, section, story_type, summary, body_html, updated_time):
+def build_story_page(title, section, story_type, summary, body_html, updated_time, published_at=""):
+    published_html = ""
+    if published_at:
+        published_html = f'<div class="published">Published: {html.escape(published_at)}</div>'
+
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -438,7 +453,7 @@ def build_story_page(title, section, story_type, summary, body_html, updated_tim
       font-size: 3rem;
       line-height: 1.1;
     }}
-    .updated {{
+    .updated, .published {{
       margin-top: 10px;
       color: #666;
       font-size: 0.95rem;
@@ -488,6 +503,7 @@ def build_story_page(title, section, story_type, summary, body_html, updated_tim
     <header>
       <a class="brand" href="../index.html"><h1>The Daily Brief</h1></a>
       <div class="updated">Updated: {updated_time} UTC</div>
+      {published_html}
     </header>
     <a class="back" href="../index.html">← Back to front page</a>
     <article>
@@ -641,10 +657,14 @@ def build_homepage_page(updated_time, at_a_glance_items, lead_story, story_cards
         image_html = ""
         if lead_story.get("image_url"):
             image_html = f'<img class="lead-image" src="{html.escape(lead_story["image_url"])}" alt="{html.escape(lead_story["title"])}">'
+        published_html = ""
+        if lead_story.get("published_at"):
+            published_html = f'<div class="published-line">Published: {html.escape(lead_story["published_at"])}</div>'
         lead_html = f"""
         <section class="lead-story">
           {image_html}
           <div class="lead-meta">{html.escape(lead_story['section'])} | {html.escape(lead_story['story_type'])}</div>
+          {published_html}
           <h2><a href="{lead_story['url']}">{html.escape(lead_story['title'])}</a></h2>
           <p>{html.escape(lead_story['summary'])}</p>
         </section>
@@ -667,10 +687,15 @@ def build_homepage_page(updated_time, at_a_glance_items, lead_story, story_cards
         if lead_card.get("image_url"):
             section_lead_image = f'<img class="section-lead-image" src="{html.escape(lead_card["image_url"])}" alt="{html.escape(lead_card["title"])}">'
 
+        section_lead_published = ""
+        if lead_card.get("published_at"):
+            section_lead_published = f'<div class="published-line">Published: {html.escape(lead_card["published_at"])}</div>'
+
         section_lead_html = f"""
         <article class="section-lead-card">
           {section_lead_image}
           <div class="story-meta">{html.escape(lead_card['story_type'])}</div>
+          {section_lead_published}
           <h3><a href="{lead_card['url']}">{html.escape(lead_card['title'])}</a></h3>
           <p>{html.escape(lead_card['summary'])}</p>
         </article>
@@ -680,6 +705,7 @@ def build_homepage_page(updated_time, at_a_glance_items, lead_story, story_cards
             f"""
             <article class="story-card">
               <div class="story-meta">{html.escape(card['story_type'])}</div>
+              {'<div class="published-line">Published: ' + html.escape(card['published_at']) + '</div>' if card.get('published_at') else ''}
               <h4><a href="{card['url']}">{html.escape(card['title'])}</a></h4>
               <p>{html.escape(card['summary'])}</p>
             </article>
@@ -730,10 +756,10 @@ def build_homepage_page(updated_time, at_a_glance_items, lead_story, story_cards
       font-size: 3rem;
       line-height: 1.1;
     }}
-    .updated {{
-      margin-top: 10px;
+    .updated, .published-line {{
+      margin-top: 8px;
       color: #666;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
     }}
     .feature-block {{
       margin-top: 18px;
@@ -811,10 +837,10 @@ def build_homepage_page(updated_time, at_a_glance_items, lead_story, story_cards
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: #666;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }}
     .lead-story h2 {{
-      margin: 0 0 14px 0;
+      margin: 8px 0 14px 0;
       font-size: 2.4rem;
       line-height: 1.12;
     }}
@@ -855,7 +881,7 @@ def build_homepage_page(updated_time, at_a_glance_items, lead_story, story_cards
       border-bottom: 1px solid #dcdcdc;
     }}
     .section-lead-card h3 {{
-      margin: 0 0 10px 0;
+      margin: 8px 0 10px 0;
       font-size: 1.55rem;
       line-height: 1.25;
     }}
@@ -880,7 +906,7 @@ def build_homepage_page(updated_time, at_a_glance_items, lead_story, story_cards
       border-bottom: 1px solid #e6e6e6;
     }}
     .story-card h4 {{
-      margin: 0 0 8px 0;
+      margin: 8px 0 8px 0;
       font-size: 1.18rem;
       line-height: 1.3;
     }}
@@ -938,13 +964,15 @@ EDITORIAL RULES:
 - Present contested issues fairly.
 - Show both sides where relevant, but do not create false balance.
 - Distinguish evidence from claims.
-- Use context, stakes, trade-offs, history, and likely next steps.
+- Use context, stakes, trade-offs, history, historical background, precedent, and likely next steps.
 - The lead story must be the most important global story.
 - Markets & Economy should be treated as a serious pillar of the paper.
 - Science & Technology should focus on important developments, not gadget fluff.
-- Sport must prioritise these topics where justified by the signals:
-  Cardiff City, Tampa Bay Buccaneers, NFL, football transfer news and gossip, and cycling.
+- Sport must be tightly focused on:
+  Cardiff City, Tampa Bay Buccaneers, NFL, football transfer developments or gossip, and cycling.
+- If the live sport signals are thin for one of those priorities, you may create a careful state-of-play or watchlist story rather than drifting into random sport.
 - In sport, separate confirmed developments from credible reports and rumours where relevant.
+- Use timestamps and recency intelligently.
 - Do not invent direct quotes.
 - Do not make up precise statistics not clearly supported by the source signals.
 - Treat source metadata seriously.
@@ -1043,7 +1071,7 @@ ARTICLE DETAILS:
 - Standfirst: {summary}
 
 SOURCE SIGNALS:
-{json.dumps(signals[:50], ensure_ascii=False, indent=2)}
+{json.dumps(signals[:60], ensure_ascii=False, indent=2)}
 
 EDITORIAL RULES:
 - British English.
@@ -1054,6 +1082,8 @@ EDITORIAL RULES:
 - If different regions frame the same story differently, explain that carefully.
 - Prioritise consensus facts first.
 - Distinguish claims from supported facts.
+- Bring in historical context and background where it genuinely helps the reader understand the present moment.
+- For major geopolitical tensions, explain what earlier phases, flashpoints or negotiations form the backdrop.
 - Do not invent direct quotes.
 - Do not make up unsupported precise figures.
 - Avoid robotic phrasing.
@@ -1089,14 +1119,17 @@ def build_section_body_prompt(section, stories, signals):
     if section == "Sport":
         sport_priority_terms = [
             "cardiff city",
+            "cardiff",
             "tampa bay buccaneers",
             "buccaneers",
             "nfl",
             "transfer",
             "cycling",
             "tour",
-            "premier league",
             "championship",
+            "premier league",
+            "draft",
+            "window",
         ]
         prioritised = []
         others = []
@@ -1109,7 +1142,7 @@ def build_section_body_prompt(section, stories, signals):
         section_signals = prioritised + others
 
     if len(section_signals) < 20:
-        section_signals = signals[:60]
+        section_signals = signals[:70]
 
     return f"""
 You are writing a full section package for The Daily Brief.
@@ -1121,7 +1154,7 @@ STORIES TO WRITE:
 {json.dumps(stories, ensure_ascii=False, indent=2)}
 
 SOURCE SIGNALS:
-{json.dumps(section_signals[:60], ensure_ascii=False, indent=2)}
+{json.dumps(section_signals[:70], ensure_ascii=False, indent=2)}
 
 EDITORIAL RULES:
 - British English.
@@ -1132,11 +1165,15 @@ EDITORIAL RULES:
 - Where regional framings differ, mention that only if it genuinely helps the reader.
 - Do not force artificial balance.
 - Distinguish evidence from claims.
+- Bring in historical context and background where it genuinely improves understanding.
+- Each story should help the reader see not just what happened, but what led to it and what may come next.
 - No invented quotes.
 - No unsupported precise figures.
 - Avoid generic filler.
 - Every paragraph must add something new.
-- For Sport, focus on Cardiff City, Tampa Bay Buccaneers, NFL, football transfer developments and cycling where supported by the signals.
+- For Sport, stay tightly focused on Cardiff City, Tampa Bay Buccaneers, NFL, football transfer developments or gossip, and cycling.
+- Do not drift into generic sport simply to fill space.
+- If a requested sport priority has little fresh reporting in the signals, write a careful watch, state-of-play, or context piece rather than pretending there is breaking news.
 - For football transfer items, clearly imply the difference between confirmed developments, credible reports and rumours where relevant.
 
 Return valid JSON only in exactly this structure:
@@ -1173,7 +1210,7 @@ def build_multi_feature_prompt(feature_pack, signals):
         relevant_signals = [s for s in signals if s["section"] == section]
 
     if len(relevant_signals) < 20:
-        relevant_signals = signals[:60]
+        relevant_signals = signals[:70]
 
     return f"""
 You are writing one of the featured pieces for The Daily Brief.
@@ -1183,15 +1220,15 @@ FEATURE TOPIC:
 - Core section: {section}
 
 SOURCE SIGNALS:
-{json.dumps(relevant_signals[:60], ensure_ascii=False, indent=2)}
+{json.dumps(relevant_signals[:70], ensure_ascii=False, indent=2)}
 
 EDITORIAL RULES:
 - British English.
 - Serious, elegant, substantial newspaper prose.
 - This is a featured piece, deeper than a routine article.
 - Use context, structure, history where relevant, and likely future developments.
-- Use evidence carefully.
 - Distinguish fact from claim.
+- Historical context should be used naturally where it genuinely helps.
 - Do not invent direct quotes.
 - Do not make up unsupported precise figures.
 - For Markets & Economy, focus on the biggest macro or market-moving theme.
@@ -1235,18 +1272,25 @@ FEATURES_DIR.mkdir(parents=True, exist_ok=True)
 
 used_slugs = set()
 
-signal_image_map = {}
+signal_map = {}
 for signal in signals:
     norm = normalise_title(signal["title"])
-    if norm and norm not in signal_image_map and signal.get("image_url"):
-        signal_image_map[norm] = signal["image_url"]
+    if not norm:
+        continue
+    if norm not in signal_map:
+        signal_map[norm] = {
+            "image_url": signal.get("image_url", ""),
+            "published_at": signal.get("published_at", ""),
+        }
 
 lead_story = outline_data["lead_story"]
 lead_title = lead_story["title"].strip()
 lead_section = coerce_section(lead_story["section"].strip())
 lead_type = coerce_story_type(lead_story["story_type"].strip())
 lead_summary = lead_story["summary"].strip()
-lead_image_url = signal_image_map.get(normalise_title(lead_title), "")
+lead_meta = signal_map.get(normalise_title(lead_title), {})
+lead_image_url = lead_meta.get("image_url", "")
+lead_published_at = lead_meta.get("published_at", "")
 
 lead_body_response = client.responses.create(
     model="gpt-5",
@@ -1274,6 +1318,7 @@ lead_page = build_story_page(
     summary=lead_summary,
     body_html=lead_body_html,
     updated_time=now,
+    published_at=lead_published_at,
 )
 
 with open(STORIES_DIR / lead_filename, "w", encoding="utf-8") as f:
@@ -1290,10 +1335,16 @@ for section_name in SECTION_ORDER:
     raw_stories = raw_stories[:required_count]
 
     while len(raw_stories) < required_count:
+        fallback_title = f"{section_name} watch {len(raw_stories) + 1}" if section_name == "Sport" else f"{section_name} update {len(raw_stories) + 1}"
+        fallback_summary = (
+            f"A current watch item in {section_name.lower()} with broader context and next-step implications."
+            if section_name == "Sport"
+            else f"A significant development in {section_name.lower()} with wider consequences under review."
+        )
         raw_stories.append({
-            "story_type": "News",
-            "title": f"{section_name} update {len(raw_stories) + 1}",
-            "summary": f"A significant development in {section_name.lower()} with wider consequences under review.",
+            "story_type": "Analysis" if section_name == "Sport" else "News",
+            "title": fallback_title,
+            "summary": fallback_summary,
         })
 
     normalised_section_stories = []
@@ -1324,16 +1375,18 @@ for section_name in SECTION_ORDER:
         story_type = story["story_type"]
         summary = story["summary"]
         body = bodies_by_title.get(title, [])
-        image_url = signal_image_map.get(normalise_title(title), "")
+        meta = signal_map.get(normalise_title(title), {})
+        image_url = meta.get("image_url", "")
+        published_at = meta.get("published_at", "")
 
         if not body:
             body = [
-                f"{title} has moved onto the Daily Brief agenda because it appears to carry wider significance than a routine headline alone would suggest.",
-                f"In {section_name.lower()}, the immediate facts are only part of the story, and the broader context helps explain why this development matters now.",
-                "Different outlets may emphasise different causes, risks, or consequences, but the central task is to separate agreed facts from interpretation.",
-                "For readers, the key question is not only what has happened, but what constraints, incentives, and possible next steps now shape the situation.",
-                "That in turn makes this a story worth following beyond the first burst of headlines, particularly if the practical or strategic consequences widen.",
-                "The next phase will depend on whether the present signals harden into a durable shift, fade into a short-lived episode, or trigger further responses."
+                f"{title} is on the Daily Brief agenda because it appears to carry wider significance than a routine headline alone would suggest.",
+                f"In {section_name.lower()}, the immediate facts are only one part of the picture, and the broader background helps explain why this matters now.",
+                "Different outlets may emphasise different causes, risks, or consequences, but the key task is to separate agreed facts from interpretation.",
+                "That means readers should pay attention not just to the latest development, but to the history and incentives that have shaped the current position.",
+                "It also makes this a story worth following beyond the first burst of headlines, especially if the practical or strategic consequences widen.",
+                "The next phase will depend on whether the present signals harden into a lasting shift, fade into a short-lived episode, or trigger further responses."
             ]
 
         base_slug = slugify(title)
@@ -1349,6 +1402,7 @@ for section_name in SECTION_ORDER:
             summary=summary,
             body_html=body_html,
             updated_time=now,
+            published_at=published_at,
         )
 
         with open(STORIES_DIR / filename, "w", encoding="utf-8") as f:
@@ -1361,6 +1415,7 @@ for section_name in SECTION_ORDER:
             "summary": summary,
             "url": story_url,
             "image_url": image_url,
+            "published_at": published_at,
         })
 
         saved_stories.append({
@@ -1370,6 +1425,7 @@ for section_name in SECTION_ORDER:
             "summary": summary,
             "url": story_url,
             "image_url": image_url,
+            "published_at": published_at,
             "body": body,
         })
 
@@ -1421,6 +1477,7 @@ homepage = build_homepage_page(
         "summary": lead_summary,
         "url": lead_url,
         "image_url": lead_image_url,
+        "published_at": lead_published_at,
     },
     story_cards=story_cards,
     feature=feature,
@@ -1442,6 +1499,7 @@ with open(DATA_DIR / "stories.json", "w", encoding="utf-8") as f:
             "summary": lead_summary,
             "url": lead_url,
             "image_url": lead_image_url,
+            "published_at": lead_published_at,
             "body": lead_body,
         },
         "section_story_counts": SECTION_STORY_COUNTS,
