@@ -25,6 +25,7 @@ jobs:
       - name: Run feature generator
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
         run: python scripts/generate_feature.py
 
       - name: Commit changes
