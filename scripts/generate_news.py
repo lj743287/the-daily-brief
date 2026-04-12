@@ -37,6 +37,13 @@ def get_headlines():
                 headlines.append(title)
     return headlines[:15]
 
+def load_feature():
+    feature_file = DATA_DIR / "feature.json"
+    if not feature_file.exists():
+        return None
+    with open(feature_file, "r", encoding="utf-8") as f:
+        return json.load(f)
+
 def build_story_page(title, body_html, updated_time):
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -117,7 +124,7 @@ def build_story_page(title, body_html, updated_time):
 </html>
 """
 
-def build_homepage_page(updated_time, at_a_glance_items, story_cards):
+def build_homepage_page(updated_time, at_a_glance_items, story_cards, feature):
     glance_html = "\n".join(f"<li>{html.escape(item)}</li>" for item in at_a_glance_items)
 
     cards_html = "\n".join(
@@ -129,6 +136,16 @@ def build_homepage_page(updated_time, at_a_glance_items, story_cards):
         """
         for card in story_cards
     )
+
+    feature_html = ""
+    if feature:
+        feature_html = f"""
+        <section class="feature-block">
+          <div class="feature-label">Daily Long Read</div>
+          <h2><a href="{feature['url']}">{html.escape(feature['title'])}</a></h2>
+          <p class="feature-standfirst">{html.escape(feature['standfirst'])}</p>
+        </section>
+        """
 
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -183,6 +200,39 @@ def build_homepage_page(updated_time, at_a_glance_items, story_cards):
       line-height: 1.7;
       margin-bottom: 10px;
     }}
+    .feature-block {{
+      margin-top: 18px;
+      margin-bottom: 30px;
+      padding: 22px;
+      background: #f8f3e8;
+      border-left: 5px solid #111;
+    }}
+    .feature-label {{
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #666;
+      margin-bottom: 10px;
+    }}
+    .feature-block h2 {{
+      margin: 0 0 12px 0;
+      padding: 0;
+      border: 0;
+      font-size: 2rem;
+    }}
+    .feature-block a {{
+      color: #111;
+      text-decoration: none;
+    }}
+    .feature-block a:hover {{
+      text-decoration: underline;
+    }}
+    .feature-standfirst {{
+      margin: 0;
+      font-size: 1.08rem;
+      line-height: 1.8;
+      color: #333;
+    }}
     .story-card {{
       padding: 0 0 20px 0;
       margin: 0 0 20px 0;
@@ -213,6 +263,8 @@ def build_homepage_page(updated_time, at_a_glance_items, story_cards):
       <h1>The Daily Brief</h1>
       <div class="updated">Updated: {updated_time} UTC</div>
     </header>
+
+    {feature_html}
 
     <section>
       <h2>At a Glance</h2>
@@ -343,10 +395,13 @@ for story in data["stories"]:
         "body": story["body"]
     })
 
+feature = load_feature()
+
 homepage = build_homepage_page(
     updated_time=now,
     at_a_glance_items=data["at_a_glance"],
-    story_cards=story_cards
+    story_cards=story_cards,
+    feature=feature
 )
 
 with open("index.html", "w", encoding="utf-8") as f:
