@@ -10,6 +10,7 @@ from pathlib import Path
 import feedparser
 from openai import OpenAI
 
+MODEL_NAME = os.getenv("OPENAI_MODEL", "gpt-5")
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 BASE_DIR = Path(".")
@@ -26,12 +27,12 @@ SECTION_ORDER = [
 ]
 
 SECTION_STORY_COUNTS = {
-    "World": 10,
-    "Markets & Economy": 10,
-    "Business": 5,
-    "UK": 5,
-    "Science & Technology": 5,
-    "Sport": 5,
+    "World": 6,
+    "Markets & Economy": 6,
+    "Business": 4,
+    "UK": 4,
+    "Science & Technology": 4,
+    "Sport": 4,
 }
 
 STORY_TYPE_ORDER = ["News", "Analysis", "Explainer", "Profile", "Feature"]
@@ -247,6 +248,35 @@ def load_feature():
         return json.load(f)
 
 
+def load_previous_news():
+    stories_file = DATA_DIR / "stories.json"
+    if not stories_file.exists():
+        return {}
+
+    with open(stories_file, "r", encoding="utf-8") as f:
+        try:
+            return json.load(f)
+        except Exception:
+            return {}
+
+
+def index_previous_items(previous_data):
+    index = {}
+
+    lead = previous_data.get("lead_story")
+    if isinstance(lead, dict):
+        key = normalise_title(lead.get("source_signal_title") or lead.get("title", ""))
+        if key:
+            index[key] = lead
+
+    for item in previous_data.get("stories", []):
+        key = normalise_title(item.get("source_signal_title") or item.get("title", ""))
+        if key and key not in index:
+            index[key] = item
+
+    return index
+
+
 def fetch_url(url):
     request = urllib.request.Request(
         url,
@@ -406,10 +436,31 @@ def get_source_signals():
     return signals[:180]
 
 
-def build_story_page(title, section, story_type, summary, body_html, updated_time, published_at=""):
+def build_story_page(
+    title,
+    section,
+    story_type,
+    summary,
+    body_html,
+    updated_time,
+    published_at="",
+    source_name="",
+    source_link="",
+    is_brief=False,
+):
     published_html = ""
     if published_at:
         published_html = f'<div class="published">Published: {html.escape(published_at)}</div>'
+
+    source_html = ""
+    if source_name and source_link:
+        source_html = f'<div class="source-line">Source signal: <a href="{html.escape(source_link)}">{html.escape(source_name)}</a></div>'
+    elif source_name:
+        source_html = f'<div class="source-line">Source signal: {html.escape(source_name)}</div>'
+
+    brief_label = ""
+    if is_brief:
+        brief_label = '<div class="brief-label">Brief</div>'
 
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -446,10 +497,13 @@ def build_story_page(title, section, story_type, summary, body_html, updated_tim
       font-size: 3rem;
       line-height: 1.1;
     }}
-    .updated, .published {{
+    .updated, .published, .source-line {{
       margin-top: 10px;
       color: #666;
       font-size: 0.95rem;
+    }}
+    .source-line a {{
+      color: #444;
     }}
     .back {{
       display: inline-block;
@@ -470,6 +524,16 @@ def build_story_page(title, section, story_type, summary, body_html, updated_tim
       letter-spacing: 0.06em;
       text-transform: uppercase;
       color: #666;
+    }}
+    .brief-label {{
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 4px 8px;
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: #efe8da;
+      color: #555;
     }}
     h2 {{
       margin-top: 0;
@@ -497,9 +561,11 @@ def build_story_page(title, section, story_type, summary, body_html, updated_tim
       <a class="brand" href="../index.html"><h1>The Daily Brief</h1></a>
       <div class="updated">Updated: {updated_time} UTC</div>
       {published_html}
+      {source_html}
     </header>
     <a class="back" href="../index.html">← Back to front page</a>
     <article>
+      {brief_label}
       <div class="meta">
         <span>{html.escape(section)}</span>
         <span>{html.escape(story_type)}</span>
@@ -793,6 +859,30 @@ def build_homepage_page(updated_time, at_a_glance_items, lead_story, story_cards
 """
 
 
+def build_brief_body(summary, section, source_name, published_at, source_link):
+    parts = []
+
+    if summary:
+        parts.append(summary)
+
+    context_line = f"This remains a brief in the {section.lower()} file"
+    if source_name:
+        context_line += f", shaped by current reporting signals from {source_name}"
+    if published_at:
+        context_line += f" and tied to an item published at {published_at}"
+    context_line += "."
+    parts.append(context_line)
+
+    parts.append(
+        "The Daily Brief is keeping this item on the agenda because it appears relevant, but the fuller treatment is being reserved for stories that move higher in the running order or materially change."
+    )
+
+    if source_link:
+        parts.append(f"Readers wanting the originating report can follow the linked source signal for the underlying item.")
+
+    return [p for p in parts if p.strip()]
+
+
 def build_outline_prompt(signals):
     story_counts_json = json.dumps(SECTION_STORY_COUNTS, indent=2)
 
@@ -823,6 +913,8 @@ EDITORIAL RULES:
 - If the live sport signals are thin for one of those priorities, you may create a careful state-of-play or watchlist story rather than drifting into random sport.
 - In sport, separate confirmed developments from credible reports and rumours where relevant.
 - Use timestamps and recency intelligently.
+- Reuse source titles closely. Do not write theatrical or overly rewritten headlines.
+- Every story must include a source_signal_title that exactly matches one source signal title from the list.
 - Do not invent direct quotes.
 - Do not make up precise statistics not clearly supported by the source signals.
 - Treat source metadata seriously.
@@ -852,49 +944,56 @@ Return valid JSON only in exactly this structure:
     "section": "World",
     "story_type": "Analysis",
     "title": "Lead headline",
-    "summary": "A serious standfirst in 4 to 5 sentences."
+    "summary": "A serious standfirst in 3 to 4 sentences.",
+    "source_signal_title": "Exact source signal title here"
   }},
   "sections": {{
     "World": [
       {{
         "story_type": "News",
         "title": "Story title",
-        "summary": "A strong standfirst in 2 to 4 sentences."
+        "summary": "A strong standfirst in 2 to 3 sentences.",
+        "source_signal_title": "Exact source signal title here"
       }}
     ],
     "Markets & Economy": [
       {{
         "story_type": "Analysis",
         "title": "Story title",
-        "summary": "A strong standfirst in 2 to 4 sentences."
+        "summary": "A strong standfirst in 2 to 3 sentences.",
+        "source_signal_title": "Exact source signal title here"
       }}
     ],
     "Business": [
       {{
         "story_type": "News",
         "title": "Story title",
-        "summary": "A strong standfirst in 2 to 4 sentences."
+        "summary": "A strong standfirst in 2 to 3 sentences.",
+        "source_signal_title": "Exact source signal title here"
       }}
     ],
     "UK": [
       {{
         "story_type": "News",
         "title": "Story title",
-        "summary": "A strong standfirst in 2 to 4 sentences."
+        "summary": "A strong standfirst in 2 to 3 sentences.",
+        "source_signal_title": "Exact source signal title here"
       }}
     ],
     "Science & Technology": [
       {{
         "story_type": "Explainer",
         "title": "Story title",
-        "summary": "A strong standfirst in 2 to 4 sentences."
+        "summary": "A strong standfirst in 2 to 3 sentences.",
+        "source_signal_title": "Exact source signal title here"
       }}
     ],
     "Sport": [
       {{
         "story_type": "News",
         "title": "Story title",
-        "summary": "A strong standfirst in 2 to 4 sentences."
+        "summary": "A strong standfirst in 2 to 3 sentences.",
+        "source_signal_title": "Exact source signal title here"
       }}
     ]
   }}
@@ -910,18 +1009,15 @@ ADDITIONAL RULES:
 """
 
 
-def build_lead_body_prompt(title, section, story_type, summary, signals):
+def build_full_body_prompt(stories_to_write, signals):
     return f"""
-You are writing the lead article for The Daily Brief.
+You are writing the full article bodies for the most important stories in The Daily Brief.
 
-ARTICLE DETAILS:
-- Section: {section}
-- Story type: {story_type}
-- Headline: {title}
-- Standfirst: {summary}
+STORIES TO WRITE:
+{json.dumps(stories_to_write, ensure_ascii=False, indent=2)}
 
 SOURCE SIGNALS:
-{json.dumps(signals[:60], ensure_ascii=False, indent=2)}
+{json.dumps(signals[:90], ensure_ascii=False, indent=2)}
 
 EDITORIAL RULES:
 - British English.
@@ -934,111 +1030,23 @@ EDITORIAL RULES:
 - Distinguish claims from supported facts.
 - Bring in historical context and background where it genuinely helps the reader understand the present moment.
 - For major geopolitical tensions, explain what earlier phases, flashpoints or negotiations form the backdrop.
-- Do not invent direct quotes.
-- Do not make up unsupported precise figures.
-- Avoid robotic phrasing.
-
-Return valid JSON only in exactly this structure:
-
-{{
-  "body": [
-    "Paragraph 1",
-    "Paragraph 2",
-    "Paragraph 3",
-    "Paragraph 4",
-    "Paragraph 5",
-    "Paragraph 6",
-    "Paragraph 7",
-    "Paragraph 8",
-    "Paragraph 9",
-    "Paragraph 10"
-  ]
-}}
-"""
-
-
-def build_section_body_prompt(section, stories, signals):
-    section_signals = [s for s in signals if s["section"] == section]
-
-    if section == "Markets & Economy":
-        section_signals = [
-            s for s in signals
-            if s["section"] in ["Business", "World", "UK"]
-        ]
-
-    if section == "Sport":
-        sport_priority_terms = [
-            "cardiff city",
-            "cardiff",
-            "tampa bay buccaneers",
-            "buccaneers",
-            "nfl",
-            "transfer",
-            "cycling",
-            "tour",
-            "championship",
-            "premier league",
-            "draft",
-            "window",
-        ]
-        prioritised = []
-        others = []
-        for s in section_signals:
-            title_blob = f"{s['title']} {s['summary']}".lower()
-            if any(term in title_blob for term in sport_priority_terms):
-                prioritised.append(s)
-            else:
-                others.append(s)
-        section_signals = prioritised + others
-
-    if len(section_signals) < 20:
-        section_signals = signals[:70]
-
-    return f"""
-You are writing a full section package for The Daily Brief.
-
-SECTION:
-{section}
-
-STORIES TO WRITE:
-{json.dumps(stories, ensure_ascii=False, indent=2)}
-
-SOURCE SIGNALS:
-{json.dumps(section_signals[:70], ensure_ascii=False, indent=2)}
-
-EDITORIAL RULES:
-- British English.
-- Serious, calm, restrained newspaper prose.
-- Global-first where relevant.
-- Use the region and viewpoint metadata intelligently.
-- Prioritise consensus facts first.
-- Where regional framings differ, mention that only if it genuinely helps the reader.
-- Do not force artificial balance.
-- Distinguish evidence from claims.
-- Bring in historical context and background where it genuinely improves understanding.
-- Each story should help the reader see not just what happened, but what led to it and what may come next.
+- For Sport, stay tightly focused on Cardiff City, Tampa Bay Buccaneers, NFL, football transfer developments or gossip, and cycling.
 - No invented quotes.
 - No unsupported precise figures.
-- Avoid generic filler.
-- Every paragraph must add something new.
-- For Sport, stay tightly focused on Cardiff City, Tampa Bay Buccaneers, NFL, football transfer developments or gossip, and cycling.
-- Do not drift into generic sport simply to fill space.
-- If a requested sport priority has little fresh reporting in the signals, write a careful watch, state-of-play, or context piece rather than pretending there is breaking news.
-- For football transfer items, clearly imply the difference between confirmed developments, credible reports and rumours where relevant.
+- Avoid robotic phrasing.
+- Keep the prose tight. Do not overwrite.
 
 Return valid JSON only in exactly this structure:
 
 {{
   "stories": [
     {{
-      "title": "Story 1 title exactly as provided",
+      "title": "Story title exactly as provided",
       "body": [
         "Paragraph 1",
         "Paragraph 2",
         "Paragraph 3",
-        "Paragraph 4",
-        "Paragraph 5",
-        "Paragraph 6"
+        "Paragraph 4"
       ]
     }}
   ]
@@ -1047,14 +1055,32 @@ Return valid JSON only in exactly this structure:
 ADDITIONAL RULES:
 - Return one body for every story provided.
 - Match titles exactly.
-- Return exactly 6 paragraphs per story.
+- Use the requested paragraph_count for each story.
 """
 
 
+def get_signal_maps(signals):
+    signal_by_key = {}
+    signal_by_title = {}
+
+    for signal in signals:
+        key = normalise_title(signal["title"])
+        if key and key not in signal_by_key:
+            signal_by_key[key] = signal
+        if signal["title"] not in signal_by_title:
+            signal_by_title[signal["title"]] = signal
+
+    return signal_by_key, signal_by_title
+
+
 signals = get_source_signals()
+signal_by_key, signal_by_title = get_signal_maps(signals)
+
+previous_data = load_previous_news()
+previous_index = index_previous_items(previous_data)
 
 outline_response = client.responses.create(
-    model="gpt-5",
+    model=MODEL_NAME,
     input=build_outline_prompt(signals),
 )
 
@@ -1067,43 +1093,113 @@ DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 used_slugs = set()
 
-signal_map = {}
-for signal in signals:
-    norm = normalise_title(signal["title"])
-    if not norm:
-        continue
-    if norm not in signal_map:
-        signal_map[norm] = {
-            "image_url": signal.get("image_url", ""),
-            "published_at": signal.get("published_at", ""),
-        }
-
 lead_story = outline_data["lead_story"]
 lead_title = lead_story["title"].strip()
 lead_section = coerce_section(lead_story["section"].strip())
 lead_type = coerce_story_type(lead_story["story_type"].strip())
 lead_summary = lead_story["summary"].strip()
-lead_meta = signal_map.get(normalise_title(lead_title), {})
-lead_image_url = lead_meta.get("image_url", "")
-lead_published_at = lead_meta.get("published_at", "")
+lead_source_signal_title = lead_story["source_signal_title"].strip()
+lead_signal = signal_by_title.get(lead_source_signal_title) or signal_by_key.get(normalise_title(lead_source_signal_title), {})
+lead_key = normalise_title(lead_source_signal_title or lead_title)
+previous_lead = previous_index.get(lead_key, {})
 
-lead_body_response = client.responses.create(
-    model="gpt-5",
-    input=build_lead_body_prompt(
-        title=lead_title,
-        section=lead_section,
-        story_type=lead_type,
-        summary=lead_summary,
-        signals=signals,
-    ),
-)
+planned_stories = []
+for section_name in SECTION_ORDER:
+    required_count = SECTION_STORY_COUNTS[section_name]
+    raw_stories = outline_data.get("sections", {}).get(section_name, [])[:required_count]
 
-lead_body_data = json.loads(lead_body_response.output_text.strip())
-lead_body = [p.strip() for p in lead_body_data["body"] if p.strip()]
+    while len(raw_stories) < required_count:
+        fallback_title = f"{section_name} watch {len(raw_stories) + 1}" if section_name == "Sport" else f"{section_name} update {len(raw_stories) + 1}"
+        fallback_signal_title = next(
+            (s["title"] for s in signals if s["section"] == section_name),
+            signals[0]["title"] if signals else fallback_title,
+        )
+        raw_stories.append({
+            "story_type": "Analysis" if section_name == "Sport" else "News",
+            "title": fallback_title,
+            "summary": (
+                f"A current watch item in {section_name.lower()} with broader context and next-step implications."
+                if section_name == "Sport"
+                else f"A significant development in {section_name.lower()} with wider consequences under review."
+            ),
+            "source_signal_title": fallback_signal_title,
+        })
 
-lead_slug = ensure_unique_slug(slugify(lead_title), used_slugs)
-lead_filename = f"{lead_slug}.html"
-lead_url = f"stories/{lead_filename}"
+    for i, raw_story in enumerate(raw_stories):
+        story = {
+            "section": section_name,
+            "story_type": coerce_story_type(raw_story["story_type"].strip()),
+            "title": raw_story["title"].strip(),
+            "summary": raw_story["summary"].strip(),
+            "source_signal_title": raw_story["source_signal_title"].strip(),
+            "is_section_lead": i == 0,
+        }
+        planned_stories.append(story)
+
+stories_to_generate_full = []
+lead_body = previous_lead.get("body", []) if previous_lead and previous_lead.get("body") else []
+
+if not lead_body:
+    stories_to_generate_full.append({
+        "section": lead_section,
+        "story_type": lead_type,
+        "title": lead_title,
+        "summary": lead_summary,
+        "source_signal_title": lead_source_signal_title,
+        "paragraph_count": 6,
+    })
+
+for story in planned_stories:
+    story_key = normalise_title(story["source_signal_title"] or story["title"])
+    previous_story = previous_index.get(story_key, {})
+    story["previous"] = previous_story
+
+    if story["is_section_lead"]:
+        previous_body = previous_story.get("body", []) if previous_story else []
+        if not previous_body:
+            stories_to_generate_full.append({
+                "section": story["section"],
+                "story_type": story["story_type"],
+                "title": story["title"],
+                "summary": story["summary"],
+                "source_signal_title": story["source_signal_title"],
+                "paragraph_count": 4,
+            })
+
+generated_full_bodies = {}
+if stories_to_generate_full:
+    full_body_response = client.responses.create(
+        model=MODEL_NAME,
+        input=build_full_body_prompt(stories_to_generate_full, signals),
+    )
+    full_body_data = json.loads(full_body_response.output_text.strip())
+    generated_full_bodies = {
+        item["title"].strip(): [p.strip() for p in item.get("body", []) if p.strip()]
+        for item in full_body_data.get("stories", [])
+    }
+
+lead_body = lead_body or generated_full_bodies.get(lead_title, [])
+if not lead_body:
+    lead_body = [
+        lead_summary,
+        "This is the leading story in the current edition because it appears to carry the widest international consequence among the available signals.",
+        "What matters is not only the latest development, but the background that has shaped it and the implications of what may happen next.",
+        "The Daily Brief is treating this as the clearest item on the world agenda at the moment."
+    ]
+
+lead_image_url = lead_signal.get("image_url", "")
+lead_published_at = lead_signal.get("published_at", "")
+lead_source_name = lead_signal.get("source", "")
+lead_source_link = lead_signal.get("link", "")
+
+if previous_lead and previous_lead.get("url"):
+    lead_url = previous_lead["url"]
+    lead_filename = Path(lead_url).name
+    used_slugs.add(Path(lead_filename).stem)
+else:
+    lead_slug = ensure_unique_slug(slugify(lead_title), used_slugs)
+    lead_filename = f"{lead_slug}.html"
+    lead_url = f"stories/{lead_filename}"
 
 lead_body_html = "\n".join(f"<p>{html.escape(p)}</p>" for p in lead_body)
 lead_page = build_story_page(
@@ -1114,6 +1210,9 @@ lead_page = build_story_page(
     body_html=lead_body_html,
     updated_time=now,
     published_at=lead_published_at,
+    source_name=lead_source_name,
+    source_link=lead_source_link,
+    is_brief=False,
 )
 
 with open(STORIES_DIR / lead_filename, "w", encoding="utf-8") as f:
@@ -1122,107 +1221,91 @@ with open(STORIES_DIR / lead_filename, "w", encoding="utf-8") as f:
 story_cards = []
 saved_stories = []
 
-sections = outline_data.get("sections", {})
+for story in planned_stories:
+    story_key = normalise_title(story["source_signal_title"] or story["title"])
+    previous_story = story["previous"]
+    signal = signal_by_title.get(story["source_signal_title"]) or signal_by_key.get(story_key, {})
 
-for section_name in SECTION_ORDER:
-    required_count = SECTION_STORY_COUNTS[section_name]
-    raw_stories = sections.get(section_name, [])
-    raw_stories = raw_stories[:required_count]
+    title = story["title"]
+    section = story["section"]
+    story_type = story["story_type"]
+    summary = story["summary"]
 
-    while len(raw_stories) < required_count:
-        fallback_title = f"{section_name} watch {len(raw_stories) + 1}" if section_name == "Sport" else f"{section_name} update {len(raw_stories) + 1}"
-        fallback_summary = (
-            f"A current watch item in {section_name.lower()} with broader context and next-step implications."
-            if section_name == "Sport"
-            else f"A significant development in {section_name.lower()} with wider consequences under review."
-        )
-        raw_stories.append({
-            "story_type": "Analysis" if section_name == "Sport" else "News",
-            "title": fallback_title,
-            "summary": fallback_summary,
-        })
-
-    normalised_section_stories = []
-    for raw_story in raw_stories:
-        normalised_section_stories.append({
-            "story_type": coerce_story_type(raw_story["story_type"].strip()),
-            "title": raw_story["title"].strip(),
-            "summary": raw_story["summary"].strip(),
-        })
-
-    section_body_response = client.responses.create(
-        model="gpt-5",
-        input=build_section_body_prompt(
-            section=section_name,
-            stories=normalised_section_stories,
-            signals=signals,
-        ),
-    )
-
-    section_body_data = json.loads(section_body_response.output_text.strip())
-    bodies_by_title = {
-        item["title"].strip(): [p.strip() for p in item.get("body", []) if p.strip()]
-        for item in section_body_data.get("stories", [])
-    }
-
-    for story in normalised_section_stories:
-        title = story["title"]
-        story_type = story["story_type"]
-        summary = story["summary"]
-        body = bodies_by_title.get(title, [])
-        meta = signal_map.get(normalise_title(title), {})
-        image_url = meta.get("image_url", "")
-        published_at = meta.get("published_at", "")
-
-        if not body:
-            body = [
-                f"{title} is on the Daily Brief agenda because it appears to carry wider significance than a routine headline alone would suggest.",
-                f"In {section_name.lower()}, the immediate facts are only one part of the picture, and the broader background helps explain why this matters now.",
-                "Different outlets may emphasise different causes, risks, or consequences, but the key task is to separate agreed facts from interpretation.",
-                "That means readers should pay attention not just to the latest development, but to the history and incentives that have shaped the current position.",
-                "It also makes this a story worth following beyond the first burst of headlines, especially if the practical or strategic consequences widen.",
-                "The next phase will depend on whether the present signals harden into a lasting shift, fade into a short-lived episode, or trigger further responses."
-            ]
-
-        base_slug = slugify(title)
-        unique_slug = ensure_unique_slug(base_slug, used_slugs)
+    if previous_story and previous_story.get("url"):
+        story_url = previous_story["url"]
+        filename = Path(story_url).name
+        used_slugs.add(Path(filename).stem)
+    else:
+        unique_slug = ensure_unique_slug(slugify(title), used_slugs)
         filename = f"{unique_slug}.html"
         story_url = f"stories/{filename}"
 
-        body_html = "\n".join(f"<p>{html.escape(p)}</p>" for p in body)
-        story_page = build_story_page(
-            title=title,
-            section=section_name,
-            story_type=story_type,
-            summary=summary,
-            body_html=body_html,
-            updated_time=now,
-            published_at=published_at,
-        )
+    if story["is_section_lead"]:
+        body = previous_story.get("body", []) if previous_story else []
+        body = body or generated_full_bodies.get(title, [])
+        is_brief = False
+        if not body:
+            body = [
+                summary,
+                "This story is being treated as the lead item in its section because it appears to carry greater significance than the surrounding developments.",
+                "The fuller reading depends not only on the latest facts, but on the background and the plausible next stage of the story.",
+                "The Daily Brief will continue to treat it as a higher-priority item while it remains near the top of the running order."
+            ]
+    else:
+        if previous_story and previous_story.get("body"):
+            body = previous_story["body"]
+            is_brief = previous_story.get("is_brief", True)
+        else:
+            body = build_brief_body(
+                summary=summary,
+                section=section,
+                source_name=signal.get("source", ""),
+                published_at=signal.get("published_at", ""),
+                source_link=signal.get("link", ""),
+            )
+            is_brief = True
 
-        with open(STORIES_DIR / filename, "w", encoding="utf-8") as f:
-            f.write(story_page)
+    body_html = "\n".join(f"<p>{html.escape(p)}</p>" for p in body)
+    story_page = build_story_page(
+        title=title,
+        section=section,
+        story_type=story_type,
+        summary=summary,
+        body_html=body_html,
+        updated_time=now,
+        published_at=signal.get("published_at", ""),
+        source_name=signal.get("source", ""),
+        source_link=signal.get("link", ""),
+        is_brief=is_brief,
+    )
 
-        story_cards.append({
-            "section": section_name,
-            "story_type": story_type,
-            "title": title,
-            "summary": summary,
-            "url": story_url,
-            "image_url": image_url,
-            "published_at": published_at,
-        })
+    with open(STORIES_DIR / filename, "w", encoding="utf-8") as f:
+        f.write(story_page)
 
-        saved_stories.append({
-            "section": section_name,
-            "story_type": story_type,
-            "title": title,
-            "summary": summary,
-            "url": story_url,
-            "image_url": image_url,
-            "published_at": published_at,
-            "body": body,
-        })
+    story_cards.append({
+        "section": section,
+        "story_type": story_type,
+        "title": title,
+        "summary": summary,
+        "url": story_url,
+        "image_url": signal.get("image_url", ""),
+        "published_at": signal.get("published_at", ""),
+    })
+
+    saved_stories.append({
+        "section": section,
+        "story_type": story_type,
+        "title": title,
+        "summary": summary,
+        "url": story_url,
+        "image_url": signal.get("image_url", ""),
+        "published_at": signal.get("published_at", ""),
+        "source_signal_title": story["source_signal_title"],
+        "source_name": signal.get("source", ""),
+        "source_link": signal.get("link", ""),
+        "is_brief": is_brief,
+        "body": body,
+    })
 
 feature = load_feature()
 
@@ -1248,6 +1331,7 @@ with open(BASE_DIR / "index.html", "w", encoding="utf-8") as f:
 with open(DATA_DIR / "stories.json", "w", encoding="utf-8") as f:
     json.dump({
         "last_updated": now,
+        "model_used": MODEL_NAME,
         "source_signals": signals,
         "at_a_glance": outline_data["at_a_glance"],
         "lead_story": {
@@ -1258,6 +1342,10 @@ with open(DATA_DIR / "stories.json", "w", encoding="utf-8") as f:
             "url": lead_url,
             "image_url": lead_image_url,
             "published_at": lead_published_at,
+            "source_signal_title": lead_source_signal_title,
+            "source_name": lead_source_name,
+            "source_link": lead_source_link,
+            "is_brief": False,
             "body": lead_body,
         },
         "section_story_counts": SECTION_STORY_COUNTS,
