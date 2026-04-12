@@ -1,45 +1,72 @@
+import os
 import json
 import datetime
+import feedparser
+from openai import OpenAI
 
-# Simple placeholder headlines (we will replace this with real feeds later)
-headlines = [
-    "Global markets rise on easing tensions",
-    "UK economy shows mixed signals",
-    "AI investment continues to surge"
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+# RSS feeds
+feeds = [
+    "https://feeds.bbci.co.uk/news/world/rss.xml",
+    "https://feeds.bbci.co.uk/news/business/rss.xml"
 ]
 
-# Load previous data
+def get_headlines():
+    headlines = []
+    for url in feeds:
+        feed = feedparser.parse(url)
+        for entry in feed.entries[:5]:
+            headlines.append(entry.title)
+    return headlines
+
+# Get new headlines
+new_headlines = get_headlines()
+
+# Load previous headlines
 try:
     with open("data/stories.json", "r") as f:
-        data = json.load(f)
+        old_data = json.load(f)
+        old_headlines = old_data.get("headlines", [])
 except:
-    data = {"stories": []}
-
-old_headlines = [s["headline"] for s in data.get("stories", [])]
+    old_headlines = []
 
 # Check if anything changed
-if headlines == old_headlines:
+if set(new_headlines) == set(old_headlines):
     print("No changes, skipping update")
     exit()
 
-# Build new stories
-stories = []
-for h in headlines:
-    stories.append({
-        "headline": h,
-        "summary": "This is a placeholder summary that will be replaced later."
-    })
+# Ask ChatGPT to write the newspaper
+prompt = f"""
+You are writing The Daily Brief.
 
-# Update JSON
-new_data = {
-    "last_updated": str(datetime.datetime.utcnow()),
-    "stories": stories
-}
+Here are the latest headlines:
+{new_headlines}
 
+Write a professional news homepage with:
+- At a Glance (5 bullets)
+- Front Page (lead + 3 stories)
+- Markets summary
+- UK summary
+
+Keep it structured and readable.
+"""
+
+response = client.responses.create(
+    model="gpt-5",
+    input=prompt
+)
+
+article = response.output_text
+
+# Save headlines for next run
 with open("data/stories.json", "w") as f:
-    json.dump(new_data, f, indent=2)
+    json.dump({
+        "headlines": new_headlines,
+        "last_updated": str(datetime.datetime.utcnow())
+    }, f)
 
-# Generate HTML
+# Write homepage
 html = f"""
 <!DOCTYPE html>
 <html>
@@ -48,15 +75,13 @@ html = f"""
 </head>
 <body>
 <h1>The Daily Brief</h1>
-<p>Updated: {new_data["last_updated"]}</p>
+<p>Updated: {datetime.datetime.utcnow()}</p>
+<pre>{article}</pre>
+</body>
+</html>
 """
-
-for s in stories:
-    html += f"<h2>{s['headline']}</h2><p>{s['summary']}</p>"
-
-html += "</body></html>"
 
 with open("index.html", "w") as f:
     f.write(html)
 
-print("Updated site")
+print("Site updated")
