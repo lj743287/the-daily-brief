@@ -23,60 +23,68 @@ def get_headlines():
                 headlines.append(title)
     return headlines[:15]
 
-def to_html(article_text, updated_time):
+def build_content_html(article_text):
     safe = html.escape(article_text)
+    lines = [line.strip() for line in safe.splitlines() if line.strip()]
 
-    lines = [line.strip() for line in safe.splitlines()]
-    html_parts = []
+    result = []
+    in_list = False
+
+    section_titles = {
+        "at a glance",
+        "front page",
+        "world",
+        "markets & economy",
+        "business",
+        "uk",
+        "wales",
+        "science & technology",
+        "sport",
+        "also in the news"
+    }
 
     for line in lines:
-        if not line:
-            continue
-
         lower = line.lower()
 
-        if line == "The Daily Brief":
+        if lower == "the daily brief":
             continue
-        elif lower in [
-            "at a glance",
-            "front page",
-            "world",
-            "markets & economy",
-            "business",
-            "uk",
-            "wales",
-            "science & technology",
-            "sport",
-            "markets summary",
-            "uk summary",
-            "also in the news"
-        ]:
-            html_parts.append(f"<h2>{line}</h2>")
-        elif line.startswith("Lead:"):
-            html_parts.append(f"<h3>{line}</h3>")
-        elif line.startswith("- "):
-            html_parts.append(f"<li>{line[2:]}</li>")
-        else:
-            html_parts.append(f"<p>{line}</p>")
 
-    content = "\n".join(html_parts)
-
-    if "<li>" in content:
-        rebuilt = []
-        in_list = False
-        for part in html_parts:
-            if part.startswith("<li>") and not in_list:
-                rebuilt.append("<ul>")
-                in_list = True
-            if not part.startswith("<li>") and in_list:
-                rebuilt.append("</ul>")
+        if lower in section_titles:
+            if in_list:
+                result.append("</ul>")
                 in_list = False
-            rebuilt.append(part)
-        if in_list:
-            rebuilt.append("</ul>")
-        content = "\n".join(rebuilt)
+            result.append(f"<h2>{line}</h2>")
+            continue
 
-    page = f"""<!DOCTYPE html>
+        if line.startswith("Lead:"):
+            if in_list:
+                result.append("</ul>")
+                in_list = False
+            result.append(f"<h3>{line}</h3>")
+            continue
+
+        if line.startswith("- "):
+            if not in_list:
+                result.append("<ul>")
+                in_list = True
+            result.append(f"<li>{line[2:]}</li>")
+            continue
+
+        if in_list:
+            result.append("</ul>")
+            in_list = False
+
+        result.append(f"<p>{line}</p>")
+
+    if in_list:
+        result.append("</ul>")
+
+    return "\n".join(result)
+
+def build_page(article_text, updated_time):
+    content_html = build_content_html(article_text)
+
+    return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -85,88 +93,84 @@ def to_html(article_text, updated_time):
   <style>
     body {{
       margin: 0;
-      background: #f4f1ea;
+      background: #f3efe7;
       color: #111;
       font-family: Georgia, "Times New Roman", serif;
     }}
-    .container {{
-      max-width: 900px;
+    .page {{
+      max-width: 920px;
       margin: 0 auto;
-      padding: 32px 20px 60px 20px;
       background: #fffdf8;
       min-height: 100vh;
-      box-shadow: 0 0 20px rgba(0,0,0,0.06);
+      padding: 32px 22px 60px;
+      box-shadow: 0 0 18px rgba(0,0,0,0.08);
     }}
     header {{
       border-bottom: 3px solid #111;
-      margin-bottom: 24px;
-      padding-bottom: 16px;
+      margin-bottom: 28px;
+      padding-bottom: 14px;
     }}
     h1 {{
+      margin: 0;
       font-size: 3rem;
-      margin: 0 0 8px 0;
       line-height: 1.1;
     }}
     .updated {{
-      color: #555;
+      margin-top: 10px;
+      color: #666;
       font-size: 0.95rem;
     }}
     h2 {{
-      font-size: 1.6rem;
-      margin-top: 32px;
+      margin-top: 34px;
+      margin-bottom: 14px;
+      padding-top: 14px;
       border-top: 1px solid #ddd;
-      padding-top: 18px;
+      font-size: 1.7rem;
+      line-height: 1.2;
     }}
     h3 {{
-      font-size: 1.2rem;
       margin-top: 24px;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
+      font-size: 1.25rem;
+      line-height: 1.35;
     }}
-    p, li {{
-      font-size: 1.05rem;
-      line-height: 1.75;
+    p {{
+      font-size: 1.08rem;
+      line-height: 1.8;
       margin: 0 0 14px 0;
     }}
     ul {{
+      margin: 0 0 18px 0;
       padding-left: 22px;
-      margin-top: 8px;
-      margin-bottom: 18px;
+    }}
+    li {{
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 8px;
     }}
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="page">
     <header>
       <h1>The Daily Brief</h1>
       <div class="updated">Updated: {updated_time} UTC</div>
     </header>
-    {content}
+    {content_html}
   </div>
 </body>
 </html>
 """
-    return page
 
-new_headlines = get_headlines()
-
-try:
-    with open("data/stories.json", "r") as f:
-        old_data = json.load(f)
-        old_headlines = old_data.get("headlines", [])
-except:
-    old_headlines = []
-
-if set(new_headlines) == set(old_headlines):
-    print("No changes, skipping update")
-    raise SystemExit(0)
+headlines = get_headlines()
 
 prompt = f"""
 You are writing the homepage for The Daily Brief, a premium newspaper.
 
 Use these latest headlines as source signals:
-{new_headlines}
+{headlines}
 
-Write a polished homepage in British English with this structure:
+Write a polished homepage in British English using exactly this structure:
 
 At a Glance
 Front Page
@@ -177,14 +181,13 @@ Also in the News
 Rules:
 - Professional tone
 - Clear sections
-- No markdown
 - Plain text only
+- No markdown
+- No asterisks
 - Use short paragraphs
 - Use lines starting with '- ' for bullet points in At a Glance and Also in the News
-- Start the lead story line with 'Lead:'
-- Do not use asterisks
+- Start the lead story with 'Lead:'
 - Do not include code fences
-- Keep it readable and well structured
 """
 
 response = client.responses.create(
@@ -195,13 +198,14 @@ response = client.responses.create(
 article = response.output_text.strip()
 now = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
 
-with open("data/stories.json", "w") as f:
+with open("data/stories.json", "w", encoding="utf-8") as f:
     json.dump({
-        "headlines": new_headlines,
-        "last_updated": now
+        "headlines": headlines,
+        "last_updated": now,
+        "article": article
     }, f, indent=2)
 
-page_html = to_html(article, now)
+page_html = build_page(article, now)
 
 with open("index.html", "w", encoding="utf-8") as f:
     f.write(page_html)
