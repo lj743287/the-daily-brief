@@ -46,6 +46,7 @@ def cleanup_feature() -> None:
             print(f"Warning: could not read feature.json before cleanup: {exc}")
 
     delete_file(feature_json)
+    delete_generated_html(FEATURES_DIR)
 
 
 def main() -> None:
