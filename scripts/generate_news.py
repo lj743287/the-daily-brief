@@ -38,24 +38,6 @@ SECTION_STORY_COUNTS = {
 
 STORY_TYPE_ORDER = ["News", "Analysis", "Explainer", "Profile", "Feature"]
 
-SPORT_PRIORITY_TERMS = [
-    "cardiff city",
-    "cardiff",
-    "bluebirds",
-    "tampa bay buccaneers",
-    "buccaneers",
-    "bucs",
-    "nfl",
-    "football transfer",
-    "transfer",
-    "window",
-    "cycling",
-    "tour de france",
-    "tour of britain",
-    "giro",
-    "vuelta",
-]
-
 SOURCE_CONFIG = [
     {
         "kind": "rss",
@@ -211,6 +193,24 @@ SOURCE_CONFIG = [
     },
 ]
 
+SPORT_PRIORITY_TERMS = [
+    "cardiff city",
+    "cardiff",
+    "bluebirds",
+    "tampa bay buccaneers",
+    "buccaneers",
+    "bucs",
+    "nfl",
+    "football transfer",
+    "transfer",
+    "window",
+    "cycling",
+    "tour de france",
+    "giro",
+    "vuelta",
+    "tour of britain",
+]
+
 OUTLINE_SCHEMA = {
     "type": "object",
     "additionalProperties": False,
@@ -344,7 +344,7 @@ OUTLINE_SCHEMA = {
     "required": ["at_a_glance", "lead_story", "section_features", "sections"],
 }
 
-FULL_BODY_SCHEMA = {
+BODY_SCHEMA = {
     "type": "object",
     "additionalProperties": False,
     "properties": {
@@ -358,7 +358,8 @@ FULL_BODY_SCHEMA = {
                     "body": {
                         "type": "array",
                         "items": {"type": "string"},
-                        "minItems": 1,
+                        "minItems": 3,
+                        "maxItems": 6,
                     },
                 },
                 "required": ["title", "body"],
@@ -486,11 +487,8 @@ def extract_thumbnail_from_entry(entry):
     media_content = entry.get("media_content", [])
     if media_content:
         for item in media_content:
-            medium = str(item.get("medium", "")).lower()
-            width = str(item.get("width", "")).strip()
-            height = str(item.get("height", "")).strip()
             url = item.get("url", "").strip()
-            if url and (medium == "image" or width or height):
+            if url:
                 return url
 
     enclosures = entry.get("enclosures", [])
@@ -597,6 +595,24 @@ def parse_aljazeera_sitemap(config, max_items=20):
     return signals
 
 
+def score_sport_signal(signal):
+    blob = f"{signal.get('title', '')} {signal.get('summary', '')}".lower()
+    score = 0
+    if "cardiff city" in blob or "bluebirds" in blob:
+        score += 100
+    if "tampa bay buccaneers" in blob or "buccaneers" in blob or "bucs" in blob:
+        score += 90
+    if "nfl" in blob:
+        score += 80
+    if "transfer" in blob or "window" in blob:
+        score += 70
+    if "cycling" in blob or "tour de france" in blob or "giro" in blob or "vuelta" in blob:
+        score += 60
+    if "cardiff" in blob:
+        score += 40
+    return score
+
+
 def get_source_signals():
     signals = []
     seen_titles = set()
@@ -612,6 +628,9 @@ def get_source_signals():
         except Exception as exc:
             print(f"Warning: failed to parse {config['source']} {config['url']}: {exc}")
             source_signals = []
+
+        if config["section"] == "Sport":
+            source_signals = sorted(source_signals, key=score_sport_signal, reverse=True)
 
         for signal in source_signals:
             normalised = normalise_title(signal["title"])
@@ -633,7 +652,6 @@ def build_story_page(
     published_at="",
     source_name="",
     source_link="",
-    is_brief=False,
 ):
     published_html = ""
     if published_at:
@@ -644,10 +662,6 @@ def build_story_page(
         source_html = f'<div class="source-line">Source signal: <a href="{html.escape(source_link)}">{html.escape(source_name)}</a></div>'
     elif source_name:
         source_html = f'<div class="source-line">Source signal: {html.escape(source_name)}</div>'
-
-    brief_label = ""
-    if is_brief:
-        brief_label = '<div class="brief-label">Brief</div>'
 
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -712,16 +726,6 @@ def build_story_page(
       text-transform: uppercase;
       color: #666;
     }}
-    .brief-label {{
-      display: inline-block;
-      margin-bottom: 14px;
-      padding: 4px 8px;
-      font-size: 0.8rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      background: #efe8da;
-      color: #555;
-    }}
     h2 {{
       margin-top: 0;
       margin-bottom: 16px;
@@ -752,13 +756,110 @@ def build_story_page(
     </header>
     <a class="back" href="../index.html">← Back to front page</a>
     <article>
-      {brief_label}
       <div class="meta">
         <span>{html.escape(section)}</span>
         <span>{html.escape(story_type)}</span>
       </div>
       <h2>{html.escape(title)}</h2>
       <div class="standfirst">{html.escape(summary)}</div>
+      {body_html}
+    </article>
+  </div>
+</body>
+</html>
+"""
+
+
+def build_feature_page(title, label, standfirst, body_paragraphs, updated_time):
+    body_html = "\n".join(f"<p>{html.escape(p)}</p>" for p in body_paragraphs)
+
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{html.escape(title)} | The Daily Brief</title>
+  <style>
+    body {{
+      margin: 0;
+      background: #f3efe7;
+      color: #111;
+      font-family: Georgia, "Times New Roman", serif;
+    }}
+    .page {{
+      max-width: 920px;
+      margin: 0 auto;
+      background: #fffdf8;
+      min-height: 100vh;
+      padding: 32px 22px 60px;
+      box-shadow: 0 0 18px rgba(0,0,0,0.08);
+    }}
+    header {{
+      border-bottom: 3px solid #111;
+      margin-bottom: 28px;
+      padding-bottom: 14px;
+    }}
+    .brand {{
+      text-decoration: none;
+      color: #111;
+    }}
+    h1 {{
+      margin: 0;
+      font-size: 3rem;
+      line-height: 1.1;
+    }}
+    .updated {{
+      margin-top: 10px;
+      color: #666;
+      font-size: 0.95rem;
+    }}
+    .label {{
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #666;
+      margin-bottom: 10px;
+    }}
+    h2 {{
+      margin: 0 0 14px 0;
+      font-size: 2.5rem;
+      line-height: 1.15;
+    }}
+    .standfirst {{
+      font-size: 1.2rem;
+      line-height: 1.7;
+      color: #333;
+      margin-bottom: 28px;
+      font-style: italic;
+    }}
+    p {{
+      font-size: 1.12rem;
+      line-height: 1.95;
+      margin: 0 0 18px 0;
+    }}
+    .back {{
+      display: inline-block;
+      margin-bottom: 22px;
+      color: #333;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }}
+    .back:hover {{
+      text-decoration: underline;
+    }}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <a class="brand" href="../index.html"><h1>The Daily Brief</h1></a>
+      <div class="updated">Updated: {updated_time} UTC</div>
+    </header>
+    <a class="back" href="../index.html">← Back to front page</a>
+    <article>
+      <div class="label">{html.escape(label)}</div>
+      <h2>{html.escape(title)}</h2>
+      <div class="standfirst">{html.escape(standfirst)}</div>
       {body_html}
     </article>
   </div>
@@ -778,11 +879,33 @@ def build_homepage_page(updated_time, at_a_glance_items, lead_story, story_cards
         </section>
         """
 
+    lead_html = ""
+    if lead_story:
+        thumb_html = ""
+        if lead_story.get("thumbnail_url"):
+            thumb_html = f'<img class="lead-image" src="{html.escape(lead_story["thumbnail_url"])}" alt="{html.escape(lead_story["title"])}">'
+        published_html = ""
+        if lead_story.get("published_at"):
+            published_html = f'<div class="published-line">Published: {html.escape(lead_story["published_at"])}</div>'
+        lead_html = f"""
+        <section class="lead-story">
+          {thumb_html}
+          <div class="lead-meta">{html.escape(lead_story['section'])} | {html.escape(lead_story['story_type'])}</div>
+          {published_html}
+          <h2><a href="{lead_story['url']}">{html.escape(lead_story['title'])}</a></h2>
+          <p>{html.escape(lead_story['summary'])}</p>
+        </section>
+        """
+
+    grouped = {section: [] for section in SECTION_ORDER}
+    for card in story_cards:
+        grouped.setdefault(card["section"], []).append(card)
+
     world_html = ""
-    world_cards = [card for card in story_cards if card["section"] == "World"]
+    world_cards = grouped.get("World", [])
     if world_cards:
         lead_card = world_cards[0]
-        other_cards = world_cards[1:]
+        tail_cards = world_cards[1:]
 
         thumb_html = ""
         if lead_card.get("thumbnail_url"):
@@ -797,7 +920,7 @@ def build_homepage_page(updated_time, at_a_glance_items, lead_story, story_cards
               <p>{html.escape(card['summary'])}</p>
             </article>
             """
-            for card in other_cards
+            for card in tail_cards
         )
 
         world_html = f"""
@@ -837,29 +960,7 @@ def build_homepage_page(updated_time, at_a_glance_items, lead_story, story_cards
 
     glance_html = "\n".join(f"<li>{html.escape(item)}</li>" for item in at_a_glance_items)
 
-    lead_html = ""
-    if lead_story:
-        thumb_html = ""
-        if lead_story.get("thumbnail_url"):
-            thumb_html = f'<img class="lead-image" src="{html.escape(lead_story["thumbnail_url"])}" alt="{html.escape(lead_story["title"])}">'
-        published_html = ""
-        if lead_story.get("published_at"):
-            published_html = f'<div class="published-line">Published: {html.escape(lead_story["published_at"])}</div>'
-        lead_html = f"""
-        <section class="lead-story">
-          {thumb_html}
-          <div class="lead-meta">{html.escape(lead_story['section'])} | {html.escape(lead_story['story_type'])}</div>
-          {published_html}
-          <h2><a href="{lead_story['url']}">{html.escape(lead_story['title'])}</a></h2>
-          <p>{html.escape(lead_story['summary'])}</p>
-        </section>
-        """
-
-    grouped = {section: [] for section in SECTION_ORDER}
-    for card in story_cards:
-        grouped.setdefault(card["section"], []).append(card)
-
-    sections_html_parts = []
+    remaining_sections_html_parts = []
 
     for section in SECTION_ORDER:
         if section == "World":
@@ -880,7 +981,6 @@ def build_homepage_page(updated_time, at_a_glance_items, lead_story, story_cards
         if lead_card.get("published_at"):
             section_lead_published = f'<div class="published-line">Published: {html.escape(lead_card["published_at"])}</div>'
 
-        section_title = section
         section_lead_html = f"""
         <article class="section-lead-card">
           {section_lead_thumb}
@@ -903,17 +1003,17 @@ def build_homepage_page(updated_time, at_a_glance_items, lead_story, story_cards
             for card in tail_cards
         )
 
-        sections_html_parts.append(
+        remaining_sections_html_parts.append(
             f"""
             <section class="news-section">
-              <h2>{html.escape(section_title)}</h2>
+              <h2>{html.escape(section)}</h2>
               {section_lead_html}
               {tail_html}
             </section>
             """
         )
 
-    sections_html = "\n".join(sections_html_parts)
+    remaining_sections_html = "\n".join(remaining_sections_html_parts)
 
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -1020,7 +1120,6 @@ def build_homepage_page(updated_time, at_a_glance_items, lead_story, story_cards
       display: block;
       margin-bottom: 14px;
       background: #e9e3d7;
-      image-rendering: auto;
     }}
     .lead-meta,
     .story-meta {{
@@ -1128,137 +1227,17 @@ def build_homepage_page(updated_time, at_a_glance_items, lead_story, story_cards
       </ul>
     </section>
 
-    {sections_html}
+    {remaining_sections_html}
   </div>
 </body>
 </html>
 """
-
-
-def build_feature_page(title, label, standfirst, body_paragraphs, updated_time):
-    body_html = "\n".join(f"<p>{html.escape(p)}</p>" for p in body_paragraphs)
-
-    return f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{html.escape(title)} | The Daily Brief</title>
-  <style>
-    body {{
-      margin: 0;
-      background: #f3efe7;
-      color: #111;
-      font-family: Georgia, "Times New Roman", serif;
-    }}
-    .page {{
-      max-width: 920px;
-      margin: 0 auto;
-      background: #fffdf8;
-      min-height: 100vh;
-      padding: 32px 22px 60px;
-      box-shadow: 0 0 18px rgba(0,0,0,0.08);
-    }}
-    header {{
-      border-bottom: 3px solid #111;
-      margin-bottom: 28px;
-      padding-bottom: 14px;
-    }}
-    .brand {{
-      text-decoration: none;
-      color: #111;
-    }}
-    h1 {{
-      margin: 0;
-      font-size: 3rem;
-      line-height: 1.1;
-    }}
-    .updated {{
-      margin-top: 10px;
-      color: #666;
-      font-size: 0.95rem;
-    }}
-    .label {{
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #666;
-      margin-bottom: 10px;
-    }}
-    h2 {{
-      margin: 0 0 14px 0;
-      font-size: 2.5rem;
-      line-height: 1.15;
-    }}
-    .standfirst {{
-      font-size: 1.2rem;
-      line-height: 1.7;
-      color: #333;
-      margin-bottom: 28px;
-      font-style: italic;
-    }}
-    p {{
-      font-size: 1.12rem;
-      line-height: 1.95;
-      margin: 0 0 18px 0;
-    }}
-    .back {{
-      display: inline-block;
-      margin-bottom: 22px;
-      color: #333;
-      text-decoration: none;
-      font-size: 0.95rem;
-    }}
-    .back:hover {{
-      text-decoration: underline;
-    }}
-  </style>
-</head>
-<body>
-  <div class="page">
-    <header>
-      <a class="brand" href="../index.html"><h1>The Daily Brief</h1></a>
-      <div class="updated">Updated: {updated_time} UTC</div>
-    </header>
-    <a class="back" href="../index.html">← Back to front page</a>
-    <article>
-      <div class="label">{html.escape(label)}</div>
-      <h2>{html.escape(title)}</h2>
-      <div class="standfirst">{html.escape(standfirst)}</div>
-      {body_html}
-    </article>
-  </div>
-</body>
-</html>
-"""
-
-
-def build_brief_body(summary, section, source_name, published_at, source_link):
-    parts = []
-
-    if summary:
-        parts.append(summary)
-
-    context_line = f"This remains a brief in the {section.lower()} file"
-    if source_name:
-        context_line += f", shaped by current reporting signals from {source_name}"
-    if published_at:
-        context_line += f" and tied to an item published at {published_at}"
-    context_line += "."
-    parts.append(context_line)
-
-    parts.append(
-        "The Daily Brief is keeping this item on the agenda because it appears relevant, but the fuller treatment is being reserved for stories that move higher in the running order or materially change."
-    )
-
-    if source_link:
-        parts.append(f"Readers wanting the originating report can follow the linked source signal for the underlying item.")
-
-    return [p for p in parts if p.strip()]
 
 
 def build_outline_prompt(signals):
     story_counts_json = json.dumps(SECTION_STORY_COUNTS, indent=2)
+    sport_signals = [s for s in signals if s["section"] == "Sport"]
+    sport_signals = sorted(sport_signals, key=score_sport_signal, reverse=True)
 
     return f"""
 You are the editor of The Daily Brief, a serious premium digital newspaper.
@@ -1267,6 +1246,9 @@ You are building the homepage package and newsroom plan for the edition.
 
 SOURCE SIGNALS:
 {json.dumps(signals, ensure_ascii=False, indent=2)}
+
+SPORT PRIORITY SIGNALS:
+{json.dumps(sport_signals[:20], ensure_ascii=False, indent=2)}
 
 EDITORIAL RULES:
 - British English.
@@ -1280,15 +1262,20 @@ EDITORIAL RULES:
 - Distinguish evidence from claims.
 - Use context, stakes, trade-offs, history, historical background, precedent, and likely next steps.
 - The lead story must be the most important global story.
-- The World section should feel like a proper long-read homepage package with multiple serious items.
-- After the main Daily Long Read block, the homepage order should be: lead story, World News, Features, then the remaining sections.
-- Create exactly three feature cards for the homepage:
+- The homepage order must be:
+  1. Daily Long Read
+  2. Main lead story
+  3. World News
+  4. Features
+  5. The remaining sections
+- Create exactly three feature cards:
   one world, one markets, one technology.
 - Markets & Economy should be treated as a serious pillar of the paper.
 - Science & Technology should focus on important developments, not gadget fluff.
 - Sport must be tightly focused on:
   Cardiff City, Tampa Bay Buccaneers, NFL, football transfer developments or gossip, and cycling.
-- If the live sport signals are thin for one of those priorities, create careful state-of-play or watchlist stories on those same priorities rather than drifting into generic sport.
+- Do not drift into generic sport.
+- If there is not enough hard news on those priorities, create state-of-play stories on those same priorities.
 - In sport, separate confirmed developments from credible reports and rumours where relevant.
 - Use timestamps and recency intelligently.
 - Reuse source titles closely. Do not write theatrical or overly rewritten headlines.
@@ -1305,26 +1292,19 @@ EDITORIAL RULES:
 SECTION STORY COUNTS:
 {story_counts_json}
 
-For Sport, prefer these priorities in this order:
-1. Cardiff City
-2. Tampa Bay Buccaneers
-3. NFL
-4. Football transfer developments or gossip
-5. Cycling
-
 Return JSON matching the schema exactly.
 """
 
 
-def build_full_body_prompt(stories_to_write, signals):
+def build_body_prompt(stories_to_write, signals):
     return f"""
-You are writing the full article bodies for the most important stories in The Daily Brief.
+You are writing article bodies for The Daily Brief.
 
 STORIES TO WRITE:
 {json.dumps(stories_to_write, ensure_ascii=False, indent=2)}
 
 SOURCE SIGNALS:
-{json.dumps(signals[:90], ensure_ascii=False, indent=2)}
+{json.dumps(signals[:110], ensure_ascii=False, indent=2)}
 
 EDITORIAL RULES:
 - British English.
@@ -1338,37 +1318,15 @@ EDITORIAL RULES:
 - Bring in historical context and background where it genuinely helps the reader understand the present moment.
 - For major geopolitical tensions, explain what earlier phases, flashpoints or negotiations form the backdrop.
 - For Sport, stay tightly focused on Cardiff City, Tampa Bay Buccaneers, NFL, football transfer developments or gossip, and cycling.
-- If a sport story is a watch or state-of-play piece, keep it anchored to those priorities.
+- Do not drift into generic sport.
 - No invented quotes.
 - No unsupported precise figures.
 - Avoid robotic phrasing.
-- Keep the prose tight. Do not overwrite.
+- Keep the prose tight but useful.
+- Every paragraph must add substance.
+- Do not mention internal process, workflow, briefs, source signals, or how the paper is being generated.
 
 Return JSON matching the schema exactly.
-"""
-
-
-def build_homepage_features_prompt(signals):
-    return f"""
-You are writing three homepage feature cards for The Daily Brief.
-
-SOURCE SIGNALS:
-{json.dumps(signals[:90], ensure_ascii=False, indent=2)}
-
-EDITORIAL RULES:
-- British English.
-- Serious, polished, premium-newspaper style.
-- Create exactly three homepage feature cards:
-  1. World Feature
-  2. Markets Feature
-  3. Technology Feature
-- These are not full articles in this script. They are homepage feature cards only.
-- Each should have a strong title and a 2 to 3 sentence standfirst.
-- Global-first, restrained, analytical.
-- Do not invent direct quotes.
-- Do not make up unsupported precise figures.
-
-Return JSON matching the existing schema exactly.
 """
 
 
@@ -1386,30 +1344,20 @@ def get_signal_maps(signals):
     return signal_by_key, signal_by_title
 
 
-def score_sport_signal(signal):
-    blob = f"{signal.get('title', '')} {signal.get('summary', '')}".lower()
-    score = 0
-    if "cardiff city" in blob or "bluebirds" in blob:
-        score += 100
-    if "tampa bay buccaneers" in blob or "buccaneers" in blob or "bucs" in blob:
-        score += 90
-    if "nfl" in blob:
-        score += 80
-    if "transfer" in blob or "window" in blob:
-        score += 70
-    if "cycling" in blob or "tour de france" in blob or "giro" in blob or "vuelta" in blob:
-        score += 60
-    if "cardiff" in blob:
-        score += 40
-    return score
+def get_tier_for_story(is_main_lead, is_section_lead):
+    if is_main_lead:
+        return "lead"
+    if is_section_lead:
+        return "section_lead"
+    return "standard"
 
 
-def enrich_sport_signals(signals):
-    sport_signals = [s for s in signals if s["section"] == "Sport"]
-    scored = sorted(sport_signals, key=score_sport_signal, reverse=True)
-    if any(score_sport_signal(s) > 0 for s in scored):
-        return scored
-    return sport_signals
+def get_paragraph_count_for_tier(tier):
+    if tier == "lead":
+        return 6
+    if tier == "section_lead":
+        return 4
+    return 3
 
 
 signals = get_source_signals()
@@ -1435,19 +1383,6 @@ FEATURES_DIR.mkdir(parents=True, exist_ok=True)
 
 used_slugs = set()
 
-signal_map = {}
-for signal in signals:
-    norm = normalise_title(signal["title"])
-    if not norm:
-        continue
-    if norm not in signal_map:
-        signal_map[norm] = {
-            "thumbnail_url": signal.get("thumbnail_url", ""),
-            "published_at": signal.get("published_at", ""),
-            "source_name": signal.get("source", ""),
-            "source_link": signal.get("link", ""),
-        }
-
 lead_story = outline_data["lead_story"]
 lead_title = lead_story["title"].strip()
 lead_section = coerce_section(lead_story["section"].strip())
@@ -1456,36 +1391,31 @@ lead_summary = lead_story["summary"].strip()
 lead_source_signal_title = lead_story["source_signal_title"].strip()
 lead_signal = signal_by_title.get(lead_source_signal_title) or signal_by_key.get(normalise_title(lead_source_signal_title), {})
 lead_key = normalise_title(lead_source_signal_title or lead_title)
-previous_lead = previous_index.get(lead_key, {})
 
 planned_stories = []
 for section_name in SECTION_ORDER:
     required_count = SECTION_STORY_COUNTS[section_name]
     raw_stories = outline_data.get("sections", {}).get(section_name, [])[:required_count]
 
-    if section_name == "Sport":
-        raw_stories = raw_stories[:required_count]
-
     while len(raw_stories) < required_count:
         if section_name == "Sport":
-            fallback_sources = enrich_sport_signals(signals)
-            fallback_signal_title = fallback_sources[0]["title"] if fallback_sources else (signals[0]["title"] if signals else "Sport watch")
-            priority_titles = [
-                "Cardiff City watch",
-                "Tampa Bay Buccaneers watch",
-                "NFL watch",
+            sport_signals = sorted([s for s in signals if s["section"] == "Sport"], key=score_sport_signal, reverse=True)
+            fallback_signal_title = sport_signals[0]["title"] if sport_signals else (signals[0]["title"] if signals else "Sport")
+            fallback_title = [
+                "Cardiff City state of play",
+                "Tampa Bay Buccaneers state of play",
+                "NFL state of play",
                 "Transfer watch",
                 "Cycling watch",
-            ]
-            fallback_title = priority_titles[min(len(raw_stories), len(priority_titles) - 1)]
-            fallback_summary = "A current state-of-play item on one of the core sport priorities, focusing on what matters now and what to watch next."
+            ][min(len(raw_stories), 4)]
+            fallback_summary = "A current state-of-play piece focused on one of the core sport priorities, explaining where matters stand and what to watch next."
             fallback_type = "Analysis"
         else:
-            fallback_title = f"{section_name} update {len(raw_stories) + 1}"
             fallback_signal_title = next(
                 (s["title"] for s in signals if s["section"] == section_name),
-                signals[0]["title"] if signals else fallback_title,
+                signals[0]["title"] if signals else section_name,
             )
+            fallback_title = f"{section_name} update {len(raw_stories) + 1}"
             fallback_summary = f"A significant development in {section_name.lower()} with wider consequences under review."
             fallback_type = "News"
 
@@ -1497,72 +1427,67 @@ for section_name in SECTION_ORDER:
         })
 
     for i, raw_story in enumerate(raw_stories):
-        story = {
+        planned_stories.append({
             "section": section_name,
             "story_type": coerce_story_type(raw_story["story_type"].strip()),
             "title": raw_story["title"].strip(),
             "summary": raw_story["summary"].strip(),
             "source_signal_title": raw_story["source_signal_title"].strip(),
             "is_section_lead": i == 0,
-        }
-        planned_stories.append(story)
+        })
 
-stories_to_generate_full = []
-lead_body = previous_lead.get("body", []) if previous_lead and previous_lead.get("body") else []
+previous_lead = previous_index.get(lead_key, {})
+lead_body = previous_lead.get("body", []) if previous_lead else []
 
+stories_to_generate = []
 if not lead_body:
-    stories_to_generate_full.append({
+    stories_to_generate.append({
+        "title": lead_title,
         "section": lead_section,
         "story_type": lead_type,
-        "title": lead_title,
         "summary": lead_summary,
         "source_signal_title": lead_source_signal_title,
-        "paragraph_count": 6,
+        "paragraph_count": get_paragraph_count_for_tier("lead"),
     })
 
 for story in planned_stories:
-    story_key = normalise_title(story["source_signal_title"] or story["title"])
-    previous_story = previous_index.get(story_key, {})
+    key = normalise_title(story["source_signal_title"] or story["title"])
+    previous_story = previous_index.get(key, {})
     story["previous"] = previous_story
+    body = previous_story.get("body", []) if previous_story else []
+    if not body:
+        tier = get_tier_for_story(False, story["is_section_lead"])
+        stories_to_generate.append({
+            "title": story["title"],
+            "section": story["section"],
+            "story_type": story["story_type"],
+            "summary": story["summary"],
+            "source_signal_title": story["source_signal_title"],
+            "paragraph_count": get_paragraph_count_for_tier(tier),
+        })
 
-    if story["is_section_lead"]:
-        previous_body = previous_story.get("body", []) if previous_story else []
-        if not previous_body:
-            stories_to_generate_full.append({
-                "section": story["section"],
-                "story_type": story["story_type"],
-                "title": story["title"],
-                "summary": story["summary"],
-                "source_signal_title": story["source_signal_title"],
-                "paragraph_count": 4,
-            })
-
-generated_full_bodies = {}
-if stories_to_generate_full:
-    full_body_response = client.responses.create(
+generated_bodies = {}
+if stories_to_generate:
+    body_response = client.responses.create(
         model=MODEL_NAME,
-        input=build_full_body_prompt(stories_to_generate_full, signals),
-        text={"format": response_json_schema("daily_brief_full_bodies", FULL_BODY_SCHEMA)},
+        input=build_body_prompt(stories_to_generate, signals),
+        text={"format": response_json_schema("daily_brief_story_bodies", BODY_SCHEMA)},
     )
-    try:
-        full_body_data = parse_response_json(full_body_response)
-    except Exception:
-        print("RAW FULL BODY RESPONSE:")
-        print(full_body_response.output_text)
-        raise
-
-    generated_full_bodies = {
+    body_data = parse_response_json(body_response)
+    generated_bodies = {
         item["title"].strip(): [p.strip() for p in item.get("body", []) if p.strip()]
-        for item in full_body_data.get("stories", [])
+        for item in body_data.get("stories", [])
     }
 
-lead_body = lead_body or generated_full_bodies.get(lead_title, [])
+lead_body = lead_body or generated_bodies.get(lead_title, [])
 if not lead_body:
     lead_body = [
         lead_summary,
-        "This is the leading story in the current edition because it appears to carry the widest international consequence among the available signals.",
-        "What matters is not only the latest development, but the background that has shaped it and the implications of what may happen next.",
-        "The Daily Brief is treating this as the clearest item on the world agenda at the moment."
+        "The central question is not merely what happened, but why this moment matters in the wider international picture.",
+        "That requires looking at the immediate facts, the strategic background, and the practical consequences that may follow.",
+        "The Daily Brief is treating this as the clearest lead item on the current global agenda.",
+        "The next meaningful test will be whether the present development holds, escalates, or gives way to a fresh round of positioning.",
+        "For readers, the real value lies in understanding both the event itself and the structure beneath it."
     ]
 
 lead_thumbnail_url = lead_signal.get("thumbnail_url", "")
@@ -1590,7 +1515,6 @@ lead_page = build_story_page(
     published_at=lead_published_at,
     source_name=lead_source_name,
     source_link=lead_source_link,
-    is_brief=False,
 )
 
 with open(STORIES_DIR / lead_filename, "w", encoding="utf-8") as f:
@@ -1600,9 +1524,9 @@ story_cards = []
 saved_stories = []
 
 for story in planned_stories:
-    story_key = normalise_title(story["source_signal_title"] or story["title"])
+    key = normalise_title(story["source_signal_title"] or story["title"])
     previous_story = story["previous"]
-    signal = signal_by_title.get(story["source_signal_title"]) or signal_by_key.get(story_key, {})
+    signal = signal_by_title.get(story["source_signal_title"]) or signal_by_key.get(key, {})
 
     title = story["title"]
     section = story["section"]
@@ -1618,30 +1542,13 @@ for story in planned_stories:
         filename = f"{unique_slug}.html"
         story_url = f"stories/{filename}"
 
-    if story["is_section_lead"]:
-        body = previous_story.get("body", []) if previous_story else []
-        body = body or generated_full_bodies.get(title, [])
-        is_brief = False
-        if not body:
-            body = [
-                summary,
-                "This story is being treated as the lead item in its section because it appears to carry greater significance than the surrounding developments.",
-                "The fuller reading depends not only on the latest facts, but on the background and the plausible next stage of the story.",
-                "The Daily Brief will continue to treat it as a higher-priority item while it remains near the top of the running order."
-            ]
-    else:
-        if previous_story and previous_story.get("body"):
-            body = previous_story["body"]
-            is_brief = previous_story.get("is_brief", True)
-        else:
-            body = build_brief_body(
-                summary=summary,
-                section=section,
-                source_name=signal.get("source", ""),
-                published_at=signal.get("published_at", ""),
-                source_link=signal.get("link", ""),
-            )
-            is_brief = True
+    body = previous_story.get("body", []) if previous_story else []
+    body = body or generated_bodies.get(title, [])
+
+    if not body:
+        tier = get_tier_for_story(False, story["is_section_lead"])
+        paragraphs = get_paragraph_count_for_tier(tier)
+        body = [summary] * paragraphs
 
     body_html = "\n".join(f"<p>{html.escape(p)}</p>" for p in body)
     story_page = build_story_page(
@@ -1654,7 +1561,6 @@ for story in planned_stories:
         published_at=signal.get("published_at", ""),
         source_name=signal.get("source", ""),
         source_link=signal.get("link", ""),
-        is_brief=is_brief,
     )
 
     with open(STORIES_DIR / filename, "w", encoding="utf-8") as f:
@@ -1681,14 +1587,11 @@ for story in planned_stories:
         "source_signal_title": story["source_signal_title"],
         "source_name": signal.get("source", ""),
         "source_link": signal.get("link", ""),
-        "is_brief": is_brief,
         "body": body,
     })
 
-section_features = outline_data.get("section_features", [])
 saved_section_features = []
-
-for item in section_features:
+for item in outline_data.get("section_features", []):
     label = item["label"].strip()
     section = item["section"].strip()
     title = item["title"].strip()
@@ -1699,8 +1602,8 @@ for item in section_features:
 
     feature_body = [
         standfirst,
-        f"This feature sits within the {section.lower()} agenda and is being highlighted because it appears to reward slower, more analytical reading.",
-        "The fuller feature system can be expanded later, but this card is already designed to surface the most worthwhile deeper-reading themes from the current edition."
+        f"This feature is being highlighted from the {section.lower()} agenda because it appears to reward slower, more analytical reading.",
+        "The card is intended to surface a worthwhile deeper-reading theme from the current edition rather than simply repeat a routine news summary."
     ]
 
     feature_page = build_feature_page(
@@ -1761,7 +1664,6 @@ with open(DATA_DIR / "stories.json", "w", encoding="utf-8") as f:
             "source_signal_title": lead_source_signal_title,
             "source_name": lead_source_name,
             "source_link": lead_source_link,
-            "is_brief": False,
             "body": lead_body,
         },
         "section_features": saved_section_features,
