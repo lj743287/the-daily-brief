@@ -1,73 +1,292 @@
 {
-  "last_updated": "2026-04-12 16:56:05",
-  "headlines": [
-    "After Iran talks falter, the big question is what happens next?",
-    "Asha Bhosle: The sound of Bollywood dies aged 92",
-    "Ukraine and Russia accuse each other of hundreds of ceasefire violations",
-    "At least 30 feared dead in crush at Haitian tourist site",
-    "Why this disillusioned Trump voter spends hours searching Epstein files",
-    "Justin Bieber headlines Coachella with nostalgia-fuelled set",
-    "Faisal Islam: Why the government is relaxed about Chinese car imports",
-    "Tice \u00a391,000 tax row is 'minor administrative error', party claims",
-    "British Steel 'needs nationalising by the summer'",
-    "EU airline industry warns of fuel shortages if Strait of Hormuz stays closed",
-    "Tankers urged not to pay toll to Iran for use of strait",
-    "'Every drop of water counts': Fear for the future of Argentina's glaciers",
-    "Starmer urges US and Iran to 'find way through' after peace talks falter",
-    "Murder charge over Primrose Hill stabbing",
-    "Woman raped by several men outside church"
+  "last_updated": "2026-04-12 16:58:42",
+  "source_signals": [
+    {
+      "section": "World",
+      "title": "After Iran talks falter, the big question is what happens next?",
+      "summary": "Twenty-one hours was not enough to end 47 years of hostility between Iran and the US, writes the BBC's Lyse Doucet.",
+      "link": "https://www.bbc.com/news/articles/c5y943x2g8qo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "section": "World",
+      "title": "Asha Bhosle: The sound of Bollywood dies aged 92",
+      "summary": "Her infectious voice got fans dancing and singing, becoming the soundtrack for generations of Indians.",
+      "link": "https://www.bbc.com/news/articles/c6ppd0qdp1do?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "section": "World",
+      "title": "Ukraine and Russia accuse each other of hundreds of ceasefire violations",
+      "summary": "Ukrainian President Volodymyr Zelensky says his nation's forces would respond \"symmetrically\" to Russian attacks.",
+      "link": "https://www.bbc.com/news/articles/cz78y73v830o?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "section": "World",
+      "title": "At least 30 feared dead in crush at Haitian tourist site",
+      "summary": "The incident occurred at a \"tourist event attended by many young people\", Haiti's prime minister says.",
+      "link": "https://www.bbc.com/news/articles/cwyj8d49wzxo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "section": "World",
+      "title": "Why this disillusioned Trump voter spends hours searching Epstein files",
+      "summary": "Many who support the president have expressed frustration with how Trump's former attorney general Pam Bondi handled the Epstein files.",
+      "link": "https://www.bbc.com/news/articles/cx237vmr2lyo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "section": "World",
+      "title": "Justin Bieber headlines Coachella with nostalgia-fuelled set",
+      "summary": "The star spent much of the gig singing along to YouTube videos of early hits like Baby and Never say Never.",
+      "link": "https://www.bbc.com/news/articles/c75kx5dw395o?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "section": "World",
+      "title": "Prosecutor probes abuse claims against California governor candidate Swalwell",
+      "summary": "The high-profile Democrat, a leading contender in California's governor race, firmly denies the accusations.",
+      "link": "https://www.bbc.com/news/articles/c7vq0jnn0yro?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "section": "World",
+      "title": "Germany's far-right AfD adopts 'radical' manifesto ahead of key polls",
+      "summary": "The far-right party is riding high in the opinion polls in the eastern state of Saxony-Anhalt.",
+      "link": "https://www.bbc.com/news/articles/cwy3wwgyd6do?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "section": "Business",
+      "title": "Faisal Islam: Why the government is relaxed about Chinese car imports",
+      "summary": "The UK government believes the rise of China's car industry could be good for UK consumers and industry.",
+      "link": "https://www.bbc.com/news/articles/cnv82v3n6yqo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "section": "Business",
+      "title": "Tice \u00a391,000 tax row is 'minor administrative error', party claims",
+      "summary": "A property company owned by the Reform UK deputy leader failed to pay \u00a391,000 in tax on dividends, according to the Sunday Times.",
+      "link": "https://www.bbc.com/news/articles/c8x7yj99jrwo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "section": "Business",
+      "title": "British Steel 'needs nationalising by the summer'",
+      "summary": "Labour MP Nic Dakin says it is \"the best outcome\" for British Steel as ownership talks continue.",
+      "link": "https://www.bbc.com/news/articles/cddq5zqvvejo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "section": "Business",
+      "title": "EU airline industry warns of fuel shortages if Strait of Hormuz stays closed",
+      "summary": "Airports Council International (ACI) Europe said its members had \"increasing concerns\" about the availability of jet fuel.",
+      "link": "https://www.bbc.com/news/articles/c3w37ggp011o?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "section": "Business",
+      "title": "Tankers urged not to pay toll to Iran for use of strait",
+      "summary": "Tanker firms are being advised not to pay Iran any levies in return for safe passage through the Strait of Hormuz.",
+      "link": "https://www.bbc.com/news/articles/c3dl0gdvvveo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "section": "Business",
+      "title": "'Every drop of water counts': Fear for the future of Argentina's glaciers",
+      "summary": "A controversial law to ease protections for the glaciers has passed, opening the doors for mining.",
+      "link": "https://www.bbc.com/news/articles/cj947487wzyo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "section": "Business",
+      "title": "Great at gaming? US air traffic control wants you to apply",
+      "summary": "A new government ad campaign is trying to persuade gamers to apply for air safety roles.",
+      "link": "https://www.bbc.com/news/articles/ce84rvx0e6do?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "section": "Business",
+      "title": "Soaring pump prices drive US inflation to highest level in almost two years",
+      "summary": "A surge in prices at the pump due to the Iran war has pushed the inflation rate to 3.3%.",
+      "link": "https://www.bbc.com/news/articles/cde56g80xp5o?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "section": "UK",
+      "title": "Starmer urges US and Iran to 'find way through' after peace talks falter",
+      "summary": "The prime minister warns the US and Iran against \"escalation\", as negotiations end without agreement.",
+      "link": "https://www.bbc.com/news/articles/c3dlmdl1v57o?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "section": "UK",
+      "title": "Murder charge over Primrose Hill stabbing",
+      "summary": "A 27-year-old man is due to appear in court on Monday charged with Finbar Sullivan's murder.",
+      "link": "https://www.bbc.com/news/articles/cx2dgmz20p1o?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "section": "UK",
+      "title": "Woman raped by several men outside church",
+      "summary": "A woman in her 20s was followed after leaving a nightclub and raped outside Epsom Methodist Church.",
+      "link": "https://www.bbc.com/news/articles/crk18mke8gjo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "section": "UK",
+      "title": "Woman killed in dog attack at house named",
+      "summary": "Police say the seized dog - a family pet - is believed to be a Lurcher cross.",
+      "link": "https://www.bbc.com/news/articles/c79jr971p5do?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "section": "UK",
+      "title": "Golden eagles' return to English skies gets government backing",
+      "summary": "The birds could be reintroduced as early as next year following a \u00a31m injection from the government.",
+      "link": "https://www.bbc.com/news/articles/cje4zlxqkqdo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "section": "UK",
+      "title": "Four arrested over murder of Scottish businessman in Kenya",
+      "summary": "Campbell Scott's body was found in a pineapple sack about 60 miles from Nairobi where he was attending a conference in February last year.",
+      "link": "https://www.bbc.com/news/articles/cx2e8kj3yn4o?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "section": "UK",
+      "title": "Two in hospital after bus crashes down embankment in the Highlands",
+      "summary": "The bus, believed to be operated by Ember, left the road on Sunday morning north of Aviemore.",
+      "link": "https://www.bbc.com/news/articles/cwyx94488wqo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "section": "UK",
+      "title": "Eamonn Holmes thanks well-wishers after suffering stroke",
+      "summary": "\"We're taking it one step at a time,\" Declan Holmes also said, as his 66-year-old father recovers in hospital.",
+      "link": "https://www.bbc.com/news/articles/c4gdlg7je4po?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "section": "Science & Technology",
+      "title": "Dancer with MND performs on stage again through digital avatar",
+      "summary": "Breanna Olson said brainwave tech was able to re-establish the expression and connection she felt had gone.",
+      "link": "https://www.bbc.com/news/articles/cgqkz5lzvnwo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "section": "Science & Technology",
+      "title": "Meta pulls Facebook ads recruiting for social media addiction lawsuits",
+      "summary": "The Facebook owner recently lost a landmark social media addiction trial in California",
+      "link": "https://www.bbc.com/news/articles/czjw0zgz9zyo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "section": "Science & Technology",
+      "title": "White House staff told not to place bets on prediction markets",
+      "summary": "The gambling platforms have grown in popularity, with some users making wagers on conflicts.",
+      "link": "https://www.bbc.com/news/articles/cgld65x396go?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "section": "Science & Technology",
+      "title": "Mayor warns of London 'disinformation blizzard'",
+      "summary": "Sir Sadiq Khan claims London is being targeted with disinformation portraying it as a city \"in decline\".",
+      "link": "https://www.bbc.com/news/articles/cp3l4kwer5ko?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "section": "Science & Technology",
+      "title": "Amazon to end support for older Kindles, prompting user outcry",
+      "summary": "The move means owners of Kindles released before 2013 will be unable to download new e-books.",
+      "link": "https://www.bbc.com/news/articles/c98k91yy4z4o?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "section": "Science & Technology",
+      "title": "OpenAI pauses UK data centre deal over energy costs and regulation",
+      "summary": "The project was part of a package of tech investment promising the UK could become an AI superpower.",
+      "link": "https://www.bbc.com/news/articles/clyd032ej70o?at_medium=RSS&at_campaign=rss"
+    }
   ],
   "at_a_glance": [
-    "Iran talks falter as Strait of Hormuz tensions raise risk to global fuel supplies.",
-    "EU airlines warn of jet fuel shortages if the waterway remains closed; tankers told not to pay Iranian tolls.",
-    "Ukraine and Russia trade blame for hundreds of ceasefire violations amid intensified strikes.",
-    "At least 30 feared dead in a crush at a Haitian tourist site, with rescue efforts ongoing.",
-    "British Steel \u2018needs nationalising by the summer\u2019, piling pressure on ministers over industrial strategy.",
-    "Asha Bhosle, the voice of generations of Bollywood cinema, dies aged 92."
+    "Iran\u2013US talks end without agreement as the region waits for next steps",
+    "UK prime minister urges restraint and renewed diplomacy after negotiations stall",
+    "Europe\u2019s airports warn of jet fuel shortages if the Strait of Hormuz remains closed",
+    "Tanker operators advised not to pay Iranian levies for safe passage through the strait",
+    "US inflation climbs to 3.3% as fuel prices jump amid conflict-related disruption",
+    "Ukraine and Russia trade accusations of hundreds of ceasefire violations",
+    "At least 30 feared dead after a crush at a Haitian tourist event",
+    "Bollywood legend Asha Bhosle dies aged 92, prompting tributes across India"
   ],
   "stories": [
     {
-      "title": "After Iran talks falter, the big question is what happens next?",
-      "summary": "Fragile diplomacy with Iran has stumbled, amplifying fears over the Strait of Hormuz and the knock\u2011on effects on global fuel supplies. Europe\u2019s airlines warn of jet fuel shortages if the choke point remains shut, while shippers are urged not to pay Iranian tolls.",
-      "url": "stories/after-iran-talks-falter-the-big-question-is-what-happens-next.html",
+      "section": "World",
+      "title": "After Iran talks falter, a volatile region asks what comes next",
+      "summary": "Marathon contacts between the US and Iran failed to bridge deep divides, leaving the Middle East braced for potential miscalculation. With maritime routes contested and regional actors on alert, the diplomatic calendar now matters as much as battlefield dynamics. The coming days will test whether backchannels and guarantors can cool tempers or whether a dangerous cycle hardens.",
+      "url": "stories/after-iran-talks-falter-a-volatile-region-asks-what-comes-next.html",
       "body": [
-        "The latest effort to ease tensions with Tehran has run aground, leaving a dangerous vacuum around the world\u2019s most vital oil and fuel corridor. With the diplomatic track stalling, attention has turned to the Strait of Hormuz, where any prolonged disruption would reverberate through energy and transport markets.",
-        "Industry bodies in Europe warn that a sustained closure could trigger jet fuel shortages and force carriers to ration or reroute operations. Shipping groups, meanwhile, are being urged not to pay any transit tolls demanded by Iran, a stance that raises complex legal, sanctions and insurance questions for operators assessing risk.",
-        "Energy traders are already gaming out contingencies, from longer voyages around Africa to accelerated stockpiling, all of which would increase costs and travel times. Even partial interruptions can ripple quickly into higher fares, pricier freight and renewed pressure on inflation forecasts.",
-        "Political calls for restraint are growing, with Starmer urging Washington and Tehran to find a way through before miscalculation hardens into crisis. The next inflection points to watch include back\u2011channel talks, potential convoy protections and whether any narrow, temporary reopening can stabilise markets long enough for diplomacy to resume."
+        "Twenty-one hours of engagement were not enough to unwind nearly five decades of antagonism, and the collapse of the latest efforts underscores how far apart Washington and Tehran remain on core issues. The pause leaves both sides weighing their next move while regional capitals try to anticipate the consequences.",
+        "Sticking points span the spectrum: the scale and verification of limits on Iran\u2019s nuclear programme, sequencing of sanctions relief, and assurances about regional security activity. None yielded to compressed timetables or external pressure, and both sides now return to domestic audiences that will scrutinise any sign of concession.",
+        "The strategic risk is that absence of process increases the chances of miscalculation at sea and across proxy theatres. Maritime security remains a flashpoint, with contested passages driving insurance costs higher and forcing hard choices on commercial and military planners.",
+        "Attention now turns to third-party mediation. European and Gulf intermediaries have channels into both capitals and may try to extract discrete, testable steps that can rebuild confidence. The UN and regional organisations will look for openings to establish deconfliction mechanisms if direct talks remain stalled.",
+        "Domestic politics in both countries are a complicating factor. Each side faces pressures that limit flexibility, and the optics of any concession will be sensitive. Political calendars can shorten horizons, pushing leaders towards symbolic shows of resolve rather than incremental compromises.",
+        "Neighbouring states are calibrating their own postures. Israel and Gulf monarchies are watching nuclear and missile developments closely, while Lebanon, Iraq and Syria remain vulnerable to spillover if proxy confrontations intensify. Humanitarian agencies warn that any escalation would deepen existing crises.",
+        "The economic repercussions are already felt beyond the region. Disruption around key energy routes filters into global prices, challenging airlines, shipping and manufacturers, while fuelling broader inflationary pressures. Investors and policymakers are preparing for a more volatile trading environment as a result.",
+        "What matters next is whether small, confidence-building measures can be agreed, such as humanitarian arrangements, narrow maritime understandings or technical nuclear steps under international oversight. Absent that, the risk is a drift towards normalised crisis, where ad hoc retaliation replaces structured diplomacy."
       ]
     },
     {
-      "title": "Ukraine and Russia accuse each other of hundreds of ceasefire violations",
-      "summary": "Kyiv and Moscow traded allegations of large\u2011scale truce breaches amid intensified shelling and drone strikes. The claims underscore how fragile any lull remains, with civilians again bearing the brunt.",
-      "url": "stories/ukraine-and-russia-accuse-each-other-of-hundreds-of-ceasefire-violations.html",
+      "section": "Business",
+      "title": "Airports warn of jet fuel squeeze as Hormuz disruption drags on",
+      "summary": "Europe\u2019s airport operators have raised alarm over jet fuel availability if the Strait of Hormuz remains closed, highlighting an immediate operational risk for carriers and hubs. With supplies from Gulf refineries curtailed and rerouting options slow to materialise, contingency plans are being drawn up. Any prolonged disruption is likely to add costs for airlines and, ultimately, passengers.",
+      "url": "stories/airports-warn-of-jet-fuel-squeeze-as-hormuz-disruption-drags-on.html",
       "body": [
-        "Both sides reported surges in violations along multiple sectors of the front, each blaming the other for escalating attacks. The tempo of strikes has sharpened the battle of narratives, with information and military campaigns moving in lockstep.",
-        "Civilian areas have faced renewed disruption, from power cuts to damage to homes and infrastructure, as emergency services race to stabilise hard\u2011hit districts. Independent verification of casualty figures remains difficult amid restricted access and ongoing hostilities.",
-        "Even limited ceasefire understandings are proving brittle, vulnerable to local tactical moves and shifting battlefield priorities. The absence of durable monitoring mechanisms complicates efforts to assign responsibility and to halt spirals of retaliation.",
-        "International partners are urging restraint while funnelling humanitarian aid and air\u2011defence support, wary that a further slide could derail wider diplomatic efforts. For now, the frontline remains fluid, with the risk that local flare\u2011ups metastasise into broader confrontations."
+        "Airports Council International (ACI) Europe said members were increasingly concerned about jet fuel supplies, pointing to the strait\u2019s pivotal role in global energy flows. Stocks at major hubs can buffer short disruptions, but planners are preparing for tighter rationing if alternative deliveries fail to keep pace.",
+        "The aviation fuel supply chain is finely tuned, with a significant share sourced or transiting through Gulf facilities. Rerouting via longer sea lanes or alternative suppliers carries lead times and higher freight costs, while pipeline and storage capacity in Europe can become bottlenecks when supply is constrained.",
+        "Airlines are responding with a familiar toolkit: fuel tankering where safety and weight limits permit, additional refuelling stops on long-haul routes, and payload adjustments that can restrict cargo. Each step imposes operational trade-offs that ripple through schedules and on-time performance.",
+        "Higher energy costs typically feed into fares through surcharges or reduced capacity growth. While carriers with robust hedging programmes will have partial protection in the near term, hedges roll off, and smaller or newer airlines may have less cover against sudden spikes.",
+        "Regulators and governments are in contact with operators about releasing strategic reserves and easing logistics bottlenecks if needed. Environmental obligations remain in view, but policymakers face difficult choices if keeping flights moving requires prioritising fossil fuel deliveries over other uses.",
+        "Airport operators are revisiting supply contracts and allocation frameworks to balance equity among carriers if rationing intensifies. Ground operations, from de-icing to ancillary power, also depend on reliable fuel and energy inputs, adding to the overall resilience challenge.",
+        "Exposure is uneven across the industry. Cargo operators and long-haul heavyweights are particularly sensitive to fuel constraints, while point-to-point low-cost carriers could see outsized impacts at secondary airports with thinner storage buffers and fewer alternative suppliers.",
+        "The ultimate impact hinges on duration. A short disruption can be managed with inventories and scheduling tweaks; a longer one risks capacity reductions and higher fares across key markets. For a sector still rebuilding balance sheets, elevated fuel volatility is an unwelcome test of resilience."
       ]
     },
     {
-      "title": "British Steel \u2018needs nationalising by the summer\u2019 as policy tensions sharpen",
-      "summary": "A stark warning that British Steel may require nationalisation within months has thrust industrial policy back to the top of the agenda. It comes as ministers are said to be relaxed about Chinese car imports, highlighting a split\u2011screen approach to competitiveness and consumer prices.",
-      "url": "stories/british-steel-needs-nationalising-by-the-summer-as-policy-tensions-sharpen.html",
+      "section": "UK",
+      "title": "Downing Street presses for de-escalation after Iran\u2013US talks stall",
+      "summary": "The prime minister has called on Washington and Tehran to avoid escalation and seek a route back to dialogue after negotiations ended without agreement. The UK is positioning itself as a supporter of renewed diplomacy while preparing for knock-on effects to energy, shipping and consular interests. Ministers are receiving regular briefings amid concerns over regional security and economic spillovers.",
+      "url": "stories/downing-street-presses-for-de-escalation-after-iranus-talks-stall.html",
       "body": [
-        "Pressure is intensifying on the government to decide whether, and how, to intervene in Britain\u2019s steelmaking future after warnings that British Steel could need to be brought into public ownership by the summer. The prospect underscores fragile balance sheets and the capital demands of the transition to lower\u2011carbon production.",
-        "At the same time, analysis by Faisal Islam suggests ministers are relatively sanguine about inflows of competitively priced Chinese electric vehicles, reflecting a calculus that cheaper consumer goods help tame inflation even as domestic manufacturers seek protection and investment.",
-        "Bridging those tensions will require choices on state aid, carbon costs and border measures, alongside clarity on timelines for green steel. Without it, the sector risks drift, deterring private capital and imperilling skilled jobs across critical industrial hubs.",
-        "Officials are weighing options from bridge financing and conditional support to a special administration regime, while unions press for job guarantees and a credible decarbonisation plan. Markets, suppliers and customers are watching closely for signals that policy will match rhetoric with delivery."
+        "In the wake of failed contacts between the US and Iran, the government urged restraint and a renewed push for diplomacy, framing de-escalation as the only sustainable path to regional stability. Officials are monitoring developments closely as maritime risks rise and energy markets react.",
+        "The UK has longstanding channels with regional partners and with European intermediaries, and will look to support any practical steps that reduce the risk of miscalculation. Security officials are prioritising maritime awareness, given the importance of safe passage for global commerce.",
+        "Energy security is a central concern. While Britain is less directly reliant on Gulf oil than some peers, global price movements transmit quickly to UK consumers and businesses. The Treasury and the Department for Energy Security are assessing potential measures if volatility persists.",
+        "Foreign Office teams are updating travel and consular guidance, particularly for British nationals in affected countries and for shipping firms operating near contested waterways. The UK\u2019s maritime authorities are liaising with industry on risk assessments and routing advice.",
+        "Parliament is expected to seek further detail on the government\u2019s contingency planning, including the scope for coordinated action with allies on sanctions calibration and humanitarian access. Committees may also probe the implications for defence commitments in the region.",
+        "Opposition parties have signalled support for de-escalation but will press ministers on preparedness at home, from energy affordability to supply chain resilience. The debate will centre on how to balance diplomatic leverage with practical steps that cushion households and firms.",
+        "Business groups are highlighting exposure in aviation, shipping and manufacturing, with particular focus on input costs and insurance premiums. Retail fuel prices are a sensitive political indicator and could become a barometer of public sentiment if they rise sharply.",
+        "Officials caution that the situation remains fluid. Any pathway back to talks would likely begin with limited, verifiable steps to rebuild confidence, even as the UK and its partners brace for a period of heightened uncertainty across security and economic domains."
       ]
     },
     {
-      "title": "Asha Bhosle: The sound of Bollywood dies aged 92",
-      "summary": "Asha Bhosle, whose voice defined generations of Hindi cinema, has died aged 92. Her versatility and prolific output made her a defining figure of South Asian popular culture.",
-      "url": "stories/asha-bhosle-the-sound-of-bollywood-dies-aged-92.html",
+      "section": "Markets",
+      "title": "Oil shock reverberates through assets as investors seek safety",
+      "summary": "Energy disruption around the Strait of Hormuz and a fresh jump in US inflation to 3.3% have reset risk appetite, lifting oil and the dollar while pressuring equities. Airlines and energy-intensive sectors are under strain as input costs rise, and bond markets are reassessing the path of rates. Currency markets favour perceived havens amid a fragile geopolitical backdrop.",
+      "url": "stories/oil-shock-reverberates-through-assets-as-investors-seek-safety.html",
       "body": [
-        "Across decades of playback singing, Bhosle brought charisma, range and emotional colour to thousands of film songs, helping to shape the musical identity of Bollywood for audiences in India and far beyond. Her recordings became part of the cultural fabric, spanning romance, drama and dance classics.",
-        "Colleagues and admirers from film and music paid tribute to an artist whose catalogue bridged eras and styles. To many, she embodied the glamour and storytelling of the industry at its most expansive, her voice inseparable from the stars who mimed to it on screen.",
-        "For fans at home and across the diaspora, her songs trace personal histories as much as cinematic ones, soundtracking weddings, festivals and family memory. Broadcasters and platforms are set to revisit her work, underscoring the breadth of an unmatched repertoire.",
-        "Her legacy is secure: a body of work that travelled across languages and generations, and a standard that continues to influence singers today. In mourning her, the industry also celebrates the voice that helped define its golden age."
+        "Crude benchmarks extended gains as supply uncertainty persisted, with traders factoring in longer and costlier routes for tankers and the risk of further interruptions. Higher oil prices have revived concerns that the disinflation trend could stall, complicating central bank calculus.",
+        "Equity markets reflected the squeeze, with travel and transport facing headwinds from rising fuel costs and potential operational disruption. By contrast, energy producers and some commodity-linked names found support from firmer prices, tempering broader index declines.",
+        "The latest US inflation print, driven by higher pump prices, nudged rate expectations, pushing up short-dated yields and reviving debate over how quickly monetary easing can proceed. European bond markets tracked the move, though growth concerns lent some support to longer maturities.",
+        "In currencies, the dollar outperformed as investors sought liquid havens, while sterling and the euro were mixed, balancing energy exposure against relatively resilient domestic data. Safe-haven flows also supported the yen and Swiss franc, although policy divergences capped gains.",
+        "Credit markets saw spreads widen modestly, reflecting a cautious tone rather than outright stress. Issuers with heavy energy exposure or discretionary consumer sensitivity underperformed, while investment-grade defensives held firmer amid a rotation toward quality.",
+        "Commodities beyond oil were mixed. Industrial metals reacted to the growth implications of higher energy costs, while gold benefited from risk aversion and its role as a store of value in periods of geopolitical strain.",
+        "Derivatives positioning showed increased demand for downside protection in equities and for call options in energy contracts, signalling a desire to hedge tail risks as the news flow remains volatile.",
+        "Market direction will hinge on the duration of energy route disruption and any sign of renewed diplomacy. Clearer timelines on central bank policy and evidence that second-round inflation effects are contained would be needed to stabilise risk sentiment more broadly."
+      ]
+    },
+    {
+      "section": "Science & Technology",
+      "title": "OpenAI pauses UK data centre plan amid energy costs and regulatory uncertainty",
+      "summary": "A flagship UK data centre project linked to the country\u2019s ambitions to become an AI superpower has been paused, with energy costs and the regulatory environment cited as headwinds. The move underscores the sector\u2019s dependence on affordable, reliable power and clear rules for deployment. Ministers face questions over how to attract and retain large-scale compute investments.",
+      "url": "stories/openai-pauses-uk-data-centre-plan-amid-energy-costs-and-regulatory-uncertainty.html",
+      "body": [
+        "OpenAI has put a UK data centre deal on hold, highlighting concerns over energy prices and evolving regulation. The decision lands as the government courts global firms to anchor a domestic ecosystem for advanced computing and artificial intelligence.",
+        "The proposed facility was part of a wider investment narrative aimed at boosting national compute capacity and research capability. Its pause raises the prospect that providers could redirect capital to jurisdictions offering lower operating costs or more predictable frameworks.",
+        "Data centres are energy-intensive, drawing significant baseload power and often relying on complex cooling systems with water and grid implications. Persistent wholesale price volatility and local capacity constraints can materially alter project economics.",
+        "Regulatory clarity is another factor. AI governance, safety standards and data protection rules are in flux, while planning and environmental consents add timelines and costs. Operators typically seek predictable pathways from permitting to operation before committing.",
+        "Global competition for AI infrastructure is fierce, with the US and parts of the EU offering incentives and clearer roadmaps for grid connections and renewable sourcing. The UK\u2019s challenge is to balance prudential oversight with a compelling value proposition for investors.",
+        "Officials argue that the UK remains attractive, pointing to talent, research strengths and a growing cluster of AI firms. Supporters of the project say targeted reforms on energy market design and planning could unlock capacity without diluting standards.",
+        "For startups, universities and public services hoping to leverage cutting-edge models, delays in local capacity can mean greater reliance on overseas cloud infrastructure. That dependency can raise costs, complicate data governance and slow experimentation.",
+        "Analysts say a credible path forward would pair more predictable regulatory guidance with investment in grid upgrades and low-carbon generation, giving operators confidence on long-term power contracts and sustainability targets. Without that, the risk is a drift of high-value compute abroad."
+      ]
+    },
+    {
+      "section": "Sport",
+      "title": "Sport counts the cost as travel disruption and inflation squeeze budgets",
+      "summary": "Rising fuel prices and broader inflation pressures are feeding into the economics of sport, from elite team logistics to supporter travel. Event organisers are revisiting budgets while airlines warn of jet fuel tightness if key sea lanes remain closed. Governing bodies say the priority is to keep calendars intact while maintaining safety and affordability.",
+      "url": "stories/sport-counts-the-cost-as-travel-disruption-and-inflation-squeeze-budgets.html",
+      "body": [
+        "Higher energy costs are translating into more expensive travel for teams and backroom staff, with long-haul charters and freight particularly exposed. The combination of fuel surcharges and tighter capacity is forcing organisations to reconsider routing and scheduling assumptions.",
+        "Airlines\u2019 warnings about potential jet fuel shortages, if disruptions around the Strait of Hormuz persist, add uncertainty for clubs and national sides that rely on tightly timed itineraries. Even where availability is maintained, price volatility makes budgeting more difficult.",
+        "Supporters are feeling the pinch through costlier flights and domestic transport, with some fans switching to overland options or limiting away travel. Hospitality and accommodation providers are also adjusting rates, affecting the overall matchday spend.",
+        "Event organisers face a delicate balancing act between rising input costs and commitments to keep tickets accessible. Staging costs, from temporary power to security and logistics, are being reassessed to preserve margins without compromising safety or experience.",
+        "Broadcasters and sponsors are reviewing contingency plans to safeguard coverage and activation schedules if travel is disrupted. Multi-venue and international tournaments are mapping alternative hubs and freight solutions to reduce single-point-of-failure risks.",
+        "Governing bodies emphasise calendar continuity but are building flexibility into windows and venue allocations where possible. Sustainability goals add another dimension, as efforts to cut emissions can collide with the need for more circuitous routes or additional flights.",
+        "Grassroots sport is not immune. Community clubs report higher energy bills for facilities and increased transport costs for fixtures, putting pressure on participation and volunteer-run budgets.",
+        "The outlook depends on how quickly energy routes stabilise and inflation moderates. In the meantime, stakeholders are negotiating revised contracts, seeking efficiency gains, and exploring regionalised formats that reduce travel demands while preserving competitive integrity."
       ]
     }
   ]
