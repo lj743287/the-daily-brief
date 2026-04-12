@@ -41,31 +41,55 @@
       background: #f8f3e8;
       border-left: 5px solid #111;
     }
-    .feature-label {
+    .feature-label, .mini-feature-label {
       font-size: 0.85rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: #666;
       margin-bottom: 10px;
     }
-    .feature-block h2 {
+    .feature-block h2, .mini-features h2 {
       margin: 0 0 12px 0;
       padding: 0;
       border: 0;
       font-size: 2rem;
       line-height: 1.2;
     }
-    .feature-block a {
+    .feature-block a, .mini-feature-card a {
       color: #111;
       text-decoration: none;
     }
-    .feature-block a:hover {
+    .feature-block a:hover, .mini-feature-card a:hover {
       text-decoration: underline;
     }
     .feature-standfirst {
       margin: 0;
       font-size: 1.08rem;
       line-height: 1.8;
+      color: #333;
+    }
+    .mini-features {
+      margin-bottom: 34px;
+    }
+    .mini-features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+    .mini-feature-card {
+      border: 1px solid #e3ddd2;
+      padding: 18px;
+      background: #faf7f0;
+    }
+    .mini-feature-card h3 {
+      margin: 0 0 10px 0;
+      font-size: 1.35rem;
+      line-height: 1.25;
+    }
+    .mini-feature-card p {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.7;
       color: #333;
     }
     .lead-story {
@@ -79,6 +103,7 @@
       display: block;
       margin-bottom: 14px;
       background: #e9e3d7;
+      image-rendering: auto;
     }
     .lead-meta,
     .story-meta {
@@ -171,7 +196,7 @@
   <div class="page">
     <header>
       <h1>The Daily Brief</h1>
-      <div class="updated">Updated: 2026-04-12 21:35:04 UTC</div>
+      <div class="updated">Updated: 2026-04-12 21:48:04 UTC</div>
     </header>
 
     
@@ -187,42 +212,25 @@
           <div class="lead-meta">World | Analysis</div>
           <div class="published-line">Published: 2026-04-12 18:48:57 UTC</div>
           <h2><a href="stories/trumps-blockade-threat-raises-risks-and-leaves-predicaments-unchanged.html">Trump&#x27;s blockade threat raises risks and leaves predicaments unchanged</a></h2>
-          <p>The threatened blockade of the Strait of Hormuz deepens the crisis around Iran, but does not alter the basic strategic problem: Tehran can absorb pressure, while Donald Trump must decide how much economic and military cost he is willing to bear. The result is a high-stakes test of endurance, with consequences for shipping, energy prices and allied diplomacy far beyond the Gulf.</p>
+          <p>Donald Trump’s threat to blockade the Strait of Hormuz has sharpened the stakes in the Iran crisis, but it has not resolved the underlying problem: Iran can still absorb pain, while Washington must weigh the costs of escalation, shipping disruption and political blowback. The story now tests how far both sides will go before the conflict spills more fully into global trade and regional security.</p>
         </section>
         
-
-    <section class="glance-section">
-      <h2>At a Glance</h2>
-      <ul>
-        <li>US-Iran talks collapse, leaving the Strait of Hormuz closed and global energy markets on edge.</li>
-<li>Trump’s blockade threat raises the risk of escalation while failing to resolve the underlying Iran standoff.</li>
-<li>Nigeria faces mounting scrutiny after reports of a deadly air strike on a market.</li>
-<li>Ukraine and Russia trade accusations over ceasefire breaches as hopes for a truce fade.</li>
-<li>UK politics turns further towards the May elections, with NHS, Reform and devolution all in play.</li>
-<li>Manchester City’s title surge and Masters drama dominate a busy sporting weekend.</li>
-<li>AI, online safety and platform accountability remain central themes in technology coverage.</li>
-<li>British households and firms continue to feel the spillover from higher fuel and energy costs.</li>
-      </ul>
-    </section>
-
     
-            <section class="news-section">
-              <h2>World</h2>
-              
-        <article class="section-lead-card">
-          <img class="section-lead-image" src="https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/7a79/live/1fe25240-369c-11f1-a64d-95608276955d.jpg" alt="Trump&#x27;s blockade threat raises risks and leaves predicaments unchanged">
-          <div class="story-meta">Analysis</div>
-          <div class="published-line">Published: 2026-04-12 18:48:57 UTC</div>
-          <h3><a href="stories/trumps-blockade-threat-raises-risks-and-leaves-predicaments-unchanged.html">Trump&#x27;s blockade threat raises risks and leaves predicaments unchanged</a></h3>
-          <p>The threatened blockade of the Strait of Hormuz deepens the crisis around Iran, but does not alter the basic strategic problem: Tehran can absorb pressure, while Donald Trump must decide how much economic and military cost he is willing to bear. The result is a high-stakes test of endurance, with consequences for shipping, energy prices and allied diplomacy far beyond the Gulf.</p>
-        </article>
-        
-              
+        <section class="news-section">
+          <h2>World News</h2>
+          <article class="section-lead-card">
+            <img class="section-lead-image" src="https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/7a79/live/1fe25240-369c-11f1-a64d-95608276955d.jpg" alt="Trump&#x27;s blockade threat raises risks and leaves predicaments unchanged">
+            <div class="story-meta">Analysis</div>
+            <div class="published-line">Published: 2026-04-12 18:48:57 UTC</div>
+            <h3><a href="stories/trumps-blockade-threat-raises-risks-and-leaves-predicaments-unchanged.html">Trump&#x27;s blockade threat raises risks and leaves predicaments unchanged</a></h3>
+            <p>Donald Trump’s threat to blockade the Strait of Hormuz has sharpened the stakes in the Iran crisis, but it has not resolved the underlying problem: Iran can still absorb pain, while Washington must weigh the costs of escalation, shipping disruption and political blowback.</p>
+          </article>
+          
             <article class="story-card">
               <div class="story-meta">Analysis</div>
               <div class="published-line">Published: 2026-04-12 12:48:01 UTC</div>
               <h4><a href="stories/after-iran-talks-falter-the-big-question-is-what-happens-next.html">After Iran talks falter, the big question is what happens next?</a></h4>
-              <p>With the 21-hour talks failing to produce a breakthrough, the immediate question is whether the ceasefire can hold and whether diplomacy can resume before the confrontation hardens into a wider regional shock.</p>
+              <p>The collapse of the latest talks leaves the ceasefire fragile and the diplomatic track uncertain, with the next phase likely to be defined by deterrence, coercion and hurried back-channel bargaining rather than a breakthrough.</p>
             </article>
             
 
@@ -230,7 +238,7 @@
               <div class="story-meta">News</div>
               <div class="published-line">Published: 2026-04-12 18:11:04 UTC</div>
               <h4><a href="stories/civilians-feared-killed-after-reports-of-air-strike-on-nigerian-market.html">Civilians feared killed after reports of air strike on Nigerian market</a></h4>
-              <p>Reports of a strike on a village market in north-east Nigeria have prompted fears of civilian deaths and renewed scrutiny of the military’s operations against militants.</p>
+              <p>Reports from north-east Nigeria say a market was struck during an operation against militants; officials have not yet set out a full account, and the scale of civilian harm remains contested.</p>
             </article>
             
 
@@ -238,7 +246,7 @@
               <div class="story-meta">News</div>
               <div class="published-line">Published: 2026-04-12 11:53:37 UTC</div>
               <h4><a href="stories/ukraine-and-russia-accuse-each-other-of-hundreds-of-ceasefire-violations.html">Ukraine and Russia accuse each other of hundreds of ceasefire violations</a></h4>
-              <p>Both sides say the other has broken the truce repeatedly, underlining how fragile any pause in fighting remains and how quickly the conflict could re-escalate.</p>
+              <p>Both sides say the other has broken the Easter truce repeatedly, underlining how limited and reversible any pause in fighting remains.</p>
             </article>
             
 
@@ -246,20 +254,63 @@
               <div class="story-meta">News</div>
               <div class="published-line">Published: 2026-04-12 07:22:28 UTC</div>
               <h4><a href="stories/at-least-30-feared-dead-in-crush-at-haitian-tourist-site.html">At least 30 feared dead in crush at Haitian tourist site</a></h4>
-              <p>A crowded tourist event in Haiti turned deadly after a crush that authorities say may have killed at least 30 people, highlighting the country’s continuing governance and safety challenges.</p>
+              <p>A crush at a crowded tourist event in Haiti has left at least 30 people feared dead, adding to the country’s continuing security and humanitarian strain.</p>
             </article>
             
 
             <article class="story-card">
-              <div class="story-meta">Analysis</div>
-              <div class="published-line">Published: 2026-04-12 21:31:29 UTC</div>
-              <h4><a href="stories/what-is-a-naval-blockade-and-how-would-it-work-in-strait-of-hormuz.html">What is a naval blockade and how would it work in Strait of Hormuz?</a></h4>
-              <p>As the US threatens a blockade, the practical question is how such a move would work in one of the world’s most strategically sensitive waterways, and what it would mean for shipping, insurance and energy supply.</p>
+              <div class="story-meta">News</div>
+              <div class="published-line">Published: 2026-04-11 18:55:40 UTC</div>
+              <h4><a href="stories/germanys-far-right-afd-adopts-radical-manifesto-ahead-of-key-polls.html">Germany&#x27;s far-right AfD adopts &#x27;radical&#x27; manifesto ahead of key polls</a></h4>
+              <p>The AfD is moving further to the hard right ahead of important eastern state elections, as it remains strong in the polls and continues to shape Germany’s political debate.</p>
             </article>
             
-            </section>
+        </section>
+        
+    
+        <section class="mini-features">
+          <h2>Features</h2>
+          <div class="mini-features-grid">
+            
+            <article class="mini-feature-card">
+              <div class="mini-feature-label">World feature</div>
+              <h3><a href="features/2026-04-12-world-feature-after-iran-talks-falter-the-big-question-is-what-happens-next.html">After Iran talks falter, the big question is what happens next?</a></h3>
+              <p>A sober read on the diplomatic deadlock, the ceasefire’s fragility and the narrow set of choices now facing Washington, Tehran and their allies.</p>
+            </article>
             
 
+            <article class="mini-feature-card">
+              <div class="mini-feature-label">Markets feature</div>
+              <h3><a href="features/2026-04-12-markets-feature-collapse-of-us-iran-talks-heightens-fears-of-prolonged-energy-sh.html">Collapse of US-Iran talks heightens fears of prolonged energy shock</a></h3>
+              <p>Oil, borrowing costs and transport-sector margins are all exposed if the Gulf remains disrupted and tanker traffic stays constrained.</p>
+            </article>
+            
+
+            <article class="mini-feature-card">
+              <div class="mini-feature-label">Technology feature</div>
+              <h3><a href="features/2026-04-12-technology-feature-irresponsible-failure-google-meta-snap-and-microsoft-slam-eu.html">‘Irresponsible failure’: Google, Meta, Snap and Microsoft slam EU over child sexual abuse law lapse</a></h3>
+              <p>The legal gap around automated scanning for abuse material raises a difficult trade-off between privacy, platform liability and child protection.</p>
+            </article>
+            
+          </div>
+        </section>
+        
+
+    <section class="glance-section">
+      <h2>At a Glance</h2>
+      <ul>
+        <li>Trump’s Iran escalation and blockade threat risk widening a conflict that is already choking global shipping and lifting energy costs.</li>
+<li>The collapse of US-Iran talks keeps markets on edge, with oil, inflation and airline fuel all exposed to further shocks.</li>
+<li>In the UK, the Iran crisis is feeding directly into politics, energy prices and Labour’s foreign-policy test.</li>
+<li>Germany’s AfD is tightening its grip on the agenda ahead of key state polls, a reminder of Europe’s hardening political fault lines.</li>
+<li>Science and technology coverage is dominated by AI regulation, online safety and the market power of platform firms.</li>
+<li>Manchester City’s title surge and Tottenham’s crisis lead the weekend sport package, while Masters and Paris-Roubaix provide the international dimension.</li>
+<li>The Daily Long Read block should lead with the Iran/Strait of Hormuz story, followed by a clear world package, then features and the remaining sections.</li>
+<li>Three feature cards only: one world, one markets, one technology.</li>
+      </ul>
+    </section>
+
+    
             <section class="news-section">
               <h2>Markets &amp; Economy</h2>
               
@@ -268,47 +319,47 @@
           <div class="story-meta">Analysis</div>
           <div class="published-line">Published: 2026-04-12 13:07:45 UTC</div>
           <h3><a href="stories/collapse-of-us-iran-talks-heightens-fears-of-prolonged-energy-shock.html">Collapse of US-Iran talks heightens fears of prolonged energy shock</a></h3>
-          <p>Markets are bracing for another leg higher in oil and gas prices after the talks collapsed, with tankers still stranded and the prospect of a longer supply shock now more credible.</p>
+          <p>The failure of the talks has markets braced for another leg higher in oil and gas prices, with tanker disruption in the Gulf likely to feed through into inflation, borrowing costs and transport-sector margins.</p>
         </article>
         
               
             <article class="story-card">
-              <div class="story-meta">Analysis</div>
-              <div class="published-line">Published: 2026-04-09 14:00:51 UTC</div>
-              <h4><a href="stories/head-of-imf-says-iran-war-will-permanently-scar-global-economy-even-if-peace-is.html">Head of IMF says Iran war will permanently scar global economy even if peace is reached</a></h4>
-              <p>The IMF’s warning underlines the scale of the damage already done: even a durable peace may not prevent a downgrade to growth and a lasting hit to living standards.</p>
-            </article>
-            
-
-            <article class="story-card">
               <div class="story-meta">News</div>
               <div class="published-line">Published: 2026-04-10 16:20:58 UTC</div>
               <h4><a href="stories/soaring-pump-prices-drive-us-inflation-to-highest-level-in-almost-two-years.html">Soaring pump prices drive US inflation to highest level in almost two years</a></h4>
-              <p>Higher fuel costs linked to the Iran war have pushed US inflation up sharply, raising the risk of slower rate cuts and a more difficult outlook for households.</p>
+              <p>Higher fuel costs linked to the Iran war have pushed US inflation to 3.3%, reinforcing concerns that the conflict is now feeding directly into consumer prices.</p>
             </article>
             
 
             <article class="story-card">
-              <div class="story-meta">Analysis</div>
+              <div class="story-meta">News</div>
+              <div class="published-line">Published: 2026-04-11 09:21:28 UTC</div>
+              <h4><a href="stories/eu-airline-industry-warns-of-fuel-shortages-if-strait-of-hormuz-stays-closed.html">EU airline industry warns of fuel shortages if Strait of Hormuz stays closed</a></h4>
+              <p>Europe’s airports and airlines are warning that sustained disruption in the strait could tighten jet-fuel supply and hit flight operations and costs.</p>
+            </article>
+            
+
+            <article class="story-card">
+              <div class="story-meta">News</div>
               <div class="published-line">Published: 2026-04-10 10:42:48 UTC</div>
               <h4><a href="stories/will-uk-petrol-and-diesel-prices-start-going-down.html">Will UK petrol and diesel prices start going down?</a></h4>
-              <p>Drivers may not see relief quickly even after the ceasefire headlines, because wholesale fuel markets, distribution lags and residual uncertainty can keep prices elevated.</p>
+              <p>UK fuel prices may ease if the ceasefire holds, but the scale and timing of any fall remain uncertain while market disruption continues.</p>
             </article>
             
 
             <article class="story-card">
               <div class="story-meta">News</div>
+              <div class="published-line">Published: 2026-04-10 16:08:19 UTC</div>
+              <h4><a href="stories/how-many-ships-are-crossing-the-strait-of-hormuz.html">How many ships are crossing the Strait of Hormuz?</a></h4>
+              <p>BBC Verify analysis suggests only a limited number of vessels have been able to pass through the strait since the ceasefire deal, keeping shipping markets under pressure.</p>
+            </article>
+            
+
+            <article class="story-card">
+              <div class="story-meta">Feature</div>
               <div class="published-line">Published: 2026-04-12 15:53:50 UTC</div>
               <h4><a href="stories/interest-in-evs-surges-in-europe-as-fuel-prices-jump-after-iran-war.html">Interest in EVs surges in Europe as fuel prices jump after Iran war</a></h4>
-              <p>Higher petrol prices are reshaping consumer demand across Europe, with online searches for electric vehicles rising as households reassess transport costs.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">News</div>
-              <div class="published-line">Published: 2026-04-09 08:34:04 UTC</div>
-              <h4><a href="stories/uk-farmers-warn-iran-ceasefire-too-late-to-stop-higher-food-costs.html">UK farmers warn Iran ceasefire too late to stop higher food costs</a></h4>
-              <p>Farmers say the conflict has already lifted input costs enough to feed through into food prices, limiting the benefit of any near-term easing in oil markets.</p>
+              <p>Rising petrol costs are already changing consumer behaviour, with online interest in electric cars increasing across major European markets.</p>
             </article>
             
             </section>
@@ -318,27 +369,19 @@
               <h2>Business</h2>
               
         <article class="section-lead-card">
-          <img class="section-lead-image" src="https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/2801/live/f5b10fd0-3500-11f1-b057-1d9fee7490d8.jpg" alt="Faisal Islam: Why the government is relaxed about Chinese car imports">
-          <div class="story-meta">Analysis</div>
-          <div class="published-line">Published: 2026-04-11 23:12:58 UTC</div>
-          <h3><a href="stories/faisal-islam-why-the-government-is-relaxed-about-chinese-car-imports.html">Faisal Islam: Why the government is relaxed about Chinese car imports</a></h3>
-          <p>The UK’s openness to Chinese car imports reflects a consumer-benefit argument, but it also raises questions about industrial strategy, competition and how far ministers are willing to rely on foreign supply chains.</p>
+          <img class="section-lead-image" src="https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/f7f2/live/19ee2220-342f-11f1-a207-8b959fccb503.jpg" alt="British Steel &#x27;needs nationalising by the summer&#x27;">
+          <div class="story-meta">News</div>
+          <div class="published-line">Published: 2026-04-12 06:25:11 UTC</div>
+          <h3><a href="stories/british-steel-needs-nationalising-by-the-summer.html">British Steel &#x27;needs nationalising by the summer&#x27;</a></h3>
+          <p>Ownership talks are continuing as pressure grows for a decisive solution to the future of British Steel, with nationalisation now being openly argued for.</p>
         </article>
         
               
             <article class="story-card">
-              <div class="story-meta">News</div>
-              <div class="published-line">Published: 2026-04-12 06:25:11 UTC</div>
-              <h4><a href="stories/british-steel-needs-nationalising-by-the-summer.html">British Steel &#x27;needs nationalising by the summer&#x27;</a></h4>
-              <p>As ownership talks continue, pressure is mounting for a clearer state-backed solution to secure the company’s future and the industrial jobs around it.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">News</div>
-              <div class="published-line">Published: 2026-04-11 09:21:28 UTC</div>
-              <h4><a href="stories/eu-airline-industry-warns-of-fuel-shortages-if-strait-of-hormuz-stays-closed.html">EU airline industry warns of fuel shortages if Strait of Hormuz stays closed</a></h4>
-              <p>Airline groups are warning that any prolonged closure of the strait could quickly spill into jet-fuel shortages and operational disruption across Europe.</p>
+              <div class="story-meta">Analysis</div>
+              <div class="published-line">Published: 2026-04-11 23:12:58 UTC</div>
+              <h4><a href="stories/faisal-islam-why-the-government-is-relaxed-about-chinese-car-imports.html">Faisal Islam: Why the government is relaxed about Chinese car imports</a></h4>
+              <p>The government is weighing consumer gains against industrial and strategic risks as cheaper Chinese cars reshape the UK market and domestic manufacturers face sharper competition.</p>
             </article>
             
 
@@ -346,7 +389,15 @@
               <div class="story-meta">News</div>
               <div class="published-line">Published: 2026-04-09 20:36:41 UTC</div>
               <h4><a href="stories/openai-pauses-uk-data-centre-deal-over-energy-costs-and-regulation.html">OpenAI pauses UK data centre deal over energy costs and regulation</a></h4>
-              <p>The pause is another sign that Britain’s AI investment pitch is vulnerable to high power costs, planning frictions and regulatory uncertainty.</p>
+              <p>A flagship investment tied to the UK’s AI ambitions has been delayed, highlighting the tension between high power prices, planning constraints and the competition for tech capital.</p>
+            </article>
+            
+
+            <article class="story-card">
+              <div class="story-meta">News</div>
+              <div class="published-line">Published: 2026-04-12 15:02:28 UTC</div>
+              <h4><a href="stories/gsk-reports-promising-early-results-in-ovarian-and-womb-cancer-drug-trial.html">GSK reports promising early results in ovarian and womb cancer drug trial</a></h4>
+              <p>Early trial results for GSK’s Mo-Rez drug are encouraging and could support a major new oncology franchise if further testing confirms the benefit.</p>
             </article>
             
             </section>
@@ -360,7 +411,7 @@
           <div class="story-meta">News</div>
           <div class="published-line">Published: 2026-04-12 10:39:51 UTC</div>
           <h3><a href="stories/starmer-urges-us-and-iran-to-find-way-through-after-peace-talks-falter.html">Starmer urges US and Iran to &#x27;find way through&#x27; after peace talks falter</a></h3>
-          <p>The prime minister is trying to avoid escalation while keeping the UK aligned with allies, as diplomacy around Iran continues to weaken.</p>
+          <p>The prime minister is trying to hold a line against escalation while avoiding deeper UK involvement, as the Iran crisis begins to shape domestic politics and energy costs.</p>
         </article>
         
               
@@ -368,7 +419,7 @@
               <div class="story-meta">News</div>
               <div class="published-line">Published: 2026-04-12 15:55:42 UTC</div>
               <h4><a href="stories/votes-for-populist-parties-in-may-elections-will-put-nhs-at-risk-streeting-says.html">Votes for populist parties in May elections will put NHS at risk, Streeting says</a></h4>
-              <p>With local and devolved elections approaching, Labour is casting the NHS as the central battleground and warning that protest votes could have policy consequences.</p>
+              <p>Wes Streeting is turning the NHS into a central election issue, warning that protest votes could strengthen parties he says would undermine the health service.</p>
             </article>
             
 
@@ -376,15 +427,15 @@
               <div class="story-meta">News</div>
               <div class="published-line">Published: 2026-04-12 11:00:16 UTC</div>
               <h4><a href="stories/home-office-to-announce-closure-of-11-asylum-hotels-in-next-week.html">Home Office to announce closure of 11 asylum hotels in next week</a></h4>
-              <p>The government is trying to show movement on a politically fraught issue, but the closures are unlikely to settle wider disputes over asylum policy and accommodation.</p>
+              <p>The government is preparing to close a first tranche of asylum hotels, a politically sensitive move tied to Labour’s wider pledge to end the practice during this parliament.</p>
             </article>
             
 
             <article class="story-card">
-              <div class="story-meta">Analysis</div>
-              <div class="published-line">Published: 2026-04-12 08:42:25 UTC</div>
-              <h4><a href="stories/how-tax-and-welfare-are-shaping-the-vote-in-the-scottish-election.html">How tax and welfare are shaping the vote in the Scottish election</a></h4>
-              <p>Tax and social security are emerging as defining issues in the Scottish campaign, with parties trying to differentiate themselves on cost, fairness and devolution.</p>
+              <div class="story-meta">News</div>
+              <div class="published-line">Published: 2026-04-12 21:07:24 UTC</div>
+              <h4><a href="stories/swinney-says-scottish-independence-referendum-could-be-held-in-2028.html">Swinney says Scottish independence referendum could be held in 2028</a></h4>
+              <p>John Swinney has set out a possible timetable for another independence vote, sharpening the constitutional debate ahead of next month’s Scottish election.</p>
             </article>
             
             </section>
@@ -394,27 +445,27 @@
               <h2>Science &amp; Technology</h2>
               
         <article class="section-lead-card">
-          <img class="section-lead-image" src="https://i.guim.co.uk/img/media/52f28e3778e0def3eb14d4cf2f324385763c3788/415_0_2671_2138/master/2671.jpg?width=140&amp;quality=85&amp;auto=format&amp;fit=max&amp;s=26ff57a198978e7226fd2c7798348d90" alt="AI companies know they have an image problem. Will funding policy papers and thinktanks dig them out?">
+          <img class="section-lead-image" src="https://i.guim.co.uk/img/media/c26e9c02fac62382c5e6a75c15356be34df5a02b/148_0_4389_3514/master/4389.jpg?width=140&amp;quality=85&amp;auto=format&amp;fit=max&amp;s=540fe7afb69d981ddd12cca19430be6f" alt="‘Irresponsible failure’: Google, Meta, Snap and Microsoft slam EU over child sexual abuse law lapse">
           <div class="story-meta">Analysis</div>
-          <div class="published-line">Published: 2026-04-12 10:00:14 UTC</div>
-          <h3><a href="stories/ai-companies-know-they-have-an-image-problem-will-funding-policy-papers-and-thin.html">AI companies know they have an image problem. Will funding policy papers and thinktanks dig them out?</a></h3>
-          <p>As public scepticism rises, leading AI firms are increasingly trying to shape the policy debate through white papers, lobbying and thinktank-style advocacy rather than products alone.</p>
+          <div class="published-line">Published: 2026-04-10 06:00:12 UTC</div>
+          <h3><a href="stories/irresponsible-failure-google-meta-snap-and-microsoft-slam-eu-over-child-sexual-a.html">‘Irresponsible failure’: Google, Meta, Snap and Microsoft slam EU over child sexual abuse law lapse</a></h3>
+          <p>The expiry of a legal carve-out for automated scanning raises a difficult policy trade-off between privacy and the detection of abuse material on major platforms.</p>
         </article>
         
               
             <article class="story-card">
               <div class="story-meta">Analysis</div>
-              <div class="published-line">Published: 2026-04-12 09:00:13 UTC</div>
-              <h4><a href="stories/too-powerful-for-the-public-inside-anthropics-bid-to-win-the-ai-publicity-war.html">‘Too powerful for the public’: Inside Anthropic’s bid to win the AI publicity war</a></h4>
-              <p>Anthropic’s handling of its latest model reflects the new politics of AI: claims of caution, security and responsibility are also part of a battle for credibility and investment.</p>
+              <div class="published-line">Published: 2026-04-12 10:00:14 UTC</div>
+              <h4><a href="stories/ai-companies-know-they-have-an-image-problem-will-funding-policy-papers-and-thin.html">AI companies know they have an image problem. Will funding policy papers and thinktanks dig them out?</a></h4>
+              <p>The major AI firms are trying to manage a public backlash by reframing their technology as a social and economic good, even as concern over its risks continues to rise.</p>
             </article>
             
 
             <article class="story-card">
               <div class="story-meta">News</div>
-              <div class="published-line">Published: 2026-04-10 06:00:12 UTC</div>
-              <h4><a href="stories/irresponsible-failure-google-meta-snap-and-microsoft-slam-eu-over-child-sexual-a.html">‘Irresponsible failure’: Google, Meta, Snap and Microsoft slam EU over child sexual abuse law lapse</a></h4>
-              <p>The expiry of the EU’s scanning carve-out could leave child-safety systems weaker, but the issue remains contested because it pits abuse detection against privacy concerns.</p>
+              <div class="published-line">Published: 2026-04-10 15:29:31 UTC</div>
+              <h4><a href="stories/mayor-warns-of-london-disinformation-blizzard.html">Mayor warns of London &#x27;disinformation blizzard&#x27;</a></h4>
+              <p>Sadiq Khan says the capital is being targeted by a wave of false or distorted narratives aimed at portraying the city as in decline.</p>
             </article>
             
 
@@ -422,7 +473,7 @@
               <div class="story-meta">News</div>
               <div class="published-line">Published: 2026-04-09 13:12:45 UTC</div>
               <h4><a href="stories/amazon-to-end-support-for-older-kindles-prompting-user-outcry.html">Amazon to end support for older Kindles, prompting user outcry</a></h4>
-              <p>Support for pre-2013 devices is ending, leaving some readers unable to download new books and highlighting the long-tail cost of planned obsolescence.</p>
+              <p>Amazon’s decision will leave some older devices unable to download new books, renewing scrutiny of planned obsolescence and digital ownership.</p>
             </article>
             
             </section>
@@ -433,10 +484,10 @@
               
         <article class="section-lead-card">
           <img class="section-lead-image" src="https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/62c8/live/278b5820-36b5-11f1-879d-1b2f5c3919b8.jpg" alt="Man City smell blood - why Arsenal should fear title rivals">
-          <div class="story-meta">News</div>
+          <div class="story-meta">Analysis</div>
           <div class="published-line">Published: 2026-04-12 21:21:58 UTC</div>
           <h3><a href="stories/man-city-smell-blood-why-arsenal-should-fear-title-rivals.html">Man City smell blood - why Arsenal should fear title rivals</a></h3>
-          <p>Manchester City’s latest win has tightened the Premier League title race and shifted momentum at a decisive stage of the season.</p>
+          <p>Manchester City’s latest win has materially changed the Premier League title picture, increasing the pressure on Arsenal and sharpening the stakes of the run-in.</p>
         </article>
         
               
@@ -444,15 +495,7 @@
               <div class="story-meta">News</div>
               <div class="published-line">Published: 2026-04-12 17:35:37 UTC</div>
               <h4><a href="stories/will-romeros-tears-become-the-enduring-image-of-tottenhams-season.html">Will Romero&#x27;s tears become the enduring image of Tottenham&#x27;s season?</a></h4>
-              <p>Tottenham’s defeat and the emotional reaction around it have become a symbol of a campaign in freefall, with relegation still a live danger.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">News</div>
-              <div class="published-line">Published: 2026-04-12 18:52:29 UTC</div>
-              <h4><a href="stories/wout-van-aert-outduels-tadej-pogacar-to-win-his-first-paris-roubaix-title.html">Wout van Aert outduels Tadej Pogacar to win his first Paris-Roubaix title</a></h4>
-              <p>Van Aert’s victory ends a long wait at one of cycling’s hardest races and is the standout result from a dramatic spring classic.</p>
+              <p>Tottenham’s defeat leaves them in a precarious position and their new managerial era already under strain.</p>
             </article>
             
 
@@ -460,7 +503,15 @@
               <div class="story-meta">News</div>
               <div class="published-line">Published: 2026-04-12 15:46:55 UTC</div>
               <h4><a href="stories/jannik-sinner-beats-carlos-alcaraz-at-monte-carlo-masters-to-reclaim-world-no-1.html">Jannik Sinner beats Carlos Alcaraz at Monte Carlo Masters to reclaim world No 1 spot</a></h4>
-              <p>Sinner’s victory over Alcaraz restores him to the top of the men’s game and reinforces the emerging rivalry at tennis’s summit.</p>
+              <p>Sinner’s victory over Alcaraz restores him to the top of the rankings and underlines a rivalry that is now defining the men’s game.</p>
+            </article>
+            
+
+            <article class="story-card">
+              <div class="story-meta">News</div>
+              <div class="published-line">Published: 2026-04-12 18:52:29 UTC</div>
+              <h4><a href="stories/wout-van-aert-outduels-tadej-pogacar-to-win-his-first-paris-roubaix-title.html">Wout van Aert outduels Tadej Pogacar to win his first Paris-Roubaix title</a></h4>
+              <p>Van Aert’s victory ends a long run of near-misses and delivers one of cycling’s most important one-day wins of the season.</p>
             </article>
             
             </section>
