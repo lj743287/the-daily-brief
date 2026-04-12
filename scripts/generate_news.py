@@ -15,7 +15,6 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 BASE_DIR = Path(".")
 DATA_DIR = BASE_DIR / "data"
 STORIES_DIR = BASE_DIR / "stories"
-FEATURES_DIR = BASE_DIR / "features"
 
 SECTION_ORDER = [
     "World",
@@ -190,12 +189,6 @@ SOURCE_CONFIG = [
         "section": "World",
         "url": "https://www.aljazeera.com/news-sitemap.xml",
     },
-]
-
-FEATURE_PACKS = [
-    {"key": "world", "label": "World Feature", "section": "World"},
-    {"key": "technology", "label": "Technology Feature", "section": "Science & Technology"},
-    {"key": "markets", "label": "Markets Feature", "section": "Markets & Economy"},
 ]
 
 
@@ -521,105 +514,7 @@ def build_story_page(title, section, story_type, summary, body_html, updated_tim
 """
 
 
-def build_feature_page(title, label, standfirst, body_paragraphs, updated_time):
-    body_html = "\n".join(f"<p>{html.escape(p)}</p>" for p in body_paragraphs)
-
-    return f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{html.escape(title)} | The Daily Brief</title>
-  <style>
-    body {{
-      margin: 0;
-      background: #f3efe7;
-      color: #111;
-      font-family: Georgia, "Times New Roman", serif;
-    }}
-    .page {{
-      max-width: 920px;
-      margin: 0 auto;
-      background: #fffdf8;
-      min-height: 100vh;
-      padding: 32px 22px 60px;
-      box-shadow: 0 0 18px rgba(0,0,0,0.08);
-    }}
-    header {{
-      border-bottom: 3px solid #111;
-      margin-bottom: 28px;
-      padding-bottom: 14px;
-    }}
-    .brand {{
-      text-decoration: none;
-      color: #111;
-    }}
-    h1 {{
-      margin: 0;
-      font-size: 3rem;
-      line-height: 1.1;
-    }}
-    .updated {{
-      margin-top: 10px;
-      color: #666;
-      font-size: 0.95rem;
-    }}
-    .label {{
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #666;
-      margin-bottom: 10px;
-    }}
-    h2 {{
-      margin: 0 0 14px 0;
-      font-size: 2.5rem;
-      line-height: 1.15;
-    }}
-    .standfirst {{
-      font-size: 1.2rem;
-      line-height: 1.7;
-      color: #333;
-      margin-bottom: 28px;
-      font-style: italic;
-    }}
-    p {{
-      font-size: 1.12rem;
-      line-height: 1.95;
-      margin: 0 0 18px 0;
-    }}
-    .back {{
-      display: inline-block;
-      margin-bottom: 22px;
-      color: #333;
-      text-decoration: none;
-      font-size: 0.95rem;
-    }}
-    .back:hover {{
-      text-decoration: underline;
-    }}
-  </style>
-</head>
-<body>
-  <div class="page">
-    <header>
-      <a class="brand" href="../index.html"><h1>The Daily Brief</h1></a>
-      <div class="updated">Updated: {updated_time} UTC</div>
-    </header>
-    <a class="back" href="../index.html">← Back to front page</a>
-    <article>
-      <div class="label">{html.escape(label)}</div>
-      <h2>{html.escape(title)}</h2>
-      <div class="standfirst">{html.escape(standfirst)}</div>
-      {body_html}
-    </article>
-  </div>
-</body>
-</html>
-"""
-
-
-def build_homepage_page(updated_time, at_a_glance_items, lead_story, story_cards, feature, section_features):
+def build_homepage_page(updated_time, at_a_glance_items, lead_story, story_cards, feature):
     feature_html = ""
     if feature:
         feature_html = f"""
@@ -627,26 +522,6 @@ def build_homepage_page(updated_time, at_a_glance_items, lead_story, story_cards
           <div class="feature-label">Daily Long Read</div>
           <h2><a href="{feature['url']}">{html.escape(feature['title'])}</a></h2>
           <p class="feature-standfirst">{html.escape(feature['standfirst'])}</p>
-        </section>
-        """
-
-    extra_features_html = ""
-    if section_features:
-        cards = []
-        for item in section_features:
-            cards.append(f"""
-            <article class="mini-feature-card">
-              <div class="mini-feature-label">{html.escape(item['label'])}</div>
-              <h3><a href="{item['url']}">{html.escape(item['title'])}</a></h3>
-              <p>{html.escape(item['standfirst'])}</p>
-            </article>
-            """)
-        extra_features_html = f"""
-        <section class="mini-features">
-          <h2>Featured Reading</h2>
-          <div class="mini-features-grid">
-            {''.join(cards)}
-          </div>
         </section>
         """
 
@@ -768,55 +643,31 @@ def build_homepage_page(updated_time, at_a_glance_items, lead_story, story_cards
       background: #f8f3e8;
       border-left: 5px solid #111;
     }}
-    .feature-label, .mini-feature-label {{
+    .feature-label {{
       font-size: 0.85rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: #666;
       margin-bottom: 10px;
     }}
-    .feature-block h2, .mini-features h2 {{
+    .feature-block h2 {{
       margin: 0 0 12px 0;
       padding: 0;
       border: 0;
       font-size: 2rem;
       line-height: 1.2;
     }}
-    .feature-block a, .mini-feature-card a {{
+    .feature-block a {{
       color: #111;
       text-decoration: none;
     }}
-    .feature-block a:hover, .mini-feature-card a:hover {{
+    .feature-block a:hover {{
       text-decoration: underline;
     }}
     .feature-standfirst {{
       margin: 0;
       font-size: 1.08rem;
       line-height: 1.8;
-      color: #333;
-    }}
-    .mini-features {{
-      margin-bottom: 34px;
-    }}
-    .mini-features-grid {{
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 18px;
-    }}
-    .mini-feature-card {{
-      border: 1px solid #e3ddd2;
-      padding: 18px;
-      background: #faf7f0;
-    }}
-    .mini-feature-card h3 {{
-      margin: 0 0 10px 0;
-      font-size: 1.35rem;
-      line-height: 1.25;
-    }}
-    .mini-feature-card p {{
-      margin: 0;
-      font-size: 1rem;
-      line-height: 1.7;
       color: #333;
     }}
     .lead-story {{
@@ -926,7 +777,6 @@ def build_homepage_page(updated_time, at_a_glance_items, lead_story, story_cards
     </header>
 
     {feature_html}
-    {extra_features_html}
     {lead_html}
 
     <section class="glance-section">
@@ -1201,59 +1051,6 @@ ADDITIONAL RULES:
 """
 
 
-def build_multi_feature_prompt(feature_pack, signals):
-    section = feature_pack["section"]
-
-    if section == "Markets & Economy":
-        relevant_signals = [s for s in signals if s["section"] in ["Business", "World", "UK"]]
-    else:
-        relevant_signals = [s for s in signals if s["section"] == section]
-
-    if len(relevant_signals) < 20:
-        relevant_signals = signals[:70]
-
-    return f"""
-You are writing one of the featured pieces for The Daily Brief.
-
-FEATURE TOPIC:
-- Label: {feature_pack["label"]}
-- Core section: {section}
-
-SOURCE SIGNALS:
-{json.dumps(relevant_signals[:70], ensure_ascii=False, indent=2)}
-
-EDITORIAL RULES:
-- British English.
-- Serious, elegant, substantial newspaper prose.
-- This is a featured piece, deeper than a routine article.
-- Use context, structure, history where relevant, and likely future developments.
-- Distinguish fact from claim.
-- Historical context should be used naturally where it genuinely helps.
-- Do not invent direct quotes.
-- Do not make up unsupported precise figures.
-- For Markets & Economy, focus on the biggest macro or market-moving theme.
-- For Science & Technology, focus on meaningful technological or scientific developments, not gadget chatter.
-- For World, focus on the most globally consequential international theme available.
-
-Return valid JSON only in exactly this structure:
-
-{{
-  "title": "Feature title",
-  "standfirst": "A compelling standfirst in 2 to 3 sentences.",
-  "body": [
-    "Paragraph 1",
-    "Paragraph 2",
-    "Paragraph 3",
-    "Paragraph 4",
-    "Paragraph 5",
-    "Paragraph 6",
-    "Paragraph 7",
-    "Paragraph 8"
-  ]
-}}
-"""
-
-
 signals = get_source_signals()
 
 outline_response = client.responses.create(
@@ -1264,11 +1061,9 @@ outline_response = client.responses.create(
 outline_data = json.loads(outline_response.output_text.strip())
 
 now = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
-today = datetime.datetime.utcnow().strftime("%Y-%m-%d")
 
 STORIES_DIR.mkdir(parents=True, exist_ok=True)
 DATA_DIR.mkdir(parents=True, exist_ok=True)
-FEATURES_DIR.mkdir(parents=True, exist_ok=True)
 
 used_slugs = set()
 
@@ -1429,42 +1224,6 @@ for section_name in SECTION_ORDER:
             "body": body,
         })
 
-section_features = []
-
-for feature_pack in FEATURE_PACKS:
-    feature_response = client.responses.create(
-        model="gpt-5",
-        input=build_multi_feature_prompt(feature_pack, signals),
-    )
-
-    feature_data = json.loads(feature_response.output_text.strip())
-    feature_title = feature_data["title"].strip()
-    feature_standfirst = feature_data["standfirst"].strip()
-    feature_body = [p.strip() for p in feature_data["body"] if p.strip()]
-
-    feature_slug = slugify(f"{today}-{feature_pack['key']}-{feature_title}")
-    feature_filename = f"{feature_slug}.html"
-    feature_url = f"features/{feature_filename}"
-
-    feature_page = build_feature_page(
-        title=feature_title,
-        label=feature_pack["label"],
-        standfirst=feature_standfirst,
-        body_paragraphs=feature_body,
-        updated_time=now,
-    )
-
-    with open(FEATURES_DIR / feature_filename, "w", encoding="utf-8") as f:
-        f.write(feature_page)
-
-    section_features.append({
-        "key": feature_pack["key"],
-        "label": feature_pack["label"],
-        "title": feature_title,
-        "standfirst": feature_standfirst,
-        "url": feature_url,
-    })
-
 feature = load_feature()
 
 homepage = build_homepage_page(
@@ -1481,7 +1240,6 @@ homepage = build_homepage_page(
     },
     story_cards=story_cards,
     feature=feature,
-    section_features=section_features,
 )
 
 with open(BASE_DIR / "index.html", "w", encoding="utf-8") as f:
@@ -1503,8 +1261,7 @@ with open(DATA_DIR / "stories.json", "w", encoding="utf-8") as f:
             "body": lead_body,
         },
         "section_story_counts": SECTION_STORY_COUNTS,
-        "section_features": section_features,
         "stories": saved_stories,
     }, f, indent=2)
 
-print("Homepage, story pages, and section features updated")
+print("Homepage and story pages updated")
