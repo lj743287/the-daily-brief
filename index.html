@@ -12,7 +12,7 @@
       font-family: Georgia, "Times New Roman", serif;
     }
     .page {
-      max-width: 1040px;
+      max-width: 1080px;
       margin: 0 auto;
       background: #fffdf8;
       min-height: 100vh;
@@ -36,30 +36,30 @@
     }
     .feature-block {
       margin-top: 18px;
-      margin-bottom: 34px;
+      margin-bottom: 30px;
       padding: 22px;
       background: #f8f3e8;
       border-left: 5px solid #111;
     }
-    .feature-label {
+    .feature-label, .mini-feature-label {
       font-size: 0.85rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: #666;
       margin-bottom: 10px;
     }
-    .feature-block h2 {
+    .feature-block h2, .mini-features h2 {
       margin: 0 0 12px 0;
       padding: 0;
       border: 0;
       font-size: 2rem;
       line-height: 1.2;
     }
-    .feature-block a {
+    .feature-block a, .mini-feature-card a {
       color: #111;
       text-decoration: none;
     }
-    .feature-block a:hover {
+    .feature-block a:hover, .mini-feature-card a:hover {
       text-decoration: underline;
     }
     .feature-standfirst {
@@ -68,10 +68,41 @@
       line-height: 1.8;
       color: #333;
     }
+    .mini-features {
+      margin-bottom: 34px;
+    }
+    .mini-features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+    .mini-feature-card {
+      border: 1px solid #e3ddd2;
+      padding: 18px;
+      background: #faf7f0;
+    }
+    .mini-feature-card h3 {
+      margin: 0 0 10px 0;
+      font-size: 1.35rem;
+      line-height: 1.25;
+    }
+    .mini-feature-card p {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.7;
+      color: #333;
+    }
     .lead-story {
       margin-bottom: 34px;
       padding-bottom: 26px;
       border-bottom: 1px solid #ddd;
+    }
+    .lead-image, .section-lead-image {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin-bottom: 14px;
+      background: #e9e3d7;
     }
     .lead-meta,
     .story-meta {
@@ -117,28 +148,46 @@
       line-height: 1.7;
       margin-bottom: 10px;
     }
-    .story-card {
+    .section-lead-card {
       padding: 0 0 20px 0;
       margin: 0 0 20px 0;
-      border-bottom: 1px solid #e2e2e2;
+      border-bottom: 1px solid #dcdcdc;
     }
-    .story-card h3 {
+    .section-lead-card h3 {
       margin: 0 0 10px 0;
-      font-size: 1.45rem;
-      line-height: 1.28;
+      font-size: 1.55rem;
+      line-height: 1.25;
     }
+    .section-lead-card a,
     .story-card a {
       color: #111;
       text-decoration: none;
     }
+    .section-lead-card a:hover,
     .story-card a:hover {
       text-decoration: underline;
     }
-    .story-card p {
+    .section-lead-card p {
       margin: 0;
-      font-size: 1.04rem;
+      font-size: 1.05rem;
       line-height: 1.8;
       color: #222;
+    }
+    .story-card {
+      padding: 0 0 18px 0;
+      margin: 0 0 18px 0;
+      border-bottom: 1px solid #e6e6e6;
+    }
+    .story-card h4 {
+      margin: 0 0 8px 0;
+      font-size: 1.18rem;
+      line-height: 1.3;
+    }
+    .story-card p {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.72;
+      color: #333;
     }
   </style>
 </head>
@@ -146,7 +195,7 @@
   <div class="page">
     <header>
       <h1>The Daily Brief</h1>
-      <div class="updated">Updated: 2026-04-12 18:23:51 UTC</div>
+      <div class="updated">Updated: 2026-04-12 19:10:03 UTC</div>
     </header>
 
     
@@ -157,24 +206,51 @@
         </section>
         
     
+        <section class="mini-features">
+          <h2>Featured Reading</h2>
+          <div class="mini-features-grid">
+            
+            <article class="mini-feature-card">
+              <div class="mini-feature-label">World Feature</div>
+              <h3><a href="features/2026-04-12-world-the-world-at-the-narrows-hormuz-brinkmanship-and-the-cost-of-a.html">The world at the narrows: Hormuz brinkmanship and the cost of a global choke-point</a></h3>
+              <p>Talks between the US and Iran have faltered without reopening the Strait of Hormuz, even as President Trump’s blockade threat raises the stakes. With a vital artery of energy trade contested, fuel shortages, protests and political pressure are spreading far beyond the Gulf — from Ireland to Australia — while pathways to de-escalation grow narrower.</p>
+            </article>
+            
+            <article class="mini-feature-card">
+              <div class="mini-feature-label">Technology Feature</div>
+              <h3><a href="features/2026-04-12-technology-the-rules-of-the-internet-are-being-rewritten-and-ai-is-sp.html">The rules of the internet are being rewritten — and AI is speeding the edits</a></h3>
+              <p>From Europe’s child-safety legal gap to Greece’s under-15s social media ban, from Meta’s courtroom setbacks to AI firms’ policy offensives, the boundaries of digital life are up for renegotiation. As artificial intelligence reshapes discovery, labour and power, governments, platforms and users are scrambling to keep up.</p>
+            </article>
+            
+            <article class="mini-feature-card">
+              <div class="mini-feature-label">Markets Feature</div>
+              <h3><a href="features/2026-04-12-markets-hormuz-and-the-new-energy-shock-a-chokepoint-that-could-rewri.html">Hormuz and the new energy shock: a chokepoint that could rewrite the inflation path</a></h3>
+              <p>The Strait of Hormuz has again become a fulcrum of global risk. With tankers hesitant, airlines warning of fuel shortages, and forecourt prices rising, a fragile disinflation narrative is colliding with geopolitics that refuses to co‑operate.</p>
+            </article>
+            
+          </div>
+        </section>
+        
+    
         <section class="lead-story">
+          
           <div class="lead-meta">World | Analysis</div>
-          <h2><a href="stories/trumps-hormuz-blockade-threat-escalates-risk-without-solving-the-core-impasse.html">Trump’s Hormuz blockade threat escalates risk without solving the core impasse</a></h2>
-          <p>Donald Trump’s signal that the US could blockade the Strait of Hormuz raises the stakes for global energy supplies and regional security, but leaves the fundamental standoff with Iran largely unchanged. The faltering of direct talks and a fragile ceasefire have exposed how neither side has yet secured a pathway to de‑escalation that addresses nuclear concerns, sanctions relief and regional proxy dynamics. A blockade would be fraught with legal, diplomatic and military peril and could spark retaliation, supply shocks and maritime incidents. With key allies distancing themselves from any naval interdiction and tankers still hesitating, the immediate risks to trade and inflation are acute while the long‑term diplomatic route remains narrow and uncertain.</p>
+          <h2><a href="stories/hormuz-at-the-brink-trumps-blockade-threat-collides-with-failed-usiran-talks-and.html">Hormuz at the brink: Trump’s blockade threat collides with failed US–Iran talks and a tightening energy squeeze</a></h2>
+          <p>Donald Trump’s threat to blockade the Strait of Hormuz after US–Iran talks collapsed raises the risk of confrontation without resolving the underlying stalemate. Iran has shown willingness to absorb strikes while leveraging control over a chokepoint that carries a large share of global oil and gas flows. Early signs suggest shipping remains sparse despite a fragile ceasefire, feeding fuel shortages and inflation fears from Europe to Asia. Allied positions are diverging – with the UK distancing itself from any blockade – leaving questions over coalition unity, escalation control and how quickly energy markets can stabilise.</p>
         </section>
         
 
     <section class="glance-section">
       <h2>At a Glance</h2>
       <ul>
-        <li>Trump signals a possible blockade of the Strait of Hormuz as US–Iran talks falter, intensifying risks to global energy flows.</li>
-<li>A Nigerian airstrike on a busy market reportedly kills more than 100 civilians; officials acknowledge a misfire amid rights groups’ outrage.</li>
-<li>The IMF warns the Iran war will permanently scar global growth even if peace holds; markets brace for a prolonged energy shock.</li>
-<li>EU aviation leaders flag jet-fuel shortages if Hormuz remains constrained, while US inflation jumps on surging pump prices.</li>
-<li>Cyclone Vaianu lashes New Zealand’s North Island with destructive winds and flooding as Pacific extreme weather escalates.</li>
-<li>Germany’s AfD adopts a more radical manifesto ahead of key eastern state polls, testing Europe’s political centre.</li>
-<li>Benin votes for a successor to Patrice Talon four months after a failed coup, with the finance minister the frontrunner.</li>
-<li>The UK says it will not join any US-led Hormuz blockade as ministers advance plans for closer regulatory alignment with the EU.</li>
+        <li>Trump threatens a US blockade of the Strait of Hormuz as talks with Iran falter, raising risks of escalation and global supply shocks.</li>
+<li>Oil and jet-fuel strains deepen: European airports warn of shortages and shippers are told not to pay Iranian levies for safe passage.</li>
+<li>BBC analysis shows only limited vessel traffic through Hormuz despite a fragile ceasefire, keeping risk premia elevated.</li>
+<li>Nigeria: rights groups and local media report heavy civilian casualties after an air force ‘misfire’ hit a crowded market in Yobe state.</li>
+<li>Haiti: at least 30 killed and many injured in a crush at a historic tourist fortress.</li>
+<li>New Zealand’s North Island hit by Cyclone Vaianu, triggering flooding, power outages and mass evacuations.</li>
+<li>US inflation accelerates on fuel costs as the IMF warns the Iran war will leave a lasting scar on global growth.</li>
+<li>The UK says it will not join any US-led blockade of Hormuz, underscoring allied divisions over next steps.</li>
       </ul>
     </section>
 
@@ -182,73 +258,74 @@
             <section class="news-section">
               <h2>World</h2>
               
+        <article class="section-lead-card">
+          
+          <div class="story-meta">News</div>
+          <h3><a href="stories/reports-of-mass-civilian-deaths-after-nigerian-air-strike-hits-market.html">Reports of mass civilian deaths after Nigerian air strike hits market</a></h3>
+          <p>Amnesty International and local media say more than 100 civilians may have been killed when a Nigerian Air Force strike hit a market in Yobe state. Officials acknowledged a misfire targeting jihadists but have not provided full details. The incident will intensify scrutiny of counter-insurgency tactics and civilian protections.</p>
+        </article>
+        
+              
             <article class="story-card">
               <div class="story-meta">News</div>
-              <h3><a href="stories/nigerian-airstrike-reportedly-hits-market-killing-more-than-100-civilians.html">Nigerian airstrike reportedly hits market, killing more than 100 civilians</a></h3>
-              <p>Amnesty International and local media say an air force strike aimed at jihadists struck a crowded market in Yobe state, leaving over 100 dead. Officials confirmed a misfire but have yet to provide details, as survivors’ accounts point to severe civilian casualties and urgent calls for accountability.</p>
+              <h4><a href="stories/ukraine-and-russia-trade-accusations-over-ceasefire-violations.html">Ukraine and Russia trade accusations over ceasefire violations</a></h4>
+              <p>Kyiv and Moscow each accuse the other of hundreds of breaches during an Easter truce, with President Volodymyr Zelensky warning of a ‘symmetrical’ response. The fragile pause underscores how contested frontlines and mutual distrust could quickly return fighting to pre-truce levels.</p>
             </article>
             
 
             <article class="story-card">
               <div class="story-meta">News</div>
-              <h3><a href="stories/ukraine-and-russia-trade-accusations-of-ceasefire-violations.html">Ukraine and Russia trade accusations of ceasefire violations</a></h3>
-              <p>Kyiv and Moscow each blame the other for hundreds of breaches, underscoring the fragility of the truce. President Volodymyr Zelensky said Ukraine would respond “symmetrically”, raising fears of renewed escalation after a muted Easter respite.</p>
+              <h4><a href="stories/uk-distances-itself-from-any-us-blockade-of-hormuz.html">UK distances itself from any US blockade of Hormuz</a></h4>
+              <p>London signalled it would not join a US-led blockade of the Strait of Hormuz after Washington indicated allies would assist. Officials say any UK role would be limited to defensive maritime safety tasks such as minesweeping, reflecting legal and strategic caution.</p>
             </article>
             
 
             <article class="story-card">
               <div class="story-meta">News</div>
-              <h3><a href="stories/cyclone-vaianu-slams-new-zealands-north-island.html">Cyclone Vaianu slams New Zealand’s North Island</a></h3>
-              <p>Heavy rain, coastal flooding and winds above 130km/h forced evacuations and caused widespread outages. Authorities warn of landslides and lingering flood risk as the system tracks past the Chatham Islands.</p>
+              <h4><a href="stories/mauritius-vows-renewed-push-to-decolonise-chagos-after-uk-shelves-handover-bill.html">Mauritius vows renewed push to ‘decolonise’ Chagos after UK shelves handover bill</a></h4>
+              <p>Port Louis says it will ‘spare no effort’ to regain control of the Chagos Islands after the UK paused legislation amid waning US support. The dispute, long framed by decolonisation claims and strategic basing needs, now risks a prolonged diplomatic standoff.</p>
             </article>
             
 
             <article class="story-card">
               <div class="story-meta">News</div>
-              <h3><a href="stories/germanys-afd-adopts-more-radical-manifesto-ahead-of-key-regional-polls.html">Germany’s AfD adopts more radical manifesto ahead of key regional polls</a></h3>
-              <p>The far-right Alternative for Germany sharpened its platform while polling strongly in Saxony-Anhalt. The move will test mainstream parties’ ability to contain the party’s rise amid economic anxieties and migration disputes.</p>
+              <h4><a href="stories/at-least-30-killed-in-crush-at-haitian-tourist-fortress.html">At least 30 killed in crush at Haitian tourist fortress</a></h4>
+              <p>Authorities say many young people were among the dead after a crowd crush at the 19th‑century Citadelle Henry in northern Haiti. The tragedy, which left dozens injured or missing, raises urgent questions over event management and emergency access at heritage sites.</p>
             </article>
             
 
             <article class="story-card">
               <div class="story-meta">News</div>
-              <h3><a href="stories/benin-votes-in-presidential-election-months-after-failed-coup-attempt.html">Benin votes in presidential election months after failed coup attempt</a></h3>
-              <p>The West African nation heads to the polls with the finance minister seen as favourite to succeed Patrice Talon. The vote is viewed as a measure of stability after a coup bid and amid concerns over democratic openness.</p>
+              <h4><a href="stories/germanys-afd-adopts-more-radical-platform-ahead-of-key-eastern-polls.html">Germany’s AfD adopts more radical platform ahead of key eastern polls</a></h4>
+              <p>The far-right Alternative for Germany approved a platform described as more radical as it climbs in polls in Saxony-Anhalt. The shift will sharpen political fault lines ahead of state elections and test centrist parties’ containment strategies.</p>
             </article>
             
 
             <article class="story-card">
               <div class="story-meta">News</div>
-              <h3><a href="stories/djiboutis-president-wins-sixth-term-with-nearly-98-of-the-vote.html">Djibouti’s president wins sixth term with nearly 98% of the vote</a></h3>
-              <p>Ismail Omar Guelleh extended his 27-year rule in an election boycotted by main opposition candidates. Rights groups and observers have long criticised the country’s political environment as uncompetitive.</p>
+              <h4><a href="stories/djiboutis-president-secures-sixth-term-in-boycotted-election.html">Djibouti’s president secures sixth term in boycotted election</a></h4>
+              <p>Ismail Omar Guelleh extended his 27‑year rule with 97.8% of the vote in an election boycotted by main opposition candidates. The result underscores the dominance of the incumbent and heightens concerns over political openness in a strategic Horn of Africa state.</p>
             </article>
             
 
             <article class="story-card">
               <div class="story-meta">News</div>
-              <h3><a href="stories/rights-groups-condemn-us-plan-for-migrant-camp-at-guantnamo-bay.html">Rights groups condemn US plan for migrant ‘camp’ at Guantánamo Bay</a></h3>
-              <p>Dozens of organisations urged Congress to oppose proposals to house Cuban migrants at the base in any future crisis. They warned of legal and human rights risks, citing past controversies surrounding detentions at the facility.</p>
+              <h4><a href="stories/benin-votes-four-months-after-failed-coup-attempt.html">Benin votes four months after failed coup attempt</a></h4>
+              <p>Benin holds a presidential election viewed as a test of stability after a foiled coup. With the outgoing president stepping down after two terms, the finance minister is widely seen as the frontrunner, amid opposition warnings over media freedom and fairness.</p>
             </article>
             
 
             <article class="story-card">
               <div class="story-meta">News</div>
-              <h3><a href="stories/mauritius-vows-to-decolonise-chagos-after-uk-shelves-handover-bill.html">Mauritius vows to ‘decolonise’ Chagos after UK shelves handover bill</a></h3>
-              <p>Port Louis pledged to “spare no effort” to regain control after ministers in London ran out of time to pass enabling legislation. The delay follows a shift in US backing and raises questions over the UK’s timetable for resolving the long‑running dispute.</p>
+              <h4><a href="stories/cyclone-vaianu-lashes-new-zealands-north-island.html">Cyclone Vaianu lashes New Zealand’s North Island</a></h4>
+              <p>Destructive winds, heavy rain and storm surges forced evacuations and caused power outages as Cyclone Vaianu made landfall. Authorities warn of landslides and coastal flooding as emergency services respond to widespread disruption.</p>
             </article>
             
 
             <article class="story-card">
               <div class="story-meta">News</div>
-              <h3><a href="stories/australia-urges-israel-to-halt-lebanon-strikes-as-tensions-persist.html">Australia urges Israel to halt Lebanon strikes as tensions persist</a></h3>
-              <p>Prime Minister Anthony Albanese called for an immediate stop to intensified Israeli operations in Lebanon and urged Hezbollah to cease reprisals. Canberra extended its regional surveillance deployment amid concern the Middle East ceasefire could fray.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">News</div>
-              <h3><a href="stories/at-least-30-die-in-crush-at-historic-haitian-fortress.html">At least 30 die in crush at historic Haitian fortress</a></h3>
-              <p>Crowds at the Citadelle Henry tourist site triggered a deadly crush, with many injured and missing. Authorities have launched an investigation and emergency response in a country already beset by instability.</p>
+              <h4><a href="stories/peru-votes-amid-deep-mistrust-crime-and-corruption-concerns.html">Peru votes amid deep mistrust, crime and corruption concerns</a></h4>
+              <p>Peruvians go to the polls after a decade of churn that produced nine presidents, rampant corruption scandals and rising violent crime. A crowded field of candidates and a vast ballot underline public disillusionment with the political system.</p>
             </article>
             
             </section>
@@ -257,73 +334,74 @@
             <section class="news-section">
               <h2>Markets &amp; Economy</h2>
               
+        <article class="section-lead-card">
+          
+          <div class="story-meta">Analysis</div>
+          <h3><a href="stories/energy-shock-risk-rises-as-usiran-talks-fail-and-tankers-idle.html">Energy shock risk rises as US–Iran talks fail and tankers idle</a></h3>
+          <p>The collapse of negotiations raises the prospect of a prolonged oil and gas squeeze, with tankers stranded in the Gulf and insurers wary. Traders expect further price volatility and higher borrowing costs if flows through Hormuz remain constrained.</p>
+        </article>
+        
+              
             <article class="story-card">
-              <div class="story-meta">Analysis</div>
-              <h3><a href="stories/energy-shock-risk-grows-as-usiran-talks-collapse.html">Energy shock risk grows as US–Iran talks collapse</a></h3>
-              <p>The breakdown of negotiations and ongoing constraints in the Strait of Hormuz have markets braced for further oil and gas price spikes. With tankers delayed and supply routes uncertain, borrowing costs could rise and broader inflation pressures persist.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">Analysis</div>
-              <h3><a href="stories/imf-chief-iran-war-will-leave-lasting-scars-on-global-growth.html">IMF chief: Iran war will leave lasting scars on global growth</a></h3>
-              <p>Kristalina Georgieva warned that even an optimistic peace scenario implies a downgrade to growth and a permanent hit to living standards. The conflict’s disruption to trade and investment is set to outlast any ceasefire.</p>
+              <div class="story-meta">News</div>
+              <h4><a href="stories/us-inflation-accelerates-as-fuel-surge-bites.html">US inflation accelerates as fuel surge bites</a></h4>
+              <p>US consumer prices rose at the fastest monthly pace in nearly two years, driven by pump prices linked to the Iran conflict. The data complicate the outlook for interest-rate cuts and underscores the pass‑through from geopolitics to household budgets.</p>
             </article>
             
 
             <article class="story-card">
               <div class="story-meta">News</div>
-              <h3><a href="stories/eu-airports-warn-of-jet-fuel-shortages-if-hormuz-remains-constrained.html">EU airports warn of jet-fuel shortages if Hormuz remains constrained</a></h3>
-              <p>ACI Europe said members were increasingly concerned over jet-fuel availability, highlighting airlines’ exposure to Gulf supply routes. The sector is preparing contingency plans as energy logistics tighten.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">Explainer</div>
-              <h3><a href="stories/how-many-ships-are-crossing-the-strait-of-hormuz.html">How many ships are crossing the Strait of Hormuz?</a></h3>
-              <p>BBC Verify finds only a handful of vessels have transited since the ceasefire announcement, underscoring operator caution. Maritime insurers, shippers and charterers are weighing risks, toll demands and security before resuming normal flows.</p>
+              <h4><a href="stories/european-airports-warn-of-jetfuel-shortages-if-hormuz-stays-shut.html">European airports warn of jet‑fuel shortages if Hormuz stays shut</a></h4>
+              <p>ACI Europe says members are increasingly concerned about fuel availability amid disrupted Gulf flows. Airlines face potential rerouting, hedging strains and higher fares if shortages persist.</p>
             </article>
             
 
             <article class="story-card">
               <div class="story-meta">News</div>
-              <h3><a href="stories/tanker-firms-told-not-to-pay-iranian-levies-for-hormuz-transits.html">Tanker firms told not to pay Iranian levies for Hormuz transits</a></h3>
-              <p>Industry advisories urged operators to avoid any payments in exchange for safe passage, citing legal and sanctions exposure. The guidance adds another barrier to restarting normal crude and product flows.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">News</div>
-              <h3><a href="stories/us-inflation-jumps-as-fuel-prices-surge-amid-middle-east-conflict.html">US inflation jumps as fuel prices surge amid Middle East conflict</a></h3>
-              <p>The consumer price index rose 3.3% year-on-year, with a sharp monthly gain driven by pump prices. The data complicate the policy outlook as the war and shipping disruption feed through to households.</p>
+              <h4><a href="stories/shippers-told-not-to-pay-iran-for-safe-passage-tolls.html">Shippers told not to pay Iran for ‘safe passage’ tolls</a></h4>
+              <p>Tanker operators are being urged to avoid any levies sought by Iran for Hormuz transit, amid legal and sanctions risks. The advice underscores a murky operating environment and the potential for seizures or detentions.</p>
             </article>
             
 
             <article class="story-card">
               <div class="story-meta">Analysis</div>
-              <h3><a href="stories/uk-fuel-will-petrol-and-diesel-prices-fall-if-ceasefire-holds.html">UK fuel: will petrol and diesel prices fall if ceasefire holds?</a></h3>
-              <p>Retail fuel costs have risen on conflict-driven crude gains and supply bottlenecks. Any sustained relief depends on shipping resuming through Hormuz and refiners’ inventories, with motoring groups cautioning against hopes of a rapid drop.</p>
+              <h4><a href="stories/data-watch-vessel-traffic-through-hormuz-remains-thin.html">Data watch: Vessel traffic through Hormuz remains thin</a></h4>
+              <p>BBC Verify tracking shows only limited crossings since the ceasefire, indicating persistent caution among shippers and insurers. Sparse flows keep risk premia elevated across crude, products and freight.</p>
+            </article>
+            
+
+            <article class="story-card">
+              <div class="story-meta">Analysis</div>
+              <h4><a href="stories/imf-warns-iran-war-will-leave-lasting-scar-on-global-growth.html">IMF warns Iran war will leave lasting ‘scar’ on global growth</a></h4>
+              <p>Kristalina Georgieva says even a durable peace would not quickly reverse the conflict’s drag on investment and living standards. The Fund is preparing growth downgrades as fragmentation and supply shocks harden.</p>
             </article>
             
 
             <article class="story-card">
               <div class="story-meta">News</div>
-              <h3><a href="stories/uk-farmers-warn-food-costs-to-stay-elevated-despite-ceasefire.html">UK farmers warn food costs to stay elevated despite ceasefire</a></h3>
-              <p>Producers say fertiliser, fuel and transport expenses remain high and will take time to ease even if tankers move again. Supermarkets and consumers face a delayed pass‑through from the energy shock.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">Feature</div>
-              <h3><a href="stories/asias-energy-squeeze-tests-singapores-aircon-addiction.html">Asia’s energy squeeze tests Singapore’s air‑con addiction</a></h3>
-              <p>Rising power costs have intensified pressure on a city built around cooling. The strain reveals how reliant much of Asia remains on Gulf oil and underscores the need for efficiency and diversified supply.</p>
+              <h4><a href="stories/uk-pump-prices-unlikely-to-fall-quickly-despite-ceasefire-hopes.html">UK pump prices unlikely to fall quickly despite ceasefire hopes</a></h4>
+              <p>Motoring groups warn drivers not to expect rapid relief at the forecourt, with wholesale costs still elevated and supply uncertain. Retail pass‑through may lag even if shipping normalises.</p>
             </article>
             
 
             <article class="story-card">
               <div class="story-meta">News</div>
-              <h3><a href="stories/texas-opens-london-office-to-woo-uk-firms-with-tax-breaks.html">Texas opens London office to woo UK firms with tax breaks</a></h3>
-              <p>The low‑tax US state is stepping up efforts to attract British corporate investment with subsidies and incentives. The move highlights post‑Brexit competition among jurisdictions to secure capital and jobs.</p>
+              <h4><a href="stories/uk-farmers-warn-food-costs-will-stay-high-even-if-hormuz-reopens.html">UK farmers warn food costs will stay high even if Hormuz reopens</a></h4>
+              <p>Producers say input costs are already locked in, meaning supermarket prices will reflect the energy shock for months. The warning highlights food inflation’s persistence risk.</p>
+            </article>
+            
+
+            <article class="story-card">
+              <div class="story-meta">News</div>
+              <h4><a href="stories/us-treasury-meets-bank-chiefs-over-cyber-risks-from-new-ai-model.html">US Treasury meets bank chiefs over cyber risks from new AI model</a></h4>
+              <p>Washington convened major lenders after Anthropic unveiled a tool it says could raise unprecedented cybersecurity concerns. The move signals regulators’ growing focus on systemic tech risks to finance.</p>
+            </article>
+            
+
+            <article class="story-card">
+              <div class="story-meta">News</div>
+              <h4><a href="stories/white-house-tells-staff-not-to-bet-on-prediction-markets.html">White House tells staff not to bet on prediction markets</a></h4>
+              <p>Officials moved to curb gambling on political and geopolitical events as the platforms surge in popularity. The step addresses ethics and market-manipulation concerns as users place wagers on conflicts and policy outcomes.</p>
             </article>
             
             </section>
@@ -332,73 +410,39 @@
             <section class="news-section">
               <h2>Business</h2>
               
+        <article class="section-lead-card">
+          
+          <div class="story-meta">News</div>
+          <h3><a href="stories/openai-pauses-uk-datacentre-deal-amid-energy-costs-and-regulatory-uncertainty.html">OpenAI pauses UK data‑centre deal amid energy costs and regulatory uncertainty</a></h3>
+          <p>The AI firm has halted a UK data‑centre project that was part of a wider tech‑investment push. Rising power costs and an evolving regulatory regime were cited, dealing a setback to the UK’s bid to brand itself an ‘AI superpower’.</p>
+        </article>
+        
+              
             <article class="story-card">
               <div class="story-meta">News</div>
-              <h3><a href="stories/openai-pauses-uk-data-centre-plans-over-energy-costs-and-regulation.html">OpenAI pauses UK data centre plans over energy costs and regulation</a></h3>
-              <p>The AI firm has put a flagship UK infrastructure project on hold, citing power prices and policy uncertainty. The delay raises questions over Britain’s bid to be an AI ‘superpower’ and the grid capacity needed for data‑intensive growth.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">News</div>
-              <h3><a href="stories/british-steel-needs-nationalising-by-the-summer-mp-says.html">British Steel ‘needs nationalising by the summer’, MP says</a></h3>
-              <p>With ownership talks ongoing, a senior MP argued public control may be the best route to stabilise the company. The debate underscores the strategic role of steelmaking amid industrial policy and defence supply concerns.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">Analysis</div>
-              <h3><a href="stories/why-the-uk-is-relaxed-about-a-wave-of-chinese-car-imports.html">Why the UK is relaxed about a wave of Chinese car imports</a></h3>
-              <p>Ministers believe cheaper EVs can benefit consumers and spur domestic supply chains, even as Europe debates tariffs. The stance reflects a bet on competition and UK investment rather than broad protectionism.</p>
+              <h4><a href="stories/dolce-gabbana-cofounder-steps-down-as-chair.html">Dolce &amp; Gabbana co‑founder steps down as chair</a></h4>
+              <p>The Italian fashion house faces debt pressures and softer luxury demand. Leadership changes come as brands reset strategies in a slower, more price‑sensitive market.</p>
             </article>
             
 
             <article class="story-card">
               <div class="story-meta">News</div>
-              <h3><a href="stories/eu-entryexit-biometric-rules-take-effect-for-uk-travellers.html">EU entry/exit biometric rules take effect for UK travellers</a></h3>
-              <p>The long‑delayed Entry/Exit System now requires fingerprints and photos for non‑EU arrivals, changing passenger flows to 29 countries. Airlines and border posts warn of teething problems as the system beds in.</p>
+              <h4><a href="stories/argentina-clears-mining-in-glacier-and-permafrost-zones-angering-environmentalis.html">Argentina clears mining in glacier and permafrost zones, angering environmentalists</a></h4>
+              <p>A new law eases extraction in sensitive Andean regions to unlock copper, lithium and silver. The shift could boost investment but intensifies ESG concerns and legal challenges.</p>
             </article>
             
 
             <article class="story-card">
               <div class="story-meta">News</div>
-              <h3><a href="stories/us-summons-bank-chiefs-over-cyber-risks-from-new-ai-model.html">US summons bank chiefs over cyber risks from new AI model</a></h3>
-              <p>Treasury officials met major lenders after Anthropic flagged unprecedented cybersecurity implications from a new system. The move reflects regulators’ growing concerns that advanced AI could amplify financial‑sector vulnerabilities.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">Feature</div>
-              <h3><a href="stories/inside-the-prediction-markets-betting-millions-on-war.html">Inside the prediction markets betting millions on war</a></h3>
-              <p>A Guardian investigation into Polymarket finds traders can shape narratives by wagering on global conflicts. The platform’s rulings on ‘truth’ and the ethics of monetising violence are drawing scrutiny from policymakers.</p>
+              <h4><a href="stories/texas-opens-london-office-to-woo-uk-firms-with-low-taxes-and-subsidies.html">Texas opens London office to woo UK firms with low taxes and subsidies</a></h4>
+              <p>The US state expands its international footprint to attract finance and corporate HQs from Britain. The pitch highlights looser regulation and incentives as rivals vie for post‑Brexit relocations.</p>
             </article>
             
 
             <article class="story-card">
               <div class="story-meta">News</div>
-              <h3><a href="stories/gsk-cancer-therapy-shows-early-promise-in-ovarian-and-womb-tumours.html">GSK cancer therapy shows early promise in ovarian and womb tumours</a></h3>
-              <p>An early-stage trial found Mo‑Rez reduced or eliminated tumours in over 60% of patients where chemotherapy had failed. Analysts say the drug could become a blockbuster, though larger trials and safety data are still needed.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">News</div>
-              <h3><a href="stories/argentina-eases-glacier-protections-to-allow-mining-sparking-protests.html">Argentina eases glacier protections to allow mining, sparking protests</a></h3>
-              <p>Congress approved amendments to the ‘glacier law’ to facilitate extraction of metals in sensitive Andean regions. Environmentalists warn of risks to water security and ecosystems as the government pursues investment.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">News</div>
-              <h3><a href="stories/dolce-gabbana-cofounder-steps-down-as-chair-amid-debt-strain.html">Dolce &amp; Gabbana co‑founder steps down as chair amid debt strain</a></h3>
-              <p>The luxury house faces a tougher market and higher leverage as global high‑end demand cools. Leadership changes aim to steady the brand’s strategy in a more cautious consumer environment.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">News</div>
-              <h3><a href="stories/california-coffee-chain-faces-backlash-over-pride-flag-removal-plan.html">California coffee chain faces backlash over Pride flag removal plan</a></h3>
-              <p>Philz Coffee drew criticism after announcing the removal of Pride flags as part of a move to standardise store decor. The company says it seeks a consistent ‘inclusive’ approach, but petitioners call the decision a snub to LGBTQ+ customers.</p>
+              <h4><a href="stories/jo-malone-urges-sense-in-lawsuit-over-her-name-as-brand-dispute-widens.html">Jo Malone urges ‘sense’ in lawsuit over her name as brand dispute widens</a></h4>
+              <p>The British perfumer and Zara face legal action from Estée Lauder over a collaboration. The case spotlights the value and limits of personal branding years after a founder exits a namesake label.</p>
             </article>
             
             </section>
@@ -407,148 +451,39 @@
             <section class="news-section">
               <h2>UK</h2>
               
-            <article class="story-card">
-              <div class="story-meta">News</div>
-              <h3><a href="stories/ministers-plot-eu-singlemarket-rule-alignment-without-full-commons-vote.html">Ministers plot EU single‑market rule alignment without full Commons vote</a></h3>
-              <p>A proposed UK–EU reset bill would allow dynamic alignment with EU rules where deemed in the national interest. The plan is set to face opposition from Brexit hardliners but reflects a push for closer ties after the Iran war’s economic shock.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">News</div>
-              <h3><a href="stories/uk-will-not-join-any-usled-hormuz-blockade.html">UK will not join any US‑led Hormuz blockade</a></h3>
-              <p>Despite US claims that NATO allies would assist in ‘cleaning out’ the strait, British officials distanced the UK from any blockade. London remains focused on de‑escalation and protecting shipping without deepening the conflict.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">News</div>
-              <h3><a href="stories/home-office-to-close-11-asylum-hotels-as-phaseout-accelerates.html">Home Office to close 11 asylum hotels as phase‑out accelerates</a></h3>
-              <p>The closures form part of a pledge to end hotel use by the end of the parliament. Ministers argue alternative accommodation is scaling up, though campaigners warn about conditions and local capacity.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">Analysis</div>
-              <h3><a href="stories/streeting-warns-protest-votes-risk-nhs-stability.html">Streeting warns protest votes risk NHS stability</a></h3>
-              <p>The health secretary argued that backing populist parties in May could endanger the NHS’s founding principles. The comments signal Labour’s push to make health a central battleground of the local and devolved elections.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">News</div>
-              <h3><a href="stories/health-secretary-denies-changing-pay-deal-as-resident-doctors-strike-ends.html">Health secretary denies changing pay deal as resident doctors’ strike ends</a></h3>
-              <p>Wes Streeting rejected claims the junior doctors’ settlement had been altered during a six‑day walkout. The dispute highlights the difficulty of restoring NHS staffing stability amid financial constraints.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">News</div>
-              <h3><a href="stories/man-charged-with-murder-of-finbar-sullivan-in-primrose-hill.html">Man charged with murder of Finbar Sullivan in Primrose Hill</a></h3>
-              <p>Police charged a 27‑year‑old man following the fatal stabbing of the 21‑year‑old in north London. The suspect is due in court as detectives appeal for further information.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">News</div>
-              <h3><a href="stories/man-in-court-after-four-migrants-die-in-channel-crossing.html">Man in court after four migrants die in Channel crossing</a></h3>
-              <p>A 27‑year‑old Sudanese national is charged with endangering life after two men and two women died attempting to reach the UK. The case sharpens focus on small‑boat crossings and deterrence policies.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">News</div>
-              <h3><a href="stories/home-office-to-tighten-postbrexit-residency-rights-for-eu-citizens.html">Home Office to tighten post‑Brexit residency rights for EU citizens</a></h3>
-              <p>Ministers will move to remove rights from those not ‘continuously’ resident, partly using travel data. The approach raises concerns after previous data errors led to wrongful benefit removals.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">News</div>
-              <h3><a href="stories/police-appeal-after-woman-raped-by-several-men-outside-surrey-church.html">Police appeal after woman raped by several men outside Surrey church</a></h3>
-              <p>The victim, in her 20s, was reportedly followed after leaving a nightclub in Epsom and assaulted near a church. Detectives urged witnesses and drivers with dashcam footage to come forward.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">News</div>
-              <h3><a href="stories/golden-eagles-to-return-to-england-with-government-backing.html">Golden eagles to return to England with government backing</a></h3>
-              <p>A £1m plan could see reintroductions begin next year, aiming to restore a lost apex predator and boost biodiversity. Officials say careful site selection and community engagement will be critical.</p>
-            </article>
-            
-            </section>
-            
-
-            <section class="news-section">
-              <h2>Wales</h2>
+        <article class="section-lead-card">
+          
+          <div class="story-meta">Analysis</div>
+          <h3><a href="stories/ukeu-reset-ministers-eye-powers-to-align-with-singlemarket-rules-without-a-full.html">UK–EU reset: ministers eye powers to align with single‑market rules without a full Commons vote</a></h3>
+          <p>A proposed ‘dynamic alignment’ mechanism would allow the UK to track EU standards on a national‑interest basis with limited parliamentary scrutiny. Backers argue it would smooth trade post‑Iran war disruptions; critics call it a constitutional overreach.</p>
+        </article>
+        
               
             <article class="story-card">
-              <div class="story-meta">Explainer</div>
-              <h3><a href="stories/how-will-the-new-senedd-voting-system-work.html">How will the new Senedd voting system work?</a></h3>
-              <p>Wales is overhauling its electoral system ahead of next year’s Senedd election. Here’s what will change for voters, parties and constituency representation.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">Explainer</div>
-              <h3><a href="stories/what-does-the-senedd-do.html">What does the Senedd do?</a></h3>
-              <p>As Wales approaches its seventh election since 1999, this guide sets out the parliament’s powers over health, education, transport and more. It also explains where responsibilities remain with Westminster.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">Explainer</div>
-              <h3><a href="stories/find-your-new-senedd-constituency.html">Find your new Senedd constituency</a></h3>
-              <p>Boundary changes mean many voters will be in newly drawn constituencies. Use the guide to understand how representation and regional balance are shifting.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">Feature</div>
-              <h3><a href="stories/cardigans-squeeze-a-prettiest-town-under-economic-pressure.html">Cardigan’s squeeze: a ‘prettiest town’ under economic pressure</a></h3>
-              <p>Shops, cafés and restaurants in the west Wales town report rising costs and lower footfall. Local owners warn of a fragile high street unless costs ease and visitors return.</p>
+              <div class="story-meta">News</div>
+              <h4><a href="stories/home-office-to-close-11-asylum-hotels-as-part-of-pledge-to-end-hotel-use.html">Home Office to close 11 asylum hotels as part of pledge to end hotel use</a></h4>
+              <p>The government will announce closures this week, advancing a plan to phase out hotels for asylum accommodation. Ministers face pressure to balance cost, community tensions and the speed of asylum processing.</p>
             </article>
             
 
             <article class="story-card">
               <div class="story-meta">News</div>
-              <h3><a href="stories/licensing-plan-could-curb-coasteering-in-parts-of-pembrokeshire.html">Licensing plan could curb coasteering in parts of Pembrokeshire</a></h3>
-              <p>A new scheme in a coasteering heartland could restrict activity in some areas to protect the environment and manage safety. Guides and businesses say they need clarity to plan for the season.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">Feature</div>
-              <h3><a href="stories/seed-collectors-doomsday-mission-to-save-native-welsh-species.html">Seed collectors’ ‘doomsday’ mission to save native Welsh species</a></h3>
-              <p>Two conservationists are banking seeds to preserve biodiversity as climate and land‑use pressures bite. Their work aims to safeguard habitats and future restoration efforts.</p>
+              <h4><a href="stories/government-to-tighten-postbrexit-residency-rights-using-travel-data.html">Government to tighten post‑Brexit residency rights using travel data</a></h4>
+              <p>EU citizens who are no longer ‘continuously’ resident face loss of status under the Withdrawal Agreement. The plan has prompted concerns after errors in border data recently led to wrongful child‑benefit removals.</p>
             </article>
             
 
             <article class="story-card">
               <div class="story-meta">News</div>
-              <h3><a href="stories/three-teens-injured-in-alleged-airweapon-assault.html">Three teens injured in alleged air‑weapon assault</a></h3>
-              <p>Police are investigating after three teenagers were hurt in an attack reportedly involving men armed with an air weapon. Officers appealed for witnesses as patrols were stepped up.</p>
+              <h4><a href="stories/starmer-urges-us-and-iran-to-find-a-way-through-after-talks-falter.html">Starmer urges US and Iran to ‘find a way through’ after talks falter</a></h4>
+              <p>The prime minister warned against escalation and backed renewed diplomacy after marathon negotiations ended without a deal. The stance reflects UK efforts to remain aligned with allies while limiting direct involvement.</p>
             </article>
             
 
             <article class="story-card">
               <div class="story-meta">News</div>
-              <h3><a href="stories/he-killed-my-sister-and-got-off-scotfree-family-decries-licence-return.html">‘He killed my sister and got off scot‑free’: family decries licence return</a></h3>
-              <p>Relatives of a crash victim condemn the decision to reinstate the driver’s licence after he was ruled unfit to face criminal proceedings. The case raises questions over public safety and legal thresholds.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">Feature</div>
-              <h3><a href="stories/student-freedives-by-night-to-film-waless-marine-life.html">Student freedives by night to film Wales’s marine life</a></h3>
-              <p>A young filmmaker documents nocturnal biodiversity off the Welsh coast, highlighting fragile habitats. The project aims to build public interest in marine protection.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">News</div>
-              <h3><a href="stories/pub-warns-it-may-shut-amid-dispute-over-decking-and-play-area.html">Pub warns it may shut amid dispute over decking and play area</a></h3>
-              <p>A landlord has asked the council to allow existing outdoor structures to remain, arguing they are vital for trade. The case underscores planning pressures on hospitality businesses.</p>
+              <h4><a href="stories/police-appeal-after-woman-raped-by-several-men-outside-surrey-church.html">Police appeal after woman raped by several men outside Surrey church</a></h4>
+              <p>Surrey Police say a woman in her 20s was followed from a nightclub and attacked near Epsom Methodist Church between 02:00 and 04:00 on Saturday. Detectives are seeking witnesses and reviewing CCTV as specialist officers support the victim.</p>
             </article>
             
             </section>
@@ -557,73 +492,39 @@
             <section class="news-section">
               <h2>Science &amp; Technology</h2>
               
-            <article class="story-card">
-              <div class="story-meta">Explainer</div>
-              <h3><a href="stories/eu-legal-lapse-on-childabuse-scanning-sparks-big-tech-backlash.html">EU legal lapse on child‑abuse scanning sparks Big Tech backlash</a></h3>
-              <p>The European parliament let a law permitting automated detection of child sexual abuse on platforms expire, citing privacy concerns. Firms warn reports could plunge, echoing a sharp drop during a similar 2021 gap.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">Analysis</div>
-              <h3><a href="stories/china-leads-in-some-ai-fronts-the-us-in-others.html">China leads in some AI fronts, the US in others</a></h3>
-              <p>A BBC assessment finds each side gaining ground in different layers of the AI stack and applications. The race remains fluid, with policy, chips and capital likely to reshape the balance again.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">News</div>
-              <h3><a href="stories/musks-xai-sues-colorado-over-new-ai-rules.html">Musk’s xAI sues Colorado over new AI rules</a></h3>
-              <p>xAI argues a state law to curb ‘algorithmic discrimination’ infringes free‑speech rights and should be blocked. The case could set key precedents for how states regulate AI decision‑making.</p>
-            </article>
-            
-
+        <article class="section-lead-card">
+          
+          <div class="story-meta">Explainer</div>
+          <h3><a href="stories/us-vs-china-in-ai-different-leads-shifting-race.html">US vs China in AI: different leads, shifting race</a></h3>
+          <p>The US and China dominate different layers of the AI stack, from chips and frontier models to data access and deployment. Both sides aim to prevent dependence on a rival’s ecosystem, and the contest could be reshaped by export controls, compute scaling and safety regulation.</p>
+        </article>
+        
+              
             <article class="story-card">
               <div class="story-meta">Analysis</div>
-              <h3><a href="stories/firms-scramble-to-be-seen-by-ai-search.html">Firms scramble to be ‘seen’ by AI search</a></h3>
-              <p>Companies are restructuring websites and data so chatbots and AI search engines surface their content. The shift threatens to upend SEO playbooks and distribution economics.</p>
+              <h4><a href="stories/too-powerful-or-too-much-hype-inside-anthropics-latest-model-rollout.html">‘Too powerful’ or too much hype? Inside Anthropic’s latest model rollout</a></h4>
+              <p>Anthropic says it withheld a model on cybersecurity grounds, prompting high‑level briefings and political attention. Supporters frame it as responsible restraint; sceptics see a publicity gambit in a crowded AI market. Either way, policymakers are watching closely.</p>
             </article>
             
 
             <article class="story-card">
               <div class="story-meta">News</div>
-              <h3><a href="stories/meta-pulls-ads-recruiting-clients-for-socialmedia-addiction-suits.html">Meta pulls ads recruiting clients for social‑media addiction suits</a></h3>
-              <p>Facebook’s owner removed adverts seeking litigants after a landmark California trial. The move comes amid intensifying scrutiny of platforms’ impacts on mental health.</p>
+              <h4><a href="stories/greece-to-ban-social-media-for-under15s-from-next-year.html">Greece to ban social media for under‑15s from next year</a></h4>
+              <p>Athens will prohibit under‑15s from using social networks and introduce controls for older teens, joining European peers moving to curb online harms. The step will test enforcement, verification tools and platform compliance.</p>
             </article>
             
 
             <article class="story-card">
               <div class="story-meta">News</div>
-              <h3><a href="stories/greece-to-ban-social-media-for-under15s.html">Greece to ban social media for under‑15s</a></h3>
-              <p>Athens plans to restrict access for younger teens, following similar debates across Europe. Supporters cite harms mitigation; critics warn of enforcement and rights concerns.</p>
+              <h4><a href="stories/eu-allows-childsafety-scanning-law-to-lapse-drawing-tech-and-safety-backlash.html">EU allows child‑safety scanning law to lapse, drawing tech and safety backlash</a></h4>
+              <p>The European Parliament did not extend a legal carve‑out that enabled platforms to scan for child sexual abuse material. Firms warn reports will drop sharply; privacy advocates say new frameworks must better balance safety with rights.</p>
             </article>
             
 
             <article class="story-card">
               <div class="story-meta">News</div>
-              <h3><a href="stories/exmeta-worker-investigated-over-30000-private-facebook-images.html">Ex‑Meta worker investigated over 30,000 private Facebook images</a></h3>
-              <p>Meta said the former employee is suspected of downloading tens of thousands of user photos. The case renews questions about internal controls and data security.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">News</div>
-              <h3><a href="stories/amazon-to-drop-support-for-pre2013-kindles-sparking-user-anger.html">Amazon to drop support for pre‑2013 Kindles, sparking user anger</a></h3>
-              <p>Older devices will no longer download new e‑books, prompting complaints about planned obsolescence. Amazon says it will maintain access to existing libraries.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">Analysis</div>
-              <h3><a href="stories/anthropics-too-powerful-model-and-the-ai-pr-war.html">Anthropic’s ‘too powerful’ model and the AI PR war</a></h3>
-              <p>The company said it withheld a model on cybersecurity grounds while officials met banks about potential risks. Critics see hype and investor signalling; backers argue for caution on dual‑use systems.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">Feature</div>
-              <h3><a href="stories/dr-tiktok-when-commenters-spot-serious-illnesses.html">Dr TikTok? When commenters spot serious illnesses</a></h3>
-              <p>Some users say the platform helped flag undiagnosed conditions, prompting life‑saving checks. Doctors caution that crowdsourced tips are no substitute for clinical assessment.</p>
+              <h4><a href="stories/exmeta-staffer-investigated-over-30000-downloaded-private-facebook-photos.html">Ex‑Meta staffer investigated over 30,000 downloaded private Facebook photos</a></h4>
+              <p>Meta said a former employee was fired amid suspicions they exfiltrated tens of thousands of user images. The case highlights insider‑risk controls and the sensitivity of personal data even within trusted teams.</p>
             </article>
             
             </section>
@@ -632,73 +533,39 @@
             <section class="news-section">
               <h2>Sport</h2>
               
+        <article class="section-lead-card">
+          
+          <div class="story-meta">News</div>
+          <h3><a href="stories/van-aert-outduels-pogacar-to-win-first-parisroubaix.html">Van Aert outduels Pogacar to win first Paris–Roubaix</a></h3>
+          <p>Wout van Aert ended years of near‑misses to take the cobbled Monument in a sprint, with Tadej Pogacar second as mechanical issues hit key rivals. The victory reshapes early‑season narratives ahead of the Ardennes and the Tour.</p>
+        </article>
+        
+              
             <article class="story-card">
               <div class="story-meta">News</div>
-              <h3><a href="stories/i-am-maximus-wins-the-grand-national-for-a-second-time.html">I Am Maximus wins the Grand National for a second time</a></h3>
-              <p>Willie Mullins’s chaser completed a rare repeat at Aintree, echoing the feats of the sport’s greats. The victory underscores Mullins’s dominance and the horse’s stamina and class.</p>
+              <h4><a href="stories/manchester-city-close-title-gap-with-emphatic-win-at-chelsea.html">Manchester City close title gap with emphatic win at Chelsea</a></h4>
+              <p>A blistering second‑half spell secured a statement victory at Stamford Bridge, cutting Arsenal’s lead with a game in hand. City’s attack clicked into gear at a pivotal moment in the run‑in.</p>
             </article>
             
 
             <article class="story-card">
               <div class="story-meta">News</div>
-              <h3><a href="stories/sinner-beats-alcaraz-to-return-to-world-no-1.html">Sinner beats Alcaraz to return to world No 1</a></h3>
-              <p>Jannik Sinner defeated Carlos Alcaraz in Monte Carlo to reclaim the top ranking. The result tightens a compelling rivalry shaping men’s tennis.</p>
+              <h4><a href="stories/sunderland-sink-spurs-in-de-zerbis-debut-tottenham-drop-into-bottom-three.html">Sunderland sink Spurs in De Zerbi’s debut; Tottenham drop into bottom three</a></h4>
+              <p>A deflected second‑half strike condemned Roberto De Zerbi to a losing start, deepening Tottenham’s relegation fears. Sunderland climbed to mid‑table as Spurs’ rebuilding task grew more urgent.</p>
             </article>
             
 
             <article class="story-card">
               <div class="story-meta">News</div>
-              <h3><a href="stories/van-aert-outsprints-pogaar-to-win-parisroubaix.html">Van Aert outsprints Pogačar to win Paris‑Roubaix</a></h3>
-              <p>The Belgian edged the four‑time Tour de France champion in a thrilling velodrome finish. Cobbled classics form and team tactics set the tone for the summer’s grand tours.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">News</div>
-              <h3><a href="stories/union-berlin-appoint-first-woman-to-manage-a-mens-topfive-league-side.html">Union Berlin appoint first woman to manage a men’s top‑five league side</a></h3>
-              <p>Marie‑Louise Eta takes interim charge in the Bundesliga, a landmark for elite European football. Her appointment will be closely watched in a results‑driven environment.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">News</div>
-              <h3><a href="stories/fury-calls-out-joshua-after-comeback-win-over-makhmudov.html">Fury calls out Joshua after comeback win over Makhmudov</a></h3>
-              <p>Tyson Fury urged a long‑awaited showdown after a unanimous decision victory in London. Promoters face a familiar puzzle of dates, venues and broadcast partners.</p>
+              <h4><a href="stories/sinner-defeats-alcaraz-in-monte-carlo-to-reclaim-world-no-1.html">Sinner defeats Alcaraz in Monte Carlo to reclaim world No 1</a></h4>
+              <p>Jannik Sinner won the Masters 1000 final in straight sets, adding to Indian Wells and Miami titles to cap a dominant spring. The result reorders the men’s rankings ahead of the clay‑court swing.</p>
             </article>
             
 
             <article class="story-card">
               <div class="story-meta">Analysis</div>
-              <h3><a href="stories/the-decadelong-saga-of-trying-to-make-fury-v-joshua.html">The decade‑long saga of trying to make Fury v Joshua</a></h3>
-              <p>Repeated near‑misses, rival belts and competing networks have delayed the superfight. Even with fresh momentum, final hurdles on purse splits and timing remain.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">News</div>
-              <h3><a href="stories/slades-late-kick-sends-exeter-into-challenge-cup-semifinal.html">Slade’s late kick sends Exeter into Challenge Cup semi‑final</a></h3>
-              <p>Henry Slade held his nerve with a last‑minute penalty against Benetton to book Exeter’s place. The Premiership side’s European campaign remains alive after a tense finish.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">News</div>
-              <h3><a href="stories/holders-bordeaux-beat-toulouse-to-set-up-bath-semifinal.html">Holders Bordeaux beat Toulouse to set up Bath semi‑final</a></h3>
-              <p>The French champions advanced to face Premiership holders Bath in a heavyweight European clash. Form and player welfare will be pivotal in a crowded run‑in.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">News</div>
-              <h3><a href="stories/wigan-edge-wakefield-in-challenge-cup-thriller.html">Wigan edge Wakefield in Challenge Cup thriller</a></h3>
-              <p>The Warriors survived a late fightback at Belle Vue to reach the last four. The narrow win keeps their domestic and cup ambitions on course.</p>
-            </article>
-            
-
-            <article class="story-card">
-              <div class="story-meta">Analysis</div>
-              <h3><a href="stories/will-scotlands-title-race-be-decided-on-goal-difference.html">Will Scotland’s title race be decided on goal difference?</a></h3>
-              <p>Rangers’ 6‑3 win over Falkirk tightened margins at the top. With little separating the contenders, small swings could prove decisive.</p>
+              <h4><a href="stories/fury-calls-out-joshua-again-but-will-the-superfight-finally-happen.html">Fury calls out Joshua again — but will the superfight finally happen?</a></h4>
+              <p>After comfortably outpointing Arslanbek Makhmudov, Tyson Fury said it is ‘him or I’m out’ as he pushed for a long‑mooted Joshua bout. A decade of false starts and broadcast, venue and purse hurdles still stand in the way.</p>
             </article>
             
             </section>
