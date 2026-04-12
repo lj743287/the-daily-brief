@@ -192,6 +192,160 @@ SOURCE_CONFIG = [
     },
 ]
 
+OUTLINE_SCHEMA = {
+    "type": "object",
+    "additionalProperties": False,
+    "properties": {
+        "at_a_glance": {
+            "type": "array",
+            "items": {"type": "string"},
+            "minItems": 8,
+            "maxItems": 8,
+        },
+        "lead_story": {
+            "type": "object",
+            "additionalProperties": False,
+            "properties": {
+                "section": {"type": "string"},
+                "story_type": {"type": "string"},
+                "title": {"type": "string"},
+                "summary": {"type": "string"},
+                "source_signal_title": {"type": "string"},
+            },
+            "required": ["section", "story_type", "title", "summary", "source_signal_title"],
+        },
+        "sections": {
+            "type": "object",
+            "additionalProperties": False,
+            "properties": {
+                "World": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": False,
+                        "properties": {
+                            "story_type": {"type": "string"},
+                            "title": {"type": "string"},
+                            "summary": {"type": "string"},
+                            "source_signal_title": {"type": "string"},
+                        },
+                        "required": ["story_type", "title", "summary", "source_signal_title"],
+                    },
+                },
+                "Markets & Economy": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": False,
+                        "properties": {
+                            "story_type": {"type": "string"},
+                            "title": {"type": "string"},
+                            "summary": {"type": "string"},
+                            "source_signal_title": {"type": "string"},
+                        },
+                        "required": ["story_type", "title", "summary", "source_signal_title"],
+                    },
+                },
+                "Business": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": False,
+                        "properties": {
+                            "story_type": {"type": "string"},
+                            "title": {"type": "string"},
+                            "summary": {"type": "string"},
+                            "source_signal_title": {"type": "string"},
+                        },
+                        "required": ["story_type", "title", "summary", "source_signal_title"],
+                    },
+                },
+                "UK": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": False,
+                        "properties": {
+                            "story_type": {"type": "string"},
+                            "title": {"type": "string"},
+                            "summary": {"type": "string"},
+                            "source_signal_title": {"type": "string"},
+                        },
+                        "required": ["story_type", "title", "summary", "source_signal_title"],
+                    },
+                },
+                "Science & Technology": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": False,
+                        "properties": {
+                            "story_type": {"type": "string"},
+                            "title": {"type": "string"},
+                            "summary": {"type": "string"},
+                            "source_signal_title": {"type": "string"},
+                        },
+                        "required": ["story_type", "title", "summary", "source_signal_title"],
+                    },
+                },
+                "Sport": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": False,
+                        "properties": {
+                            "story_type": {"type": "string"},
+                            "title": {"type": "string"},
+                            "summary": {"type": "string"},
+                            "source_signal_title": {"type": "string"},
+                        },
+                        "required": ["story_type", "title", "summary", "source_signal_title"],
+                    },
+                },
+            },
+            "required": ["World", "Markets & Economy", "Business", "UK", "Science & Technology", "Sport"],
+        },
+    },
+    "required": ["at_a_glance", "lead_story", "sections"],
+}
+
+FULL_BODY_SCHEMA = {
+    "type": "object",
+    "additionalProperties": False,
+    "properties": {
+        "stories": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "additionalProperties": False,
+                "properties": {
+                    "title": {"type": "string"},
+                    "body": {
+                        "type": "array",
+                        "items": {"type": "string"},
+                        "minItems": 1,
+                    },
+                },
+                "required": ["title", "body"],
+            },
+        }
+    },
+    "required": ["stories"],
+}
+
+
+def response_json_schema(name: str, schema: dict) -> dict:
+    return {
+        "type": "json_schema",
+        "name": name,
+        "strict": True,
+        "schema": schema,
+    }
+
+
+def parse_response_json(response) -> dict:
+    return json.loads(response.output_text)
+
 
 def slugify(text):
     text = text.lower().strip()
@@ -927,85 +1081,7 @@ EDITORIAL RULES:
 SECTION STORY COUNTS:
 {story_counts_json}
 
-Return valid JSON only in exactly this structure:
-
-{{
-  "at_a_glance": [
-    "bullet 1",
-    "bullet 2",
-    "bullet 3",
-    "bullet 4",
-    "bullet 5",
-    "bullet 6",
-    "bullet 7",
-    "bullet 8"
-  ],
-  "lead_story": {{
-    "section": "World",
-    "story_type": "Analysis",
-    "title": "Lead headline",
-    "summary": "A serious standfirst in 3 to 4 sentences.",
-    "source_signal_title": "Exact source signal title here"
-  }},
-  "sections": {{
-    "World": [
-      {{
-        "story_type": "News",
-        "title": "Story title",
-        "summary": "A strong standfirst in 2 to 3 sentences.",
-        "source_signal_title": "Exact source signal title here"
-      }}
-    ],
-    "Markets & Economy": [
-      {{
-        "story_type": "Analysis",
-        "title": "Story title",
-        "summary": "A strong standfirst in 2 to 3 sentences.",
-        "source_signal_title": "Exact source signal title here"
-      }}
-    ],
-    "Business": [
-      {{
-        "story_type": "News",
-        "title": "Story title",
-        "summary": "A strong standfirst in 2 to 3 sentences.",
-        "source_signal_title": "Exact source signal title here"
-      }}
-    ],
-    "UK": [
-      {{
-        "story_type": "News",
-        "title": "Story title",
-        "summary": "A strong standfirst in 2 to 3 sentences.",
-        "source_signal_title": "Exact source signal title here"
-      }}
-    ],
-    "Science & Technology": [
-      {{
-        "story_type": "Explainer",
-        "title": "Story title",
-        "summary": "A strong standfirst in 2 to 3 sentences.",
-        "source_signal_title": "Exact source signal title here"
-      }}
-    ],
-    "Sport": [
-      {{
-        "story_type": "News",
-        "title": "Story title",
-        "summary": "A strong standfirst in 2 to 3 sentences.",
-        "source_signal_title": "Exact source signal title here"
-      }}
-    ]
-  }}
-}}
-
-ADDITIONAL RULES:
-- Produce exactly the number of stories required for each section.
-- Do not include a Wales section.
-- Do not duplicate the lead story inside any section.
-- The Markets & Economy section should cover macro, rates, inflation, currencies, bonds, commodities, major equity moves, policy shifts, and market consequences where visible.
-- The paper should feel like a real newspaper, not an AI digest.
-- Avoid generic filler.
+Return JSON matching the schema exactly.
 """
 
 
@@ -1036,26 +1112,7 @@ EDITORIAL RULES:
 - Avoid robotic phrasing.
 - Keep the prose tight. Do not overwrite.
 
-Return valid JSON only in exactly this structure:
-
-{{
-  "stories": [
-    {{
-      "title": "Story title exactly as provided",
-      "body": [
-        "Paragraph 1",
-        "Paragraph 2",
-        "Paragraph 3",
-        "Paragraph 4"
-      ]
-    }}
-  ]
-}}
-
-ADDITIONAL RULES:
-- Return one body for every story provided.
-- Match titles exactly.
-- Use the requested paragraph_count for each story.
+Return JSON matching the schema exactly.
 """
 
 
@@ -1082,9 +1139,12 @@ previous_index = index_previous_items(previous_data)
 outline_response = client.responses.create(
     model=MODEL_NAME,
     input=build_outline_prompt(signals),
+    text={
+        "format": response_json_schema("daily_brief_outline", OUTLINE_SCHEMA)
+    },
 )
 
-outline_data = json.loads(outline_response.output_text.strip())
+outline_data = parse_response_json(outline_response)
 
 now = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
 
@@ -1171,8 +1231,17 @@ if stories_to_generate_full:
     full_body_response = client.responses.create(
         model=MODEL_NAME,
         input=build_full_body_prompt(stories_to_generate_full, signals),
+        text={
+            "format": response_json_schema("daily_brief_full_bodies", FULL_BODY_SCHEMA)
+        },
     )
-    full_body_data = json.loads(full_body_response.output_text.strip())
+    try:
+        full_body_data = parse_response_json(full_body_response)
+    except Exception:
+        print("RAW FULL BODY RESPONSE:")
+        print(full_body_response.output_text)
+        raise
+
     generated_full_bodies = {
         item["title"].strip(): [p.strip() for p in item.get("body", []) if p.strip()]
         for item in full_body_data.get("stories", [])
