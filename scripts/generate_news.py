@@ -14,55 +14,133 @@ BASE_DIR = Path(".")
 DATA_DIR = BASE_DIR / "data"
 STORIES_DIR = BASE_DIR / "stories"
 
-FEEDS = {
-    "World": "https://feeds.bbci.co.uk/news/world/rss.xml",
-    "Business": "https://feeds.bbci.co.uk/news/business/rss.xml",
-    "UK": "https://feeds.bbci.co.uk/news/uk/rss.xml",
-    "Science & Technology": "https://feeds.bbci.co.uk/news/technology/rss.xml",
-    "Sport": "https://feeds.bbci.co.uk/sport/rss.xml"
-}
+SOURCE_FEEDS = [
+    {
+        "source": "BBC",
+        "section": "World",
+        "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
+    },
+    {
+        "source": "BBC",
+        "section": "Business",
+        "url": "https://feeds.bbci.co.uk/news/business/rss.xml",
+    },
+    {
+        "source": "BBC",
+        "section": "UK",
+        "url": "https://feeds.bbci.co.uk/news/uk/rss.xml",
+    },
+    {
+        "source": "BBC",
+        "section": "Wales",
+        "url": "https://feeds.bbci.co.uk/news/wales/rss.xml",
+    },
+    {
+        "source": "BBC",
+        "section": "Science & Technology",
+        "url": "https://feeds.bbci.co.uk/news/technology/rss.xml",
+    },
+    {
+        "source": "BBC",
+        "section": "Sport",
+        "url": "https://feeds.bbci.co.uk/sport/rss.xml",
+    },
+    {
+        "source": "The Guardian",
+        "section": "World",
+        "url": "https://www.theguardian.com/world/rss",
+    },
+    {
+        "source": "The Guardian",
+        "section": "Business",
+        "url": "https://www.theguardian.com/business/rss",
+    },
+    {
+        "source": "The Guardian",
+        "section": "Science & Technology",
+        "url": "https://www.theguardian.com/uk/technology/rss",
+    },
+    {
+        "source": "The Guardian",
+        "section": "Sport",
+        "url": "https://www.theguardian.com/uk/sport/rss",
+    },
+    {
+        "source": "AP",
+        "section": "World",
+        "url": "https://apnews.com/hub/apf-topnews?output=rss",
+    },
+]
 
 SECTION_ORDER = [
     "World",
+    "Markets & Economy",
     "Business",
     "UK",
-    "Markets",
+    "Wales",
     "Science & Technology",
-    "Sport"
+    "Sport",
+]
+
+STORY_TYPE_ORDER = [
+    "News",
+    "Analysis",
+    "Explainer",
+    "Profile",
+    "Feature",
 ]
 
 def slugify(text):
     text = text.lower().strip()
-    text = re.sub(r"[^a-z0-9\s-]", "", text)
-    text = re.sub(r"\s+", "-", text)
+    text = re.sub(r"[^a-z0-9\\s-]", "", text)
+    text = re.sub(r"\\s+", "-", text)
     text = re.sub(r"-+", "-", text)
     return text[:80].strip("-") or "story"
 
-def get_headline_signals():
+def clean_html(raw_text):
+    if not raw_text:
+        return ""
+    text = re.sub(r"<[^>]+>", " ", raw_text)
+    text = html.unescape(text)
+    text = re.sub(r"\\s+", " ", text)
+    return text.strip()
+
+def normalise_title(title):
+    text = title.lower().strip()
+    text = re.sub(r"[^a-z0-9\\s]", "", text)
+    text = re.sub(r"\\s+", " ", text)
+    return text
+
+def get_source_signals():
     signals = []
     seen_titles = set()
 
-    for section_name, url in FEEDS.items():
-        feed = feedparser.parse(url)
-        for entry in feed.entries[:8]:
-            title = entry.get("title", "").strip()
-            summary = entry.get("summary", "").strip()
+    for feed_info in SOURCE_FEEDS:
+        parsed = feedparser.parse(feed_info["url"])
+
+        for entry in parsed.entries[:8]:
+            title = clean_html(entry.get("title", ""))
+            summary = clean_html(entry.get("summary", ""))
             link = entry.get("link", "").strip()
 
             if not title:
                 continue
-            if title in seen_titles:
+
+            normalised = normalise_title(title)
+            if normalised in seen_titles:
                 continue
 
-            seen_titles.add(title)
+            seen_titles.add(normalised)
+
             signals.append({
-                "section": section_name,
+                "source": feed_info["source"],
+                "section": feed_info["section"],
                 "title": title,
-                "summary": re.sub(r"<[^>]+>", "", summary).strip(),
-                "link": link
+                "summary": summary,
+                "link": link,
             })
 
-    return signals[:30]
+    return signals[:50]
 
 def load_feature():
     feature_file = DATA_DIR / "feature.json"
@@ -71,7 +149,7 @@ def load_feature():
     with open(feature_file, "r", encoding="utf-8") as f:
         return json.load(f)
 
-def build_story_page(title, section, summary, body_html, updated_time):
+def build_story_page(title, section, story_type, summary, body_html, updated_time):
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -86,7 +164,7 @@ def build_story_page(title, section, summary, body_html, updated_time):
       font-family: Georgia, "Times New Roman", serif;
     }}
     .page {{
-      max-width: 920px;
+      max-width: 960px;
       margin: 0 auto;
       background: #fffdf8;
       min-height: 100vh;
@@ -122,29 +200,35 @@ def build_story_page(title, section, summary, body_html, updated_time):
     .back:hover {{
       text-decoration: underline;
     }}
-    .section-label {{
+    .meta {{
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
       font-size: 0.85rem;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
       color: #666;
-      margin-bottom: 10px;
+    }}
+    .meta span {{
+      display: inline-block;
     }}
     h2 {{
       margin-top: 0;
       margin-bottom: 16px;
-      font-size: 2.4rem;
-      line-height: 1.15;
+      font-size: 2.5rem;
+      line-height: 1.12;
     }}
     .standfirst {{
       font-size: 1.18rem;
-      line-height: 1.75;
+      line-height: 1.8;
       color: #333;
       margin-bottom: 28px;
       font-style: italic;
     }}
     p {{
-      font-size: 1.08rem;
-      line-height: 1.9;
+      font-size: 1.1rem;
+      line-height: 1.95;
       margin: 0 0 18px 0;
     }}
   </style>
@@ -157,7 +241,10 @@ def build_story_page(title, section, summary, body_html, updated_time):
     </header>
     <a class="back" href="../index.html">← Back to front page</a>
     <article>
-      <div class="section-label">{html.escape(section)}</div>
+      <div class="meta">
+        <span>{html.escape(section)}</span>
+        <span>{html.escape(story_type)}</span>
+      </div>
       <h2>{html.escape(title)}</h2>
       <div class="standfirst">{html.escape(summary)}</div>
       {body_html}
@@ -167,8 +254,28 @@ def build_story_page(title, section, summary, body_html, updated_time):
 </html>
 """
 
-def build_homepage_page(updated_time, at_a_glance_items, story_cards, feature):
-    glance_html = "\n".join(f"<li>{html.escape(item)}</li>" for item in at_a_glance_items)
+def build_homepage_page(updated_time, at_a_glance_items, lead_story, story_cards, feature):
+    feature_html = ""
+    if feature:
+        feature_html = f"""
+        <section class="feature-block">
+          <div class="feature-label">Daily Long Read</div>
+          <h2><a href="{feature['url']}">{html.escape(feature['title'])}</a></h2>
+          <p class="feature-standfirst">{html.escape(feature['standfirst'])}</p>
+        </section>
+        """
+
+    glance_html = "\\n".join(f"<li>{html.escape(item)}</li>" for item in at_a_glance_items)
+
+    lead_html = ""
+    if lead_story:
+        lead_html = f"""
+        <section class="lead-story">
+          <div class="lead-meta">{html.escape(lead_story['section'])} | {html.escape(lead_story['story_type'])}</div>
+          <h2><a href="{lead_story['url']}">{html.escape(lead_story['title'])}</a></h2>
+          <p>{html.escape(lead_story['summary'])}</p>
+        </section>
+        """
 
     grouped = {section: [] for section in SECTION_ORDER}
     for card in story_cards:
@@ -180,9 +287,10 @@ def build_homepage_page(updated_time, at_a_glance_items, story_cards, feature):
         if not cards:
             continue
 
-        cards_html = "\n".join(
+        cards_html = "\\n".join(
             f"""
             <article class="story-card">
+              <div class="story-meta">{html.escape(card['story_type'])}</div>
               <h3><a href="{card['url']}">{html.escape(card['title'])}</a></h3>
               <p>{html.escape(card['summary'])}</p>
             </article>
@@ -190,25 +298,16 @@ def build_homepage_page(updated_time, at_a_glance_items, story_cards, feature):
             for card in cards
         )
 
-        section_html = f"""
-        <section class="news-section">
-          <h2>{html.escape(section)}</h2>
-          {cards_html}
-        </section>
-        """
-        sections_html_parts.append(section_html)
+        sections_html_parts.append(
+            f"""
+            <section class="news-section">
+              <h2>{html.escape(section)}</h2>
+              {cards_html}
+            </section>
+            """
+        )
 
-    sections_html = "\n".join(sections_html_parts)
-
-    feature_html = ""
-    if feature:
-        feature_html = f"""
-        <section class="feature-block">
-          <div class="feature-label">Daily Long Read</div>
-          <h2><a href="{feature['url']}">{html.escape(feature['title'])}</a></h2>
-          <p class="feature-standfirst">{html.escape(feature['standfirst'])}</p>
-        </section>
-        """
+    sections_html = "\\n".join(sections_html_parts)
 
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -224,7 +323,7 @@ def build_homepage_page(updated_time, at_a_glance_items, story_cards, feature):
       font-family: Georgia, "Times New Roman", serif;
     }}
     .page {{
-      max-width: 980px;
+      max-width: 1040px;
       margin: 0 auto;
       background: #fffdf8;
       min-height: 100vh;
@@ -280,6 +379,37 @@ def build_homepage_page(updated_time, at_a_glance_items, story_cards, feature):
       line-height: 1.8;
       color: #333;
     }}
+    .lead-story {{
+      margin-bottom: 34px;
+      padding-bottom: 26px;
+      border-bottom: 1px solid #ddd;
+    }}
+    .lead-meta,
+    .story-meta {{
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #666;
+      margin-bottom: 10px;
+    }}
+    .lead-story h2 {{
+      margin: 0 0 14px 0;
+      font-size: 2.4rem;
+      line-height: 1.12;
+    }}
+    .lead-story a {{
+      color: #111;
+      text-decoration: none;
+    }}
+    .lead-story a:hover {{
+      text-decoration: underline;
+    }}
+    .lead-story p {{
+      margin: 0;
+      font-size: 1.12rem;
+      line-height: 1.85;
+      color: #222;
+    }}
     .glance-section h2,
     .news-section h2 {{
       margin-top: 34px;
@@ -305,8 +435,8 @@ def build_homepage_page(updated_time, at_a_glance_items, story_cards, feature):
     }}
     .story-card h3 {{
       margin: 0 0 10px 0;
-      font-size: 1.5rem;
-      line-height: 1.3;
+      font-size: 1.45rem;
+      line-height: 1.28;
     }}
     .story-card a {{
       color: #111;
@@ -317,7 +447,7 @@ def build_homepage_page(updated_time, at_a_glance_items, story_cards, feature):
     }}
     .story-card p {{
       margin: 0;
-      font-size: 1.05rem;
+      font-size: 1.04rem;
       line-height: 1.8;
       color: #222;
     }}
@@ -332,6 +462,8 @@ def build_homepage_page(updated_time, at_a_glance_items, story_cards, feature):
 
     {feature_html}
 
+    {lead_html}
+
     <section class="glance-section">
       <h2>At a Glance</h2>
       <ul>
@@ -345,15 +477,49 @@ def build_homepage_page(updated_time, at_a_glance_items, story_cards, feature):
 </html>
 """
 
-signals = get_headline_signals()
+def coerce_story_type(story_type):
+    if story_type in STORY_TYPE_ORDER:
+        return story_type
+    return "News"
+
+def coerce_section(section):
+    if section in SECTION_ORDER:
+        return section
+    return "World"
+
+signals = get_source_signals()
 
 prompt = f"""
-You are writing The Daily Brief homepage package for a premium newspaper.
+You are the editor of The Daily Brief, a serious premium digital newspaper.
 
-Use these latest source signals:
+Your job is not to echo one national news agenda.
+Your job is to select and rank the most important stories in the world, using the signals below.
+
+SOURCE SIGNALS:
 {json.dumps(signals, ensure_ascii=False, indent=2)}
 
-Return valid JSON only in exactly this structure:
+EDITORIAL RULES:
+- British English.
+- World-first, not UK-first.
+- Do not overweight the UK or the US just because they are familiar.
+- Rank stories by consequence, strategic importance, market importance, democratic importance, public-interest significance, and international relevance.
+- Avoid celebrity, gossip, fluff, influencer stories, clickbait, trivial culture-war noise, and low-consequence domestic chatter.
+- Use calm, restrained, serious newspaper language.
+- Present contested issues fairly.
+- Show both sides where relevant, but do not create false balance.
+- Distinguish evidence from claims.
+- Use context, stakes, trade-offs, history, and likely next steps.
+- Make the paper feel closer in spirit to BBC World Service than to a domestic news site.
+- The front page lead must be the most important global story, not the most familiar Anglophone story.
+- UK belongs in the paper, but not as the default centre of gravity.
+- Wales must have its own dedicated section.
+- Markets & Economy should be treated as a serious pillar of the paper.
+- Do not invent direct quotes.
+- Do not make up precise statistics that are not clearly supported by the source signals.
+- It is acceptable to synthesise and explain significance.
+- Story types allowed: News, Analysis, Explainer, Profile, Feature.
+
+RETURN VALID JSON ONLY IN EXACTLY THIS STRUCTURE:
 
 {{
   "at_a_glance": [
@@ -366,11 +532,46 @@ Return valid JSON only in exactly this structure:
     "bullet 7",
     "bullet 8"
   ],
+  "lead_story": {{
+    "section": "World",
+    "story_type": "Analysis",
+    "title": "Lead headline",
+    "summary": "A serious standfirst in 4 to 5 sentences.",
+    "body": [
+      "Paragraph 1",
+      "Paragraph 2",
+      "Paragraph 3",
+      "Paragraph 4",
+      "Paragraph 5",
+      "Paragraph 6",
+      "Paragraph 7",
+      "Paragraph 8",
+      "Paragraph 9",
+      "Paragraph 10"
+    ]
+  }},
   "stories": [
     {{
       "section": "World",
+      "story_type": "News",
       "title": "Story title",
-      "summary": "A strong homepage standfirst in 3 to 4 sentences.",
+      "summary": "A strong standfirst in 3 to 4 sentences.",
+      "body": [
+        "Paragraph 1",
+        "Paragraph 2",
+        "Paragraph 3",
+        "Paragraph 4",
+        "Paragraph 5",
+        "Paragraph 6",
+        "Paragraph 7",
+        "Paragraph 8"
+      ]
+    }},
+    {{
+      "section": "Markets & Economy",
+      "story_type": "Analysis",
+      "title": "Story title",
+      "summary": "A strong standfirst in 3 to 4 sentences.",
       "body": [
         "Paragraph 1",
         "Paragraph 2",
@@ -384,8 +585,9 @@ Return valid JSON only in exactly this structure:
     }},
     {{
       "section": "Business",
+      "story_type": "News",
       "title": "Story title",
-      "summary": "A strong homepage standfirst in 3 to 4 sentences.",
+      "summary": "A strong standfirst in 3 to 4 sentences.",
       "body": [
         "Paragraph 1",
         "Paragraph 2",
@@ -399,8 +601,9 @@ Return valid JSON only in exactly this structure:
     }},
     {{
       "section": "UK",
+      "story_type": "News",
       "title": "Story title",
-      "summary": "A strong homepage standfirst in 3 to 4 sentences.",
+      "summary": "A strong standfirst in 3 to 4 sentences.",
       "body": [
         "Paragraph 1",
         "Paragraph 2",
@@ -413,9 +616,10 @@ Return valid JSON only in exactly this structure:
       ]
     }},
     {{
-      "section": "Markets",
+      "section": "Wales",
+      "story_type": "News",
       "title": "Story title",
-      "summary": "A strong homepage standfirst in 3 to 4 sentences.",
+      "summary": "A strong standfirst in 3 to 4 sentences.",
       "body": [
         "Paragraph 1",
         "Paragraph 2",
@@ -429,8 +633,9 @@ Return valid JSON only in exactly this structure:
     }},
     {{
       "section": "Science & Technology",
+      "story_type": "Explainer",
       "title": "Story title",
-      "summary": "A strong homepage standfirst in 3 to 4 sentences.",
+      "summary": "A strong standfirst in 3 to 4 sentences.",
       "body": [
         "Paragraph 1",
         "Paragraph 2",
@@ -444,8 +649,9 @@ Return valid JSON only in exactly this structure:
     }},
     {{
       "section": "Sport",
+      "story_type": "News",
       "title": "Story title",
-      "summary": "A strong homepage standfirst in 3 to 4 sentences.",
+      "summary": "A strong standfirst in 3 to 4 sentences.",
       "body": [
         "Paragraph 1",
         "Paragraph 2",
@@ -460,18 +666,17 @@ Return valid JSON only in exactly this structure:
   ]
 }}
 
-Rules:
-- British English
-- Professional, serious newspaper tone
-- No markdown
-- No code fences
-- No text outside the JSON
-- Produce exactly 6 stories
-- Use one story for each of these sections: World, Business, UK, Markets, Science & Technology, Sport
-- The homepage summaries must feel weighty and informative, not breezy
-- The body paragraphs should feel like proper reported copy with context, stakes, nuance and consequences
-- Do not invent direct quotes
-- If source signals are thin for Markets, infer the biggest market-moving theme from the wider business and world signals
+ADDITIONAL INSTRUCTIONS:
+- Produce exactly 7 secondary stories.
+- Use each of these sections exactly once in the secondary stories:
+  World, Markets & Economy, Business, UK, Wales, Science & Technology, Sport.
+- The lead story must not duplicate any secondary story.
+- The lead story should be the most important item in the world agenda.
+- The Markets & Economy piece should explain the biggest macro or market-moving theme visible in the signals.
+- The Sport story should prioritise significance over celebrity.
+- The Wales story should focus on material consequence, not trivial political theatre.
+- The prose should feel like a real newspaper, not an AI digest.
+- Avoid generic filler such as 'in today's fast-moving world' or 'this highlights the importance of'.
 """
 
 response = client.responses.create(
@@ -487,12 +692,37 @@ now = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
 STORIES_DIR.mkdir(parents=True, exist_ok=True)
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 
+lead_story = data["lead_story"]
+lead_title = lead_story["title"].strip()
+lead_section = coerce_section(lead_story["section"].strip())
+lead_type = coerce_story_type(lead_story["story_type"].strip())
+lead_summary = lead_story["summary"].strip()
+lead_body = [p.strip() for p in lead_story["body"] if p.strip()]
+
+lead_slug = slugify(lead_title)
+lead_filename = f"{lead_slug}.html"
+lead_url = f"stories/{lead_filename}"
+
+lead_body_html = "\\n".join(f"<p>{html.escape(p)}</p>" for p in lead_body)
+lead_page = build_story_page(
+    title=lead_title,
+    section=lead_section,
+    story_type=lead_type,
+    summary=lead_summary,
+    body_html=lead_body_html,
+    updated_time=now
+)
+
+with open(STORIES_DIR / lead_filename, "w", encoding="utf-8") as f:
+    f.write(lead_page)
+
 story_cards = []
 saved_stories = []
 
 for story in data["stories"]:
     title = story["title"].strip()
-    section = story["section"].strip()
+    section = coerce_section(story["section"].strip())
+    story_type = coerce_story_type(story["story_type"].strip())
     summary = story["summary"].strip()
     body = [p.strip() for p in story["body"] if p.strip()]
 
@@ -500,25 +730,34 @@ for story in data["stories"]:
     filename = f"{slug}.html"
     story_url = f"stories/{filename}"
 
-    body_html = "\n".join(f"<p>{html.escape(p)}</p>" for p in body)
-    story_page = build_story_page(title, section, summary, body_html, now)
+    body_html = "\\n".join(f"<p>{html.escape(p)}</p>" for p in body)
+    story_page = build_story_page(
+        title=title,
+        section=section,
+        story_type=story_type,
+        summary=summary,
+        body_html=body_html,
+        updated_time=now
+    )
 
     with open(STORIES_DIR / filename, "w", encoding="utf-8") as f:
         f.write(story_page)
 
     story_cards.append({
         "section": section,
+        "story_type": story_type,
         "title": title,
         "summary": summary,
-        "url": story_url
+        "url": story_url,
     })
 
     saved_stories.append({
         "section": section,
+        "story_type": story_type,
         "title": title,
         "summary": summary,
         "url": story_url,
-        "body": body
+        "body": body,
     })
 
 feature = load_feature()
@@ -526,11 +765,18 @@ feature = load_feature()
 homepage = build_homepage_page(
     updated_time=now,
     at_a_glance_items=data["at_a_glance"],
+    lead_story={
+        "section": lead_section,
+        "story_type": lead_type,
+        "title": lead_title,
+        "summary": lead_summary,
+        "url": lead_url,
+    },
     story_cards=story_cards,
-    feature=feature
+    feature=feature,
 )
 
-with open("index.html", "w", encoding="utf-8") as f:
+with open(BASE_DIR / "index.html", "w", encoding="utf-8") as f:
     f.write(homepage)
 
 with open(DATA_DIR / "stories.json", "w", encoding="utf-8") as f:
@@ -538,7 +784,15 @@ with open(DATA_DIR / "stories.json", "w", encoding="utf-8") as f:
         "last_updated": now,
         "source_signals": signals,
         "at_a_glance": data["at_a_glance"],
-        "stories": saved_stories
+        "lead_story": {
+            "section": lead_section,
+            "story_type": lead_type,
+            "title": lead_title,
+            "summary": lead_summary,
+            "url": lead_url,
+            "body": lead_body,
+        },
+        "stories": saved_stories,
     }, f, indent=2)
 
 print("Homepage and story pages updated")
