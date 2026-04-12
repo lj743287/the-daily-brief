@@ -3,6 +3,8 @@ import json
 import datetime
 import html
 import re
+import urllib.request
+import xml.etree.ElementTree as ET
 from pathlib import Path
 
 import feedparser
@@ -13,20 +15,6 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 BASE_DIR = Path(".")
 DATA_DIR = BASE_DIR / "data"
 STORIES_DIR = BASE_DIR / "stories"
-
-SOURCE_FEEDS = [
-    {"source": "BBC", "section": "World", "url": "https://feeds.bbci.co.uk/news/world/rss.xml"},
-    {"source": "BBC", "section": "Business", "url": "https://feeds.bbci.co.uk/news/business/rss.xml"},
-    {"source": "BBC", "section": "UK", "url": "https://feeds.bbci.co.uk/news/uk/rss.xml"},
-    {"source": "BBC", "section": "Wales", "url": "https://feeds.bbci.co.uk/news/wales/rss.xml"},
-    {"source": "BBC", "section": "Science & Technology", "url": "https://feeds.bbci.co.uk/news/technology/rss.xml"},
-    {"source": "BBC", "section": "Sport", "url": "https://feeds.bbci.co.uk/sport/rss.xml"},
-    {"source": "The Guardian", "section": "World", "url": "https://www.theguardian.com/world/rss"},
-    {"source": "The Guardian", "section": "Business", "url": "https://www.theguardian.com/business/rss"},
-    {"source": "The Guardian", "section": "Science & Technology", "url": "https://www.theguardian.com/uk/technology/rss"},
-    {"source": "The Guardian", "section": "Sport", "url": "https://www.theguardian.com/uk/sport/rss"},
-    {"source": "AP", "section": "World", "url": "https://apnews.com/hub/apf-topnews?output=rss"},
-]
 
 SECTION_ORDER = [
     "World",
@@ -41,6 +29,189 @@ SECTION_ORDER = [
 STORY_TYPE_ORDER = ["News", "Analysis", "Explainer", "Profile", "Feature"]
 STORIES_PER_SECTION = 10
 
+SOURCE_CONFIG = [
+    {
+        "kind": "rss",
+        "source": "BBC",
+        "region": "UK",
+        "viewpoint_group": "uk_public_broadcaster",
+        "section": "World",
+        "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
+    },
+    {
+        "kind": "rss",
+        "source": "BBC",
+        "region": "UK",
+        "viewpoint_group": "uk_public_broadcaster",
+        "section": "Business",
+        "url": "https://feeds.bbci.co.uk/news/business/rss.xml",
+    },
+    {
+        "kind": "rss",
+        "source": "BBC",
+        "region": "UK",
+        "viewpoint_group": "uk_public_broadcaster",
+        "section": "UK",
+        "url": "https://feeds.bbci.co.uk/news/uk/rss.xml",
+    },
+    {
+        "kind": "rss",
+        "source": "BBC",
+        "region": "UK",
+        "viewpoint_group": "uk_public_broadcaster",
+        "section": "Wales",
+        "url": "https://feeds.bbci.co.uk/news/wales/rss.xml",
+    },
+    {
+        "kind": "rss",
+        "source": "BBC",
+        "region": "UK",
+        "viewpoint_group": "uk_public_broadcaster",
+        "section": "Science & Technology",
+        "url": "https://feeds.bbci.co.uk/news/technology/rss.xml",
+    },
+    {
+        "kind": "rss",
+        "source": "BBC",
+        "region": "UK",
+        "viewpoint_group": "uk_public_broadcaster",
+        "section": "Sport",
+        "url": "https://feeds.bbci.co.uk/sport/rss.xml",
+    },
+    {
+        "kind": "rss",
+        "source": "The Guardian",
+        "region": "UK",
+        "viewpoint_group": "uk_liberal_broadsheet",
+        "section": "World",
+        "url": "https://www.theguardian.com/world/rss",
+    },
+    {
+        "kind": "rss",
+        "source": "The Guardian",
+        "region": "UK",
+        "viewpoint_group": "uk_liberal_broadsheet",
+        "section": "Business",
+        "url": "https://www.theguardian.com/business/rss",
+    },
+    {
+        "kind": "rss",
+        "source": "The Guardian",
+        "region": "UK",
+        "viewpoint_group": "uk_liberal_broadsheet",
+        "section": "UK",
+        "url": "https://www.theguardian.com/uk-news/rss",
+    },
+    {
+        "kind": "rss",
+        "source": "The Guardian",
+        "region": "UK",
+        "viewpoint_group": "uk_liberal_broadsheet",
+        "section": "Science & Technology",
+        "url": "https://www.theguardian.com/uk/technology/rss",
+    },
+    {
+        "kind": "rss",
+        "source": "The Guardian",
+        "region": "UK",
+        "viewpoint_group": "uk_liberal_broadsheet",
+        "section": "Sport",
+        "url": "https://www.theguardian.com/uk/sport/rss",
+    },
+    {
+        "kind": "rss",
+        "source": "AP",
+        "region": "United States",
+        "viewpoint_group": "us_wire",
+        "section": "World",
+        "url": "https://apnews.com/hub/apf-topnews?output=rss",
+    },
+    {
+        "kind": "rss",
+        "source": "China Daily",
+        "region": "China",
+        "viewpoint_group": "china_state_english",
+        "section": "World",
+        "url": "http://www.chinadaily.com.cn/rss/world_rss.xml",
+    },
+    {
+        "kind": "rss",
+        "source": "China Daily",
+        "region": "China",
+        "viewpoint_group": "china_state_english",
+        "section": "Business",
+        "url": "http://www.chinadaily.com.cn/rss/bizchina_rss.xml",
+    },
+    {
+        "kind": "rss",
+        "source": "China Daily",
+        "region": "China",
+        "viewpoint_group": "china_state_english",
+        "section": "World",
+        "url": "http://www.chinadaily.com.cn/rss/china_rss.xml",
+    },
+    {
+        "kind": "rss",
+        "source": "Africanews",
+        "region": "Africa",
+        "viewpoint_group": "africa_panregional",
+        "section": "World",
+        "url": "https://www.africanews.com/feed/rss?themes=news",
+    },
+    {
+        "kind": "rss",
+        "source": "Africanews",
+        "region": "Africa",
+        "viewpoint_group": "africa_panregional",
+        "section": "Business",
+        "url": "https://www.africanews.com/feed/rss?themes=business",
+    },
+    {
+        "kind": "rss",
+        "source": "Africanews",
+        "region": "Africa",
+        "viewpoint_group": "africa_panregional",
+        "section": "Sport",
+        "url": "https://www.africanews.com/feed/rss?themes=sport",
+    },
+    {
+        "kind": "rss",
+        "source": "SABC News",
+        "region": "Africa",
+        "viewpoint_group": "south_africa_public",
+        "section": "World",
+        "url": "https://www.sabcnews.com/sabcnews/feed/",
+    },
+    {
+        "kind": "sitemap",
+        "source": "Al Jazeera English",
+        "region": "Middle East",
+        "viewpoint_group": "middle_east_broadcaster",
+        "section": "World",
+        "url": "https://www.aljazeera.com/news-sitemap.xml",
+    },
+
+    # Placeholders for future addition once you choose exact machine-readable sources
+    # for Canada and Australia. Left deliberately empty rather than guessed.
+    # Example structure:
+    # {
+    #     "kind": "rss",
+    #     "source": "CBC News",
+    #     "region": "Canada",
+    #     "viewpoint_group": "canada_public_broadcaster",
+    #     "section": "World",
+    #     "url": "PASTE_VERIFIED_URL_HERE",
+    # },
+    # {
+    #     "kind": "rss",
+    #     "source": "ABC News Australia",
+    #     "region": "Australia",
+    #     "viewpoint_group": "australia_public_broadcaster",
+    #     "section": "World",
+    #     "url": "PASTE_VERIFIED_URL_HERE",
+    # },
+]
+
 
 def slugify(text):
     text = text.lower().strip()
@@ -50,7 +221,7 @@ def slugify(text):
     return text[:80].strip("-") or "story"
 
 
-def clean_html(raw_text):
+def clean_text(raw_text):
     if not raw_text:
         return ""
     text = re.sub(r"<[^>]+>", " ", raw_text)
@@ -77,46 +248,6 @@ def ensure_unique_slug(base_slug, used_slugs):
     return slug
 
 
-def get_source_signals():
-    signals = []
-    seen_titles = set()
-
-    for feed_info in SOURCE_FEEDS:
-        parsed = feedparser.parse(feed_info["url"])
-
-        for entry in parsed.entries[:20]:
-            title = clean_html(entry.get("title", ""))
-            summary = clean_html(entry.get("summary", ""))
-            link = entry.get("link", "").strip()
-
-            if not title:
-                continue
-
-            normalised = normalise_title(title)
-            if normalised in seen_titles:
-                continue
-
-            seen_titles.add(normalised)
-
-            signals.append({
-                "source": feed_info["source"],
-                "section": feed_info["section"],
-                "title": title,
-                "summary": summary,
-                "link": link,
-            })
-
-    return signals[:120]
-
-
-def load_feature():
-    feature_file = DATA_DIR / "feature.json"
-    if not feature_file.exists():
-        return None
-    with open(feature_file, "r", encoding="utf-8") as f:
-        return json.load(f)
-
-
 def coerce_story_type(story_type):
     if story_type in STORY_TYPE_ORDER:
         return story_type
@@ -127,6 +258,115 @@ def coerce_section(section):
     if section in SECTION_ORDER:
         return section
     return "World"
+
+
+def load_feature():
+    feature_file = DATA_DIR / "feature.json"
+    if not feature_file.exists():
+        return None
+    with open(feature_file, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def fetch_url(url):
+    request = urllib.request.Request(
+        url,
+        headers={
+            "User-Agent": "Mozilla/5.0 (compatible; TheDailyBrief/1.0)"
+        },
+    )
+    with urllib.request.urlopen(request, timeout=20) as response:
+        return response.read()
+
+
+def parse_rss_source(config, max_items=20):
+    parsed = feedparser.parse(config["url"])
+    signals = []
+
+    for entry in parsed.entries[:max_items]:
+        title = clean_text(entry.get("title", ""))
+        summary = clean_text(entry.get("summary", ""))
+        link = entry.get("link", "").strip()
+
+        if not title:
+            continue
+
+        signals.append({
+            "source": config["source"],
+            "region": config["region"],
+            "viewpoint_group": config["viewpoint_group"],
+            "section": config["section"],
+            "title": title,
+            "summary": summary,
+            "link": link,
+        })
+
+    return signals
+
+
+def parse_aljazeera_sitemap(config, max_items=20):
+    signals = []
+    raw = fetch_url(config["url"])
+    root = ET.fromstring(raw)
+
+    ns = {
+        "sm": "http://www.sitemaps.org/schemas/sitemap/0.9",
+        "news": "http://www.google.com/schemas/sitemap-news/0.9",
+    }
+
+    for url_node in root.findall("sm:url", ns)[:max_items]:
+        loc = url_node.findtext("sm:loc", default="", namespaces=ns).strip()
+        news_node = url_node.find("news:news", ns)
+
+        title = ""
+        if news_node is not None:
+            title = news_node.findtext("news:title", default="", namespaces=ns).strip()
+
+        if not title and loc:
+            slug = loc.rstrip("/").split("/")[-1]
+            slug = re.sub(r"^\d{4}/\d{1,2}/\d{1,2}/", "", slug)
+            title = slug.replace("-", " ").strip().title()
+
+        if not title:
+            continue
+
+        signals.append({
+            "source": config["source"],
+            "region": config["region"],
+            "viewpoint_group": config["viewpoint_group"],
+            "section": config["section"],
+            "title": clean_text(title),
+            "summary": "",
+            "link": loc,
+        })
+
+    return signals
+
+
+def get_source_signals():
+    signals = []
+    seen_titles = set()
+
+    for config in SOURCE_CONFIG:
+        try:
+            if config["kind"] == "rss":
+                source_signals = parse_rss_source(config)
+            elif config["kind"] == "sitemap":
+                source_signals = parse_aljazeera_sitemap(config)
+            else:
+                source_signals = []
+        except Exception as exc:
+            print(f"Warning: failed to parse {config['source']} {config['url']}: {exc}")
+            source_signals = []
+
+        for signal in source_signals:
+            normalised = normalise_title(signal["title"])
+            if not normalised or normalised in seen_titles:
+                continue
+            seen_titles.add(normalised)
+            signals.append(signal)
+
+    return signals[:180]
 
 
 def build_story_page(title, section, story_type, summary, body_html, updated_time):
@@ -439,7 +679,6 @@ def build_homepage_page(updated_time, at_a_glance_items, lead_story, story_cards
     </header>
 
     {feature_html}
-
     {lead_html}
 
     <section class="glance-section">
@@ -482,7 +721,13 @@ EDITORIAL RULES:
 - Markets & Economy should be treated as a serious pillar of the paper.
 - Sport should focus on significance, not celebrity noise.
 - Do not invent direct quotes.
-- Do not make up precise statistics that are not clearly supported by the source signals.
+- Do not make up precise statistics not clearly supported by the source signals.
+- Treat source metadata seriously.
+- Different regions and viewpoint groups may frame the same story differently.
+- Prioritise consensus facts first.
+- Mention framing differences only when meaningful.
+- Note where one regional bloc is emphasising a different risk, cause, or consequence.
+- Do not automatically treat all viewpoints as equally well supported.
 - Story types allowed: News, Analysis, Explainer, Profile, Feature.
 
 Return valid JSON only in exactly this structure:
@@ -567,18 +812,10 @@ ADDITIONAL RULES:
 - Avoid generic filler.
 """
 
-def build_body_prompt(title, section, story_type, summary, signals, is_lead=False):
-    paragraph_count = 10 if is_lead else 6
-    relevant_signals = [s for s in signals if s["section"] == section]
 
-    if section == "Markets & Economy":
-        relevant_signals = [s for s in signals if s["section"] in ["Business", "World", "UK"]]
-
-    if len(relevant_signals) < 8:
-        relevant_signals = signals[:20]
-
+def build_lead_body_prompt(title, section, story_type, summary, signals):
     return f"""
-You are writing a full article for The Daily Brief.
+You are writing the lead article for The Daily Brief.
 
 ARTICLE DETAILS:
 - Section: {section}
@@ -586,22 +823,21 @@ ARTICLE DETAILS:
 - Headline: {title}
 - Standfirst: {summary}
 
-RELEVANT SOURCE SIGNALS:
-{json.dumps(relevant_signals[:20], ensure_ascii=False, indent=2)}
+SOURCE SIGNALS:
+{json.dumps(signals[:40], ensure_ascii=False, indent=2)}
 
 EDITORIAL RULES:
 - British English.
-- Serious, calm, restrained newspaper style.
-- Global-first perspective where relevant.
-- Explain why the story matters.
-- Include context, competing interpretations where relevant, and likely next developments.
-- Distinguish evidence from claims.
+- Serious, calm, restrained newspaper prose.
+- Global-first outlook.
+- Explain what happened, why it matters, who is affected, what is uncertain, and what may happen next.
+- Use the source metadata intelligently.
+- If different regions frame the same story differently, explain that carefully.
+- Prioritise consensus facts first.
+- Distinguish claims from supported facts.
 - Do not invent direct quotes.
-- Do not make up precise figures not supported by the signals.
-- Do not mention that you are using source signals.
-- Do not write in a robotic or generic AI style.
-- Avoid filler.
-- Use proper newspaper prose.
+- Do not make up unsupported precise figures.
+- Avoid robotic phrasing.
 
 Return valid JSON only in exactly this structure:
 
@@ -612,14 +848,76 @@ Return valid JSON only in exactly this structure:
     "Paragraph 3",
     "Paragraph 4",
     "Paragraph 5",
-    "Paragraph 6"
+    "Paragraph 6",
+    "Paragraph 7",
+    "Paragraph 8",
+    "Paragraph 9",
+    "Paragraph 10"
+  ]
+}}
+"""
+
+
+def build_section_body_prompt(section, stories, signals):
+    section_signals = [s for s in signals if s["section"] == section]
+
+    if section == "Markets & Economy":
+        section_signals = [
+            s for s in signals
+            if s["section"] in ["Business", "World", "UK"]
+        ]
+
+    if len(section_signals) < 20:
+        section_signals = signals[:60]
+
+    return f"""
+You are writing a full section package for The Daily Brief.
+
+SECTION:
+{section}
+
+STORIES TO WRITE:
+{json.dumps(stories, ensure_ascii=False, indent=2)}
+
+SOURCE SIGNALS:
+{json.dumps(section_signals[:60], ensure_ascii=False, indent=2)}
+
+EDITORIAL RULES:
+- British English.
+- Serious, calm, restrained newspaper prose.
+- Global-first where relevant.
+- Use the region and viewpoint metadata intelligently.
+- Prioritise consensus facts first.
+- Where regional framings differ, mention that only if it genuinely helps the reader.
+- Do not force artificial balance.
+- Distinguish evidence from claims.
+- No invented quotes.
+- No unsupported precise figures.
+- Avoid generic filler.
+- Every paragraph must add something new.
+
+Return valid JSON only in exactly this structure:
+
+{{
+  "stories": [
+    {{
+      "title": "Story 1 title exactly as provided",
+      "body": [
+        "Paragraph 1",
+        "Paragraph 2",
+        "Paragraph 3",
+        "Paragraph 4",
+        "Paragraph 5",
+        "Paragraph 6"
+      ]
+    }}
   ]
 }}
 
 ADDITIONAL RULES:
-- Return exactly {paragraph_count} paragraphs.
-- Each paragraph should add something new.
-- The article should feel substantial, coherent, and properly structured.
+- Return one body for every story provided.
+- Match titles exactly.
+- Return exactly 6 paragraphs per story.
 """
 
 
@@ -627,11 +925,10 @@ signals = get_source_signals()
 
 outline_response = client.responses.create(
     model="gpt-5",
-    input=build_outline_prompt(signals)
+    input=build_outline_prompt(signals),
 )
 
-outline_raw = outline_response.output_text.strip()
-outline_data = json.loads(outline_raw)
+outline_data = json.loads(outline_response.output_text.strip())
 
 now = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
 
@@ -648,14 +945,13 @@ lead_summary = lead_story["summary"].strip()
 
 lead_body_response = client.responses.create(
     model="gpt-5",
-    input=build_body_prompt(
+    input=build_lead_body_prompt(
         title=lead_title,
         section=lead_section,
         story_type=lead_type,
         summary=lead_summary,
         signals=signals,
-        is_lead=True,
-    )
+    ),
 )
 
 lead_body_data = json.loads(lead_body_response.output_text.strip())
@@ -691,29 +987,47 @@ for section_name in SECTION_ORDER:
         raw_stories.append({
             "story_type": "News",
             "title": f"{section_name} update {len(raw_stories) + 1}",
-            "summary": f"A significant development in {section_name.lower()} with wider consequences under review."
+            "summary": f"A significant development in {section_name.lower()} with wider consequences under review.",
         })
 
+    normalised_section_stories = []
     for raw_story in raw_stories:
-        title = raw_story["title"].strip()
-        story_type = coerce_story_type(raw_story["story_type"].strip())
-        summary = raw_story["summary"].strip()
-        section = section_name
+        normalised_section_stories.append({
+            "story_type": coerce_story_type(raw_story["story_type"].strip()),
+            "title": raw_story["title"].strip(),
+            "summary": raw_story["summary"].strip(),
+        })
 
-        body_response = client.responses.create(
-            model="gpt-5",
-            input=build_body_prompt(
-                title=title,
-                section=section,
-                story_type=story_type,
-                summary=summary,
-                signals=signals,
-                is_lead=False,
-            )
-        )
+    section_body_response = client.responses.create(
+        model="gpt-5",
+        input=build_section_body_prompt(
+            section=section_name,
+            stories=normalised_section_stories,
+            signals=signals,
+        ),
+    )
 
-        body_data = json.loads(body_response.output_text.strip())
-        body = [p.strip() for p in body_data["body"] if p.strip()]
+    section_body_data = json.loads(section_body_response.output_text.strip())
+    bodies_by_title = {
+        item["title"].strip(): [p.strip() for p in item.get("body", []) if p.strip()]
+        for item in section_body_data.get("stories", [])
+    }
+
+    for story in normalised_section_stories:
+        title = story["title"]
+        story_type = story["story_type"]
+        summary = story["summary"]
+        body = bodies_by_title.get(title, [])
+
+        if not body:
+            body = [
+                f"{title} has moved onto the Daily Brief agenda because it appears to carry wider significance than a routine headline alone would suggest.",
+                f"In {section_name.lower()}, the immediate facts are only part of the story, and the broader context helps explain why this development matters now.",
+                "Different outlets may emphasise different causes, risks, or consequences, but the central task is to separate agreed facts from interpretation.",
+                "For readers, the key question is not only what has happened, but what constraints, incentives, and possible next steps now shape the situation.",
+                "That in turn makes this a story worth following beyond the first burst of headlines, particularly if the practical or strategic consequences widen.",
+                "The next phase will depend on whether the present signals harden into a durable shift, fade into a short-lived episode, or trigger further responses."
+            ]
 
         base_slug = slugify(title)
         unique_slug = ensure_unique_slug(base_slug, used_slugs)
@@ -723,7 +1037,7 @@ for section_name in SECTION_ORDER:
         body_html = "\n".join(f"<p>{html.escape(p)}</p>" for p in body)
         story_page = build_story_page(
             title=title,
-            section=section,
+            section=section_name,
             story_type=story_type,
             summary=summary,
             body_html=body_html,
@@ -734,7 +1048,7 @@ for section_name in SECTION_ORDER:
             f.write(story_page)
 
         story_cards.append({
-            "section": section,
+            "section": section_name,
             "story_type": story_type,
             "title": title,
             "summary": summary,
@@ -742,7 +1056,7 @@ for section_name in SECTION_ORDER:
         })
 
         saved_stories.append({
-            "section": section,
+            "section": section_name,
             "story_type": story_type,
             "title": title,
             "summary": summary,
