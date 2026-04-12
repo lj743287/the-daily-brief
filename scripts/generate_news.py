@@ -193,24 +193,6 @@ SOURCE_CONFIG = [
     },
 ]
 
-SPORT_PRIORITY_TERMS = [
-    "cardiff city",
-    "cardiff",
-    "bluebirds",
-    "tampa bay buccaneers",
-    "buccaneers",
-    "bucs",
-    "nfl",
-    "football transfer",
-    "transfer",
-    "window",
-    "cycling",
-    "tour de france",
-    "giro",
-    "vuelta",
-    "tour of britain",
-]
-
 OUTLINE_SCHEMA = {
     "type": "object",
     "additionalProperties": False,
@@ -1115,11 +1097,13 @@ def build_homepage_page(updated_time, at_a_glance_items, lead_story, story_cards
       border-bottom: 1px solid #ddd;
     }}
     .lead-image, .section-lead-image {{
-      width: 100%;
+      width: auto;
+      max-width: 320px;
       height: auto;
       display: block;
       margin-bottom: 14px;
       background: #e9e3d7;
+      border: 1px solid #ddd6c7;
     }}
     .lead-meta,
     .story-meta {{
@@ -1344,22 +1328,6 @@ def get_signal_maps(signals):
     return signal_by_key, signal_by_title
 
 
-def get_tier_for_story(is_main_lead, is_section_lead):
-    if is_main_lead:
-        return "lead"
-    if is_section_lead:
-        return "section_lead"
-    return "standard"
-
-
-def get_paragraph_count_for_tier(tier):
-    if tier == "lead":
-        return 6
-    if tier == "section_lead":
-        return 4
-    return 3
-
-
 signals = get_source_signals()
 signal_by_key, signal_by_title = get_signal_maps(signals)
 
@@ -1447,7 +1415,7 @@ if not lead_body:
         "story_type": lead_type,
         "summary": lead_summary,
         "source_signal_title": lead_source_signal_title,
-        "paragraph_count": get_paragraph_count_for_tier("lead"),
+        "paragraph_count": 6,
     })
 
 for story in planned_stories:
@@ -1456,14 +1424,13 @@ for story in planned_stories:
     story["previous"] = previous_story
     body = previous_story.get("body", []) if previous_story else []
     if not body:
-        tier = get_tier_for_story(False, story["is_section_lead"])
         stories_to_generate.append({
             "title": story["title"],
             "section": story["section"],
             "story_type": story["story_type"],
             "summary": story["summary"],
             "source_signal_title": story["source_signal_title"],
-            "paragraph_count": get_paragraph_count_for_tier(tier),
+            "paragraph_count": 4 if story["is_section_lead"] else 3,
         })
 
 generated_bodies = {}
@@ -1546,9 +1513,8 @@ for story in planned_stories:
     body = body or generated_bodies.get(title, [])
 
     if not body:
-        tier = get_tier_for_story(False, story["is_section_lead"])
-        paragraphs = get_paragraph_count_for_tier(tier)
-        body = [summary] * paragraphs
+        paragraph_count = 4 if story["is_section_lead"] else 3
+        body = [summary] * paragraph_count
 
     body_html = "\n".join(f"<p>{html.escape(p)}</p>" for p in body)
     story_page = build_story_page(
