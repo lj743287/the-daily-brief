@@ -14,10 +14,21 @@ BASE_DIR = Path(".")
 DATA_DIR = BASE_DIR / "data"
 STORIES_DIR = BASE_DIR / "stories"
 
-feeds = [
-    "https://feeds.bbci.co.uk/news/world/rss.xml",
-    "https://feeds.bbci.co.uk/news/business/rss.xml",
-    "https://feeds.bbci.co.uk/news/uk/rss.xml"
+FEEDS = {
+    "World": "https://feeds.bbci.co.uk/news/world/rss.xml",
+    "Business": "https://feeds.bbci.co.uk/news/business/rss.xml",
+    "UK": "https://feeds.bbci.co.uk/news/uk/rss.xml",
+    "Science & Technology": "https://feeds.bbci.co.uk/news/technology/rss.xml",
+    "Sport": "https://feeds.bbci.co.uk/sport/rss.xml"
+}
+
+SECTION_ORDER = [
+    "World",
+    "Business",
+    "UK",
+    "Markets",
+    "Science & Technology",
+    "Sport"
 ]
 
 def slugify(text):
@@ -27,15 +38,31 @@ def slugify(text):
     text = re.sub(r"-+", "-", text)
     return text[:80].strip("-") or "story"
 
-def get_headlines():
-    headlines = []
-    for url in feeds:
+def get_headline_signals():
+    signals = []
+    seen_titles = set()
+
+    for section_name, url in FEEDS.items():
         feed = feedparser.parse(url)
-        for entry in feed.entries[:6]:
+        for entry in feed.entries[:8]:
             title = entry.get("title", "").strip()
-            if title and title not in headlines:
-                headlines.append(title)
-    return headlines[:15]
+            summary = entry.get("summary", "").strip()
+            link = entry.get("link", "").strip()
+
+            if not title:
+                continue
+            if title in seen_titles:
+                continue
+
+            seen_titles.add(title)
+            signals.append({
+                "section": section_name,
+                "title": title,
+                "summary": re.sub(r"<[^>]+>", "", summary).strip(),
+                "link": link
+            })
+
+    return signals[:30]
 
 def load_feature():
     feature_file = DATA_DIR / "feature.json"
@@ -44,7 +71,7 @@ def load_feature():
     with open(feature_file, "r", encoding="utf-8") as f:
         return json.load(f)
 
-def build_story_page(title, body_html, updated_time):
+def build_story_page(title, section, summary, body_html, updated_time):
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -85,17 +112,6 @@ def build_story_page(title, body_html, updated_time):
       color: #666;
       font-size: 0.95rem;
     }}
-    h2 {{
-      margin-top: 0;
-      margin-bottom: 16px;
-      font-size: 2.2rem;
-      line-height: 1.2;
-    }}
-    p {{
-      font-size: 1.08rem;
-      line-height: 1.85;
-      margin: 0 0 16px 0;
-    }}
     .back {{
       display: inline-block;
       margin-bottom: 22px;
@@ -105,6 +121,31 @@ def build_story_page(title, body_html, updated_time):
     }}
     .back:hover {{
       text-decoration: underline;
+    }}
+    .section-label {{
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #666;
+      margin-bottom: 10px;
+    }}
+    h2 {{
+      margin-top: 0;
+      margin-bottom: 16px;
+      font-size: 2.4rem;
+      line-height: 1.15;
+    }}
+    .standfirst {{
+      font-size: 1.18rem;
+      line-height: 1.75;
+      color: #333;
+      margin-bottom: 28px;
+      font-style: italic;
+    }}
+    p {{
+      font-size: 1.08rem;
+      line-height: 1.9;
+      margin: 0 0 18px 0;
     }}
   </style>
 </head>
@@ -116,7 +157,9 @@ def build_story_page(title, body_html, updated_time):
     </header>
     <a class="back" href="../index.html">← Back to front page</a>
     <article>
+      <div class="section-label">{html.escape(section)}</div>
       <h2>{html.escape(title)}</h2>
+      <div class="standfirst">{html.escape(summary)}</div>
       {body_html}
     </article>
   </div>
@@ -127,15 +170,35 @@ def build_story_page(title, body_html, updated_time):
 def build_homepage_page(updated_time, at_a_glance_items, story_cards, feature):
     glance_html = "\n".join(f"<li>{html.escape(item)}</li>" for item in at_a_glance_items)
 
-    cards_html = "\n".join(
-        f"""
-        <article class="story-card">
-          <h3><a href="{card['url']}">{html.escape(card['title'])}</a></h3>
-          <p>{html.escape(card['summary'])}</p>
-        </article>
+    grouped = {section: [] for section in SECTION_ORDER}
+    for card in story_cards:
+        grouped.setdefault(card["section"], []).append(card)
+
+    sections_html_parts = []
+    for section in SECTION_ORDER:
+        cards = grouped.get(section, [])
+        if not cards:
+            continue
+
+        cards_html = "\n".join(
+            f"""
+            <article class="story-card">
+              <h3><a href="{card['url']}">{html.escape(card['title'])}</a></h3>
+              <p>{html.escape(card['summary'])}</p>
+            </article>
+            """
+            for card in cards
+        )
+
+        section_html = f"""
+        <section class="news-section">
+          <h2>{html.escape(section)}</h2>
+          {cards_html}
+        </section>
         """
-        for card in story_cards
-    )
+        sections_html_parts.append(section_html)
+
+    sections_html = "\n".join(sections_html_parts)
 
     feature_html = ""
     if feature:
@@ -161,7 +224,7 @@ def build_homepage_page(updated_time, at_a_glance_items, story_cards, feature):
       font-family: Georgia, "Times New Roman", serif;
     }}
     .page {{
-      max-width: 920px;
+      max-width: 980px;
       margin: 0 auto;
       background: #fffdf8;
       min-height: 100vh;
@@ -183,26 +246,9 @@ def build_homepage_page(updated_time, at_a_glance_items, story_cards, feature):
       color: #666;
       font-size: 0.95rem;
     }}
-    h2 {{
-      margin-top: 34px;
-      margin-bottom: 14px;
-      padding-top: 14px;
-      border-top: 1px solid #ddd;
-      font-size: 1.7rem;
-      line-height: 1.2;
-    }}
-    ul {{
-      margin: 0 0 20px 0;
-      padding-left: 22px;
-    }}
-    li {{
-      font-size: 1.05rem;
-      line-height: 1.7;
-      margin-bottom: 10px;
-    }}
     .feature-block {{
       margin-top: 18px;
-      margin-bottom: 30px;
+      margin-bottom: 34px;
       padding: 22px;
       background: #f8f3e8;
       border-left: 5px solid #111;
@@ -219,6 +265,7 @@ def build_homepage_page(updated_time, at_a_glance_items, story_cards, feature):
       padding: 0;
       border: 0;
       font-size: 2rem;
+      line-height: 1.2;
     }}
     .feature-block a {{
       color: #111;
@@ -232,6 +279,24 @@ def build_homepage_page(updated_time, at_a_glance_items, story_cards, feature):
       font-size: 1.08rem;
       line-height: 1.8;
       color: #333;
+    }}
+    .glance-section h2,
+    .news-section h2 {{
+      margin-top: 34px;
+      margin-bottom: 14px;
+      padding-top: 14px;
+      border-top: 1px solid #ddd;
+      font-size: 1.7rem;
+      line-height: 1.2;
+    }}
+    ul {{
+      margin: 0 0 20px 0;
+      padding-left: 22px;
+    }}
+    li {{
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 10px;
     }}
     .story-card {{
       padding: 0 0 20px 0;
@@ -254,6 +319,7 @@ def build_homepage_page(updated_time, at_a_glance_items, story_cards, feature):
       margin: 0;
       font-size: 1.05rem;
       line-height: 1.8;
+      color: #222;
     }}
   </style>
 </head>
@@ -266,31 +332,28 @@ def build_homepage_page(updated_time, at_a_glance_items, story_cards, feature):
 
     {feature_html}
 
-    <section>
+    <section class="glance-section">
       <h2>At a Glance</h2>
       <ul>
         {glance_html}
       </ul>
     </section>
 
-    <section>
-      <h2>Front Page</h2>
-      {cards_html}
-    </section>
+    {sections_html}
   </div>
 </body>
 </html>
 """
 
-headlines = get_headlines()
+signals = get_headline_signals()
 
 prompt = f"""
 You are writing The Daily Brief homepage package for a premium newspaper.
 
-Use these latest headlines as source signals:
-{headlines}
+Use these latest source signals:
+{json.dumps(signals, ensure_ascii=False, indent=2)}
 
-Return valid JSON only in this exact structure:
+Return valid JSON only in exactly this structure:
 
 {{
   "at_a_glance": [
@@ -299,47 +362,99 @@ Return valid JSON only in this exact structure:
     "bullet 3",
     "bullet 4",
     "bullet 5",
-    "bullet 6"
+    "bullet 6",
+    "bullet 7",
+    "bullet 8"
   ],
   "stories": [
     {{
+      "section": "World",
       "title": "Story title",
-      "summary": "A short homepage summary in 2 to 3 sentences.",
+      "summary": "A strong homepage standfirst in 3 to 4 sentences.",
       "body": [
         "Paragraph 1",
         "Paragraph 2",
         "Paragraph 3",
-        "Paragraph 4"
+        "Paragraph 4",
+        "Paragraph 5",
+        "Paragraph 6",
+        "Paragraph 7",
+        "Paragraph 8"
       ]
     }},
     {{
+      "section": "Business",
       "title": "Story title",
-      "summary": "A short homepage summary in 2 to 3 sentences.",
+      "summary": "A strong homepage standfirst in 3 to 4 sentences.",
       "body": [
         "Paragraph 1",
         "Paragraph 2",
         "Paragraph 3",
-        "Paragraph 4"
+        "Paragraph 4",
+        "Paragraph 5",
+        "Paragraph 6",
+        "Paragraph 7",
+        "Paragraph 8"
       ]
     }},
     {{
+      "section": "UK",
       "title": "Story title",
-      "summary": "A short homepage summary in 2 to 3 sentences.",
+      "summary": "A strong homepage standfirst in 3 to 4 sentences.",
       "body": [
         "Paragraph 1",
         "Paragraph 2",
         "Paragraph 3",
-        "Paragraph 4"
+        "Paragraph 4",
+        "Paragraph 5",
+        "Paragraph 6",
+        "Paragraph 7",
+        "Paragraph 8"
       ]
     }},
     {{
+      "section": "Markets",
       "title": "Story title",
-      "summary": "A short homepage summary in 2 to 3 sentences.",
+      "summary": "A strong homepage standfirst in 3 to 4 sentences.",
       "body": [
         "Paragraph 1",
         "Paragraph 2",
         "Paragraph 3",
-        "Paragraph 4"
+        "Paragraph 4",
+        "Paragraph 5",
+        "Paragraph 6",
+        "Paragraph 7",
+        "Paragraph 8"
+      ]
+    }},
+    {{
+      "section": "Science & Technology",
+      "title": "Story title",
+      "summary": "A strong homepage standfirst in 3 to 4 sentences.",
+      "body": [
+        "Paragraph 1",
+        "Paragraph 2",
+        "Paragraph 3",
+        "Paragraph 4",
+        "Paragraph 5",
+        "Paragraph 6",
+        "Paragraph 7",
+        "Paragraph 8"
+      ]
+    }},
+    {{
+      "section": "Sport",
+      "title": "Story title",
+      "summary": "A strong homepage standfirst in 3 to 4 sentences.",
+      "body": [
+        "Paragraph 1",
+        "Paragraph 2",
+        "Paragraph 3",
+        "Paragraph 4",
+        "Paragraph 5",
+        "Paragraph 6",
+        "Paragraph 7",
+        "Paragraph 8"
       ]
     }}
   ]
@@ -347,11 +462,16 @@ Return valid JSON only in this exact structure:
 
 Rules:
 - British English
-- Professional tone
+- Professional, serious newspaper tone
 - No markdown
 - No code fences
-- No extra text outside the JSON
-- Make the stories feel like serious newspaper copy
+- No text outside the JSON
+- Produce exactly 6 stories
+- Use one story for each of these sections: World, Business, UK, Markets, Science & Technology, Sport
+- The homepage summaries must feel weighty and informative, not breezy
+- The body paragraphs should feel like proper reported copy with context, stakes, nuance and consequences
+- Do not invent direct quotes
+- If source signals are thin for Markets, infer the biggest market-moving theme from the wider business and world signals
 """
 
 response = client.responses.create(
@@ -372,27 +492,33 @@ saved_stories = []
 
 for story in data["stories"]:
     title = story["title"].strip()
+    section = story["section"].strip()
+    summary = story["summary"].strip()
+    body = [p.strip() for p in story["body"] if p.strip()]
+
     slug = slugify(title)
     filename = f"{slug}.html"
     story_url = f"stories/{filename}"
 
-    body_html = "\n".join(f"<p>{html.escape(p)}</p>" for p in story["body"])
-    story_page = build_story_page(title, body_html, now)
+    body_html = "\n".join(f"<p>{html.escape(p)}</p>" for p in body)
+    story_page = build_story_page(title, section, summary, body_html, now)
 
     with open(STORIES_DIR / filename, "w", encoding="utf-8") as f:
         f.write(story_page)
 
     story_cards.append({
+        "section": section,
         "title": title,
-        "summary": story["summary"].strip(),
+        "summary": summary,
         "url": story_url
     })
 
     saved_stories.append({
+        "section": section,
         "title": title,
-        "summary": story["summary"].strip(),
+        "summary": summary,
         "url": story_url,
-        "body": story["body"]
+        "body": body
     })
 
 feature = load_feature()
@@ -410,7 +536,7 @@ with open("index.html", "w", encoding="utf-8") as f:
 with open(DATA_DIR / "stories.json", "w", encoding="utf-8") as f:
     json.dump({
         "last_updated": now,
-        "headlines": headlines,
+        "source_signals": signals,
         "at_a_glance": data["at_a_glance"],
         "stories": saved_stories
     }, f, indent=2)
