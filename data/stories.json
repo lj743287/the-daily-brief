@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-12 22:52:29",
+  "last_updated": "2026-04-12 23:23:58",
   "model_used": "gpt-5.4-mini",
   "source_signals": [
     {
@@ -11,7 +11,7 @@
       "summary": "The conflict is now a test of wills - Iran\u2019s capacity to absorb strikes versus Trump\u2019s tolerance for the war's costs.",
       "link": "https://www.bbc.com/news/articles/c8dl5mly2rzo?at_medium=RSS&at_campaign=rss",
       "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/7a79/live/1fe25240-369c-11f1-a64d-95608276955d.jpg",
-      "published_at": "2026-04-12 18:48:57 UTC"
+      "published_at": "2026-04-12 22:57:22 UTC"
     },
     {
       "source": "BBC",
@@ -40,6 +40,17 @@
       "region": "UK",
       "viewpoint_group": "uk_public_broadcaster",
       "section": "World",
+      "title": "Pope prioritises world's fastest-growing Catholic region in major Africa tour",
+      "summary": "Leo XIV wants the world's attention on a continent vital to the Church's future, an aide says.",
+      "link": "https://www.bbc.com/news/articles/cvg0jyx4qq7o?at_medium=RSS&at_campaign=rss",
+      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/d5de/live/3400fcd0-3503-11f1-879d-1b2f5c3919b8.png",
+      "published_at": "2026-04-12 23:08:40 UTC"
+    },
+    {
+      "source": "BBC",
+      "region": "UK",
+      "viewpoint_group": "uk_public_broadcaster",
+      "section": "World",
       "title": "Ukraine and Russia accuse each other of hundreds of ceasefire violations",
       "summary": "Ukrainian President Volodymyr Zelensky says his nation's forces would respond \"symmetrically\" to Russian attacks.",
       "link": "https://www.bbc.com/news/articles/cz78y73v830o?at_medium=RSS&at_campaign=rss",
@@ -51,22 +62,22 @@
       "region": "UK",
       "viewpoint_group": "uk_public_broadcaster",
       "section": "World",
-      "title": "At least 30 feared dead in crush at Haitian tourist site",
-      "summary": "The incident occurred at a \"tourist event attended by many young people\", Haiti's prime minister says.",
-      "link": "https://www.bbc.com/news/articles/cwyj8d49wzxo?at_medium=RSS&at_campaign=rss",
-      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/97d6/live/002434b0-3637-11f1-ab65-2568beff0c21.jpg",
-      "published_at": "2026-04-12 07:22:28 UTC"
+      "title": "What is a naval blockade and how would it work in Strait of Hormuz?",
+      "summary": "Donald Trump says that the US is going to start blockading the Strait of Hormuz. What does this mean in practice?",
+      "link": "https://www.bbc.com/news/articles/c5yv6xr6me3o?at_medium=RSS&at_campaign=rss",
+      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/c1bb/live/05ad5410-368d-11f1-8c7c-3d26c824719f.jpg",
+      "published_at": "2026-04-12 21:31:29 UTC"
     },
     {
       "source": "BBC",
       "region": "UK",
       "viewpoint_group": "uk_public_broadcaster",
       "section": "World",
-      "title": "What is a naval blockade and how would it work in Strait of Hormuz?",
-      "summary": "Donald Trump says that the US is going to start blockading the Strait of Hormuz. What does this mean in practice?",
-      "link": "https://www.bbc.com/news/articles/c5yv6xr6me3o?at_medium=RSS&at_campaign=rss",
-      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/c1bb/live/05ad5410-368d-11f1-8c7c-3d26c824719f.jpg",
-      "published_at": "2026-04-12 21:31:29 UTC"
+      "title": "At least 30 feared dead in crush at Haitian tourist site",
+      "summary": "The incident occurred at a \"tourist event attended by many young people\", Haiti's prime minister says.",
+      "link": "https://www.bbc.com/news/articles/cwyj8d49wzxo?at_medium=RSS&at_campaign=rss",
+      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/97d6/live/002434b0-3637-11f1-ab65-2568beff0c21.jpg",
+      "published_at": "2026-04-12 07:22:28 UTC"
     },
     {
       "source": "BBC",
@@ -215,17 +226,6 @@
       "source": "BBC",
       "region": "UK",
       "viewpoint_group": "uk_public_broadcaster",
-      "section": "World",
-      "title": "'We need real peace': Ukrainians have little faith in Easter truce",
-      "summary": "Easter festivities are muted in Kharkiv as Ukrainians expect fighting to flare up again after a weekend truce.",
-      "link": "https://www.bbc.com/news/articles/cj0vn30574no?at_medium=RSS&at_campaign=rss",
-      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/9267/live/5ce7f850-3617-11f1-879d-1b2f5c3919b8.jpg",
-      "published_at": "2026-04-12 09:38:31 UTC"
-    },
-    {
-      "source": "BBC",
-      "region": "UK",
-      "viewpoint_group": "uk_public_broadcaster",
       "section": "Business",
       "title": "Faisal Islam: Why the government is relaxed about Chinese car imports",
       "summary": "The UK government believes the rise of China's car industry could be good for UK consumers and industry.",
@@ -282,11 +282,11 @@
       "region": "UK",
       "viewpoint_group": "uk_public_broadcaster",
       "section": "Business",
-      "title": "'Every drop of water counts': Fear for the future of Argentina's glaciers",
-      "summary": "A controversial law to ease protections for the glaciers has passed, opening the doors for mining.",
-      "link": "https://www.bbc.com/news/articles/cj947487wzyo?at_medium=RSS&at_campaign=rss",
-      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/8f89/live/236979f0-34eb-11f1-879d-1b2f5c3919b8.jpg",
-      "published_at": "2026-04-11 02:02:56 UTC"
+      "title": "The Dutch village at risk of being demolished",
+      "summary": "Moerdijk has been earmarked for removal, to make way for a vast electricity substation.",
+      "link": "https://www.bbc.com/news/articles/cm2k8v027k0o?at_medium=RSS&at_campaign=rss",
+      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/06e8/live/0f638c80-33dc-11f1-8606-05fe34b06e1b.jpg",
+      "published_at": "2026-04-12 23:20:52 UTC"
     },
     {
       "source": "BBC",
@@ -810,6 +810,28 @@
       "region": "UK",
       "viewpoint_group": "uk_public_broadcaster",
       "section": "Sport",
+      "title": "McIlroy proves he really is free with back-to-back Masters win",
+      "summary": "Moments after winning the Masters last year, Rory McIlroy said it would be transformative. He has proved that by defending the title at Augusta National.",
+      "link": "https://www.bbc.com/sport/golf/articles/cgqkgvxgv2xo?at_medium=RSS&at_campaign=rss",
+      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/eb7a/live/5c0f70d0-6139-11ee-ac8c-9d18dbc280ea.png",
+      "published_at": "2026-04-12 23:16:50 UTC"
+    },
+    {
+      "source": "BBC Sport",
+      "region": "UK",
+      "viewpoint_group": "uk_public_broadcaster",
+      "section": "Sport",
+      "title": "'A rare repeat winner' - McIlroy retains Masters title",
+      "summary": "Rory McIlroy holds his nerve to sink the putt that means he wins the Masters for the second year in a row by one shot from Scottie Scheffler.",
+      "link": "https://www.bbc.com/sport/golf/videos/cz0egdx3mjko?at_medium=RSS&at_campaign=rss",
+      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/1ddf/live/60373730-36c3-11f1-8606-05fe34b06e1b.jpg",
+      "published_at": "2026-04-12 23:05:14 UTC"
+    },
+    {
+      "source": "BBC Sport",
+      "region": "UK",
+      "viewpoint_group": "uk_public_broadcaster",
+      "section": "Sport",
       "title": "Man City smell blood - why Arsenal should fear title rivals",
       "summary": "Manchester City capitalise on Arsenal's latest slip-up in style - and now Pep Guardiola's side must be feared as the Premier League title race hots up.",
       "link": "https://www.bbc.com/sport/football/articles/cpd58x923jyo?at_medium=RSS&at_campaign=rss",
@@ -826,17 +848,6 @@
       "link": "https://www.bbc.com/sport/football/articles/ce8lnjd7n4po?at_medium=RSS&at_campaign=rss",
       "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/7826/live/993a11b0-3696-11f1-879d-1b2f5c3919b8.jpg",
       "published_at": "2026-04-12 17:35:37 UTC"
-    },
-    {
-      "source": "BBC Sport",
-      "region": "UK",
-      "viewpoint_group": "uk_public_broadcaster",
-      "section": "Sport",
-      "title": "McIlroy sinks back-to-back birdies to take three-shot lead",
-      "summary": "Rory McIlroy birdies the 12th and 13th holes to move to 13-under par and extend his lead in the final round of The Masters at Augusta National Golf Club.",
-      "link": "https://www.bbc.com/sport/golf/videos/cgld5xrz2nro?at_medium=RSS&at_campaign=rss",
-      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/9dd9/live/cd4d2cc0-36ba-11f1-879d-1b2f5c3919b8.jpg",
-      "published_at": "2026-04-12 22:02:24 UTC"
     },
     {
       "source": "BBC Sport",
@@ -975,44 +986,33 @@
       "region": "UK",
       "viewpoint_group": "uk_public_broadcaster",
       "section": "Sport",
+      "title": "How relentless Manchester City punished Chelsea",
+      "summary": "Match of the Day pundits Ben Foster and Pat Nevin praise Manchester City's second-half performance as they overpower Chelsea to secure a 3-0 away win at Stamford Bridge.",
+      "link": "https://www.bbc.com/sport/football/videos/cy71j5xvpk2o?at_medium=RSS&at_campaign=rss",
+      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/e6bc/live/7e37b6f0-36bf-11f1-879d-1b2f5c3919b8.jpg",
+      "published_at": "2026-04-12 22:55:44 UTC"
+    },
+    {
+      "source": "BBC Sport",
+      "region": "UK",
+      "viewpoint_group": "uk_public_broadcaster",
+      "section": "Sport",
+      "title": "McIlroy sinks back-to-back birdies to take three-shot lead",
+      "summary": "Rory McIlroy birdies the 12th and 13th holes to move to 13-under par and extend his lead in the final round of The Masters at Augusta National Golf Club.",
+      "link": "https://www.bbc.com/sport/golf/videos/cgld5xrz2nro?at_medium=RSS&at_campaign=rss",
+      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/9dd9/live/cd4d2cc0-36ba-11f1-879d-1b2f5c3919b8.jpg",
+      "published_at": "2026-04-12 22:02:24 UTC"
+    },
+    {
+      "source": "BBC Sport",
+      "region": "UK",
+      "viewpoint_group": "uk_public_broadcaster",
+      "section": "Sport",
       "title": "Trio of birdies send Rose to the top of the leaderboard",
       "summary": "Justin Rose hits three birdies in a row to move up from fourth to the top of the leaderboard in the final round of The Masters at Augusta National Golf Club.",
       "link": "https://www.bbc.com/sport/golf/videos/cdj7mll1kx7o?at_medium=RSS&at_campaign=rss",
       "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/4b96/live/9ea8feb0-36b2-11f1-9d5c-8ba507d7dbde.jpg",
       "published_at": "2026-04-12 20:56:21 UTC"
-    },
-    {
-      "source": "BBC Sport",
-      "region": "UK",
-      "viewpoint_group": "uk_public_broadcaster",
-      "section": "Sport",
-      "title": "Tottenham players don't need a coach - De Zerbi",
-      "summary": "Tottenham manager Roberto De Zerbi says he needs to be a \"big brother\" and \"father\" figure to his players after their 1-0 defeat at Sunderland in his first game in charge leaves his side in the bottom three of the Premier League.",
-      "link": "https://www.bbc.com/sport/football/videos/cz78gw8yv0ro?at_medium=RSS&at_campaign=rss",
-      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/c6e3/live/6f9d3830-3689-11f1-8606-05fe34b06e1b.jpg",
-      "published_at": "2026-04-12 16:13:15 UTC"
-    },
-    {
-      "source": "BBC Sport",
-      "region": "UK",
-      "viewpoint_group": "uk_public_broadcaster",
-      "section": "Sport",
-      "title": "'Disaster' as McIlroy double bogeys the fourth",
-      "summary": "Overnight joint leader Rory McIlory struggles with his putter on the fourth hole and ends with a double bogey to gift the lead to Cam Young on the final day of the 2026 Masters at Augusta.",
-      "link": "https://www.bbc.com/sport/golf/videos/ckgr1dxgkg6o?at_medium=RSS&at_campaign=rss",
-      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/4a06/live/542671c0-36a7-11f1-8606-05fe34b06e1b.jpg",
-      "published_at": "2026-04-12 19:43:08 UTC"
-    },
-    {
-      "source": "BBC Sport",
-      "region": "UK",
-      "viewpoint_group": "uk_public_broadcaster",
-      "section": "Sport",
-      "title": "Title race over if Man City don't beat Arsenal - Guardiola",
-      "summary": "Manchester City manager Pep Guardiola praises Nico O'Reilly in their 3-0 win over Chelsea but says their Premier League title challenge will be over next Sunday if they fail to beat \"extraordinary\" Arsenal.",
-      "link": "https://www.bbc.com/sport/football/videos/c87w5xqqzz5o?at_medium=RSS&at_campaign=rss",
-      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/42ef/live/d353a0a0-369b-11f1-9d5c-8ba507d7dbde.jpg",
-      "published_at": "2026-04-12 18:47:06 UTC"
     },
     {
       "source": "The Guardian",
@@ -1185,10 +1185,10 @@
       "viewpoint_group": "uk_liberal_broadsheet",
       "section": "World",
       "title": "Australia news live: Albanese says Australia \u2018hasn\u2019t been asked\u2019 to help blockade strait of Hormuz; Labor defends fuel security ads",
-      "summary": "Prime minister says he wants negotiations between US and Iran to resume amid \u2018massive global economic impact\u2019. Follow today\u2019s news live Get our breaking news email , free app or daily news podcast The child abuse prevention service is operated by Jesuit Social Services , which has run a trial scheme since 2022. It will now be able to expand its coverage as a result of Commonwealth funding, and do so permanently. \u201cChild sexual abuse is one of the most significant issues facing Australia, with one in three girls and one in five boys having been the victims of child sexual abuse. The prevalence of online offending has only intensified this issue and the need for evidence-based approaches to prevention,\u201d Stop It Now! general manager Georgia Naldrett said. We know that it\u2019s really important to work with people offending or at risk of offending, so we can intervene earlier, and ultimately keep children safe. Our experience delivering the pilot program since 2022, supported by independent evaluation, shows that this approach helps callers take meaningful action to reduce harm and keep children safe. Continue reading...",
+      "summary": "Prime minister says he wants negotiations between US and Iran to resume amid \u2018massive global economic impact\u2019. Follow today\u2019s news live Get our breaking news email , free app or daily news podcast Government to fund ads for helpline on pornography websites The child abuse prevention service is operated by Jesuit Social Services , which has run a trial scheme since 2022. It will now be able to expand its coverage as a result of commonwealth funding, and do so permanently. We know that it\u2019s really important to work with people offending or at risk of offending, so we can intervene earlier, and ultimately keep children safe. Our experience delivering the pilot program since 2022, supported by independent evaluation, shows that this approach helps callers take meaningful action to reduce harm and keep children safe. Continue reading...",
       "link": "https://www.theguardian.com/australia-news/live/2026/apr/13/australia-news-live-anthony-albanese-prime-minister-fuel-supply-diesel-oil-cost-of-living-inflation-budget-ntwnfb",
       "thumbnail_url": "https://i.guim.co.uk/img/media/c321ce38ee6290b8141d8987c728824391404d08/871_0_6880_5504/master/6880.jpg?width=140&quality=85&auto=format&fit=max&s=f3937b7a89e4af21dc92164e8a834ac1",
-      "published_at": "2026-04-12 22:49:18 UTC"
+      "published_at": "2026-04-12 23:18:14 UTC"
     },
     {
       "source": "The Guardian",
@@ -1360,11 +1360,11 @@
       "region": "UK",
       "viewpoint_group": "uk_liberal_broadsheet",
       "section": "Business",
-      "title": "\u2018There\u2019s a lot of desperation\u2019: skilled older workers turn to AI training to stay afloat",
-      "summary": "They have degrees, expertise and years of experience \u2013 but can\u2019t find work. For many Americans, AI training has become a last refuge in a brutal job market When Patrick Ciriello lost his job and couldn\u2019t find work for nearly a year, his family\u2019s foundation crumbled. \u201cYou hear about people who hit rock bottom,\u201d Ciriello told the Guardian. \u201cWell, I was there.\u201d Continue reading...",
-      "link": "https://www.theguardian.com/technology/ng-interactive/2026/apr/07/ai-training-work-jobs",
-      "thumbnail_url": "https://i.guim.co.uk/img/media/c86732103befa771bc4f5f584f1fd247d6cabf4f/1312_244_5359_4288/master/5359.jpg?width=140&quality=85&auto=format&fit=max&s=8561d5ae88f12ae4e2309453c706dc9c",
-      "published_at": "2026-04-07 12:00:46 UTC"
+      "title": "DC\u2019s highly qualified workers can\u2019t find jobs: \u2018What is happening?\u2019",
+      "summary": "Washington DC has the highest unemployment rate in the US Alicia Contreras was in Tunisia, working as the deputy country representative for Libya for USAID, when she received the news: she was fired. The Trump administration had ceased the cooperation agency\u2019s operations and terminated most overseas staff. What she didn\u2019t expect back then was that after a double major, an MBA and 17 years of experience as a public servant, she wouldn\u2019t be able to find a job back at home. Contreras moved back to the Washington DC area last September and immediately started her job search. She looked for positions in both the public and private sectors, in-person, hybrid and remote. She focused her search mostly on the US capital city and its two nearby states, Maryland and Virginia, because of her family commitments: she has two children, ages three and six. Six months later, none of her close to 100 applications have been successful. Continue reading...",
+      "link": "https://www.theguardian.com/us-news/2026/apr/07/washington-dc-highly-qualified-workers-unemployment",
+      "thumbnail_url": "https://i.guim.co.uk/img/media/b750a9c3f88af9efb500f93f5120fa16cd2a9b4e/530_254_3015_2412/master/3015.jpg?width=140&quality=85&auto=format&fit=max&s=c4d1f584e9c8e67344690a975186f01e",
+      "published_at": "2026-04-07 11:00:46 UTC"
     },
     {
       "source": "The Guardian",
@@ -1459,6 +1459,17 @@
       "region": "UK",
       "viewpoint_group": "uk_liberal_broadsheet",
       "section": "UK",
+      "title": "Thousands of unpaid carers to face DWP repayment demands during overhaul",
+      "summary": "Ministers admit carer\u2019s allowance penalties will continue while review of more than 200,000 cases is carried out Thousands of unpaid carers will continue to be hit with hefty and potentially unfair benefit repayment demands, it has emerged, as a government initiative gets under way to fix welfare injustices that have drawn comparison to the Post Office scandal. Ministers will on Monday launch an audit of more than 200,000 historical carer\u2019s allowance benefit cases, with an estimated 25,000 carers issued with unlawful overpayments since 2015 likely to see their repayment debts cancelled or reduced as a result. Continue reading...",
+      "link": "https://www.theguardian.com/society/2026/apr/13/unpaid-carers-allowance-dwp-benefit-repayment-demands",
+      "thumbnail_url": "https://i.guim.co.uk/img/media/6b9c392d2d31f1487100ecba8577d7103f6f9179/1283_815_2467_1974/master/2467.jpg?width=140&quality=85&auto=format&fit=max&s=8af70f914a250add577cf8930e7767b3",
+      "published_at": "2026-04-12 23:01:29 UTC"
+    },
+    {
+      "source": "The Guardian",
+      "region": "UK",
+      "viewpoint_group": "uk_liberal_broadsheet",
+      "section": "UK",
       "title": "Fried nuggets and steamed sponges off menu in school food overhaul in England",
       "summary": "Campaigners welcome first update of school food standards in 13 years, which aims to help lower obesity rates The government is to announce an overhaul to school food standards in England that will lead to calorific classics such as fish and chips and steamed sponges being banned. The new rules of the first major update to school food standards in 13 years will apply from September. They are part of efforts to lower the rates of childhood obesity, with data for 2024 released by the NHS in January showing that 24% of nursery and primary school children were overweight or living with obesity. Continue reading...",
       "link": "https://www.theguardian.com/education/2026/apr/12/school-food-overhaul-england-fried-nuggets-steamed-sponges",
@@ -1519,17 +1530,6 @@
       "link": "https://www.theguardian.com/politics/2026/apr/12/voting-populist-parties-local-elections-nhs-risk-wes-streeting",
       "thumbnail_url": "https://i.guim.co.uk/img/media/5148d9412155ec2e6d9027ab48bf344310041e6e/1128_2_3631_2905/master/3631.jpg?width=140&quality=85&auto=format&fit=max&s=6d9dae080bbe81921baa9e4bc2128377",
       "published_at": "2026-04-12 15:55:42 UTC"
-    },
-    {
-      "source": "The Guardian",
-      "region": "UK",
-      "viewpoint_group": "uk_liberal_broadsheet",
-      "section": "UK",
-      "title": "Man charged with murder of Finbar Sullivan in Primrose Hill",
-      "summary": "Oliuwadamilola Ogunyankinnu due to appear in court on Monday over fatal stabbing in north London A man has been charged with murder after the death of 21-year-old Finbar Sullivan, who was stabbed to death in Primrose Hill. The Metropolitan police said Oliuwadamilola Ogunyankinnu, 27, of Southbury Road in Enfield, had been charged with murder on Sunday and was due to appear at Stratford magistrates court on Monday. Continue reading...",
-      "link": "https://www.theguardian.com/uk-news/2026/apr/12/man-charged-with-of-finbar-sullivan-in-london",
-      "thumbnail_url": "https://i.guim.co.uk/img/media/ee0bff3ce6ed57fdc3483ca134ae09272cb2c02e/0_0_2500_2000/master/2500.jpg?width=140&quality=85&auto=format&fit=max&s=85cc97e96d3c61c2807f3163517259c1",
-      "published_at": "2026-04-12 15:07:37 UTC"
     },
     {
       "source": "The Guardian",
@@ -1877,11 +1877,11 @@
       "region": "UK",
       "viewpoint_group": "uk_liberal_broadsheet",
       "section": "Sport",
-      "title": "The Masters 2026: McIlroy, Scheffler, Rose and Young in contention in thrilling final round \u2013 live",
+      "title": "The Masters 2026: Rory McIlroy retains Masters title after thrilling final round \u2013 live",
       "summary": "\ufe0f Updates from the final round at Augusta National \ufe0f Ewan Murray\u2019s day-three report | Leaderboard | Mail Scott \ufe0f Garc\u00eda warned after breaking club in meltdown Marco Penge was making a good fist of his Masters debut. Especially as the 27-year-old from Crawley, the reigning Spanish Open champion, took a triple-bogey eight at the 2nd on Thursday. Not the most auspicious start to his Augusta National career, but he limited the first-round damage to 76, then shot 69 and 71. Sadly his final round isn\u2019t going so well, and he\u2019s just dumped two balls in the water at the iconic par-three 12th, the first spinning back off the bank, the second from the dropzone not even getting over to dry land before dunking into the drink. A quadruple-bogey seven. He isn\u2019t the first, he won\u2019t be the last, and things could have gotten a whole lot worse, just ask the Towering Inferno \u2026 Bogey at the last for Jon Rahm. A diminuendo end to a fine round of 68. You have to wonder how much buyer\u2019s remorse Rahmbo has for joining the LIV tour: the 2021 US Open champion and 2023 Masters winner has never been the same player since. Still, his recovery this week from an opening round of 78 will give him a little succour. He ends his week at +1, one shy of the current clubhouse leader Gary Woodland. Continue reading...",
       "link": "https://www.theguardian.com/sport/live/2026/apr/12/golf-the-masters-2026-final-round-live",
-      "thumbnail_url": "https://i.guim.co.uk/img/media/f6fc56bc124f1b93d13c028fc80cd03383fbb4ea/138_140_2776_2220/master/2776.jpg?width=140&quality=85&auto=format&fit=max&s=9197e8b1019cf2ff67adf4a4a85c9f69",
-      "published_at": "2026-04-12 22:45:41 UTC"
+      "thumbnail_url": "https://i.guim.co.uk/img/media/f8463b15b4d4a7995cadbf06823f405af3d184be/0_494_2354_1883/master/2354.jpg?width=140&quality=85&auto=format&fit=max&s=a6d577ebea379076664aecb1327e9522",
+      "published_at": "2026-04-12 23:11:28 UTC"
     },
     {
       "source": "The Guardian",
@@ -1984,56 +1984,54 @@
     }
   ],
   "at_a_glance": [
-    "Trump\u2019s blockade threat over the Strait of Hormuz raises the risk of wider conflict and a fresh energy shock.",
-    "Markets are bracing for another week of oil-led inflation pressure after US-Iran talks collapsed.",
-    "Nigeria faces mounting scrutiny after reports of a deadly air strike on a market.",
-    "Manchester City\u2019s victory over Chelsea has tightened the Premier League title race, while Tottenham sink further into trouble.",
-    "The Masters remains finely poised, with McIlroy and Rose in contention late on Sunday.",
-    "Asha Bhosle\u2019s death marks the loss of one of Indian popular music\u2019s most enduring voices.",
-    "The UK government is under pressure on Iran, Chagos, asylum hotels and the politics of May\u2019s elections.",
-    "Technology coverage is dominated by AI governance, platform risk and the growing public backlash to digital power."
+    "Trump\u2019s blockade threat pushes the Iran crisis into a more dangerous phase, with shipping, energy markets and diplomacy all under strain.",
+    "Russia and Ukraine continue to trade accusations over ceasefire breaches, underscoring how fragile any pause in the war remains.",
+    "Rory McIlroy\u2019s back-to-back Masters win and Wout van Aert\u2019s Paris-Roubaix victory dominate the sport page, alongside Premier League fallout.",
+    "Markets remain focused on the Strait of Hormuz, with fuel costs, inflation and airline supply worries spreading beyond the Middle East.",
+    "UK politics is being reshaped by the Iran crisis, with questions over defence posture, EU alignment and asylum policy moving up the agenda.",
+    "Technology coverage is centred on AI regulation, content safety and the politics of the industry rather than gadgets.",
+    "The edition should lead with the global strategic consequences of Iran, not domestic noise.",
+    "Sport should stay narrow: cycling, golf and major football state-of-play only."
   ],
   "lead_story": {
     "section": "World",
     "story_type": "Analysis",
     "title": "Trump's blockade threat raises risks and leaves predicaments unchanged",
-    "summary": "The threat to block the Strait of Hormuz sharpens the standoff with Iran and raises the chance of miscalculation, while leaving the underlying strategic problems unresolved. For energy markets, allies and shipping, the immediate question is how much real enforcement capability Washington can bring to bear without widening the conflict.",
+    "summary": "Donald Trump\u2019s blockade threat has raised the stakes in the Iran crisis without resolving its core problem: how to prevent further escalation while keeping energy routes open. The confrontation is now a test of wills between Iran\u2019s ability to absorb pressure and Trump\u2019s willingness to bear the costs of a wider conflict.",
     "url": "stories/trumps-blockade-threat-raises-risks-and-leaves-predicaments-unchanged.html",
     "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/7a79/live/1fe25240-369c-11f1-a64d-95608276955d.jpg",
-    "published_at": "2026-04-12 18:48:57 UTC",
+    "published_at": "2026-04-12 22:57:22 UTC",
     "source_signal_title": "Trump's blockade threat raises risks and leaves predicaments unchanged",
     "source_name": "BBC",
     "source_link": "https://www.bbc.com/news/articles/c8dl5mly2rzo?at_medium=RSS&at_campaign=rss",
     "body": [
-      "Donald Trump\u2019s threat to blockade the Strait of Hormuz has sharpened a confrontation with Iran that was already edging into dangerous territory. It also underscores a familiar problem in Middle East crises: the rhetoric can move faster than the capability to carry it out.",
-      "The strait is one of the world\u2019s most important shipping lanes, carrying a large share of global oil and gas exports. Even a partial disruption can jolt energy markets, raise insurance costs and force shipping companies to rethink routes and risk management.",
-      "But a blockade is not a simple switch Washington can turn on. It would depend on sustained naval enforcement, cooperation from allies and an ability to prevent retaliation against ships, bases and regional infrastructure \u2014 all without triggering a broader war.",
-      "That is why the threat carries as much danger as leverage. If US forces begin intercepting vessels or pressing tanker operators to comply, the chances of miscalculation rise sharply, especially with Iranian commanders under pressure to show they can still respond.",
-      "For allies in Europe and Asia, the immediate concern is less about the legality of the language than the practical consequences of escalation. Energy-importing economies are already exposed to higher prices, and shipping firms have little appetite for a standoff that could turn the strait into a live conflict zone.",
-      "Yet the underlying strategic dilemmas remain unchanged. Washington still wants to pressure Tehran without being dragged into a wider regional war; Iran still wants to use disruption as leverage without inviting overwhelming retaliation. The threat may harden positions, but it does not resolve the conflict that produced them."
+      "The conflict has become a test of endurance, with Iran\u2019s capacity to absorb pressure matched against Donald Trump\u2019s tolerance for the wider costs of disruption and retaliation.",
+      "That makes the Strait of Hormuz the central pressure point. Any effort to block or tightly police the passage would threaten tanker traffic, unsettle energy markets and heighten the risk of direct clashes with US and allied forces.",
+      "But the basic strategic problem has not changed: neither side has a clean off-ramp. Iran can cause trouble, but it cannot do so without risking heavier punishment; Trump can escalate, but not without exposing the US and its partners to economic shock.",
+      "So the confrontation continues as brinkmanship rather than settlement. The question now is not only who blinks first, but who is prepared to pay the price if the standoff runs on."
     ]
   },
   "section_features": [
     {
-      "label": "Feature",
+      "label": "World feature",
       "section": "World",
       "title": "After Iran talks falter, the big question is what happens next?",
-      "standfirst": "A sober look at the diplomatic deadlock, the fragility of the ceasefire and the choices now facing Washington, Tehran and their allies.",
-      "url": "features/2026-04-12-feature-after-iran-talks-falter-the-big-question-is-what-happens-next.html"
+      "standfirst": "A sober look at the diplomatic deadlock, the risks to shipping and the choices now facing Washington, Tehran and their allies.",
+      "url": "features/2026-04-12-world-feature-after-iran-talks-falter-the-big-question-is-what-happens-next.html"
     },
     {
-      "label": "Feature",
+      "label": "Markets feature",
       "section": "Markets & Economy",
       "title": "Collapse of US-Iran talks heightens fears of prolonged energy shock",
-      "standfirst": "Oil, borrowing costs and transport supply chains remain vulnerable as traders assess whether the Strait of Hormuz disruption becomes a longer shock.",
-      "url": "features/2026-04-12-feature-collapse-of-us-iran-talks-heightens-fears-of-prolonged-energy-shock.html"
+      "standfirst": "Oil, freight, inflation and borrowing costs are all moving in the same direction as the Strait of Hormuz remains the market\u2019s central worry.",
+      "url": "features/2026-04-12-markets-feature-collapse-of-us-iran-talks-heightens-fears-of-prolonged-energy-sh.html"
     },
     {
-      "label": "Feature",
+      "label": "Technology feature",
       "section": "Science & Technology",
-      "title": "\u2018Too powerful for the public\u2019: Inside Anthropic\u2019s bid to win the AI publicity war",
-      "standfirst": "The company\u2019s claim that it withheld a model for safety reasons is also a battle for credibility, influence and regulation in the AI sector.",
-      "url": "features/2026-04-12-feature-too-powerful-for-the-public-inside-anthropics-bid-to-win-the-ai-publicit.html"
+      "title": "\u2018Irresponsible failure\u2019: Google, Meta, Snap and Microsoft slam EU over child sexual abuse law lapse",
+      "standfirst": "Big tech, child safety campaigners and privacy advocates are again in conflict after a legal gap opened over platform scanning powers.",
+      "url": "features/2026-04-12-technology-feature-irresponsible-failure-google-meta-snap-and-microsoft-slam-eu.html"
     }
   ],
   "section_story_counts": {
@@ -2047,131 +2045,27 @@
   "stories": [
     {
       "section": "World",
-      "story_type": "News",
-      "title": "Civilians feared killed after reports of air strike on Nigerian market",
-      "summary": "Reports of a strike on a village market in Nigeria raise urgent questions about civilian harm, targeting and accountability as the military has not addressed the allegations.",
-      "url": "stories/civilians-feared-killed-after-reports-of-air-strike-on-nigerian-market.html",
-      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/e63c/live/97aefd80-3699-11f1-8606-05fe34b06e1b.jpg",
-      "published_at": "2026-04-12 18:11:04 UTC",
-      "source_signal_title": "Civilians feared killed after reports of air strike on Nigerian market",
-      "source_name": "BBC",
-      "source_link": "https://www.bbc.com/news/articles/cgk021z3ejpo?at_medium=RSS&at_campaign=rss",
-      "body": [
-        "Reports from north-east Nigeria say an air strike hit a village market while the military was targeting suspected militants nearby. If confirmed, it would add to long-running concerns about the protection of civilians in Nigeria\u2019s conflict zone.",
-        "The Nigerian Air Force has not publicly addressed the allegations. That silence has left open basic questions about what was struck, whether there was a targeting error and how many people may have been killed or injured.",
-        "The area has for years seen operations against Islamist insurgents, especially in Borno and neighbouring states, where civilian populations often live close to front lines and military targets. In such settings, distinguishing militants from civilians can be difficult \u2014 but that does not remove the obligation to account for harm.",
-        "What matters now is whether the authorities investigate openly and explain what happened. Without that, claims of collateral damage risk deepening distrust among communities that already fear both insurgents and the security forces sent to fight them."
-      ]
-    },
-    {
-      "section": "World",
       "story_type": "Analysis",
-      "title": "After Iran talks falter, the big question is what happens next?",
-      "summary": "The failure of the talks leaves the ceasefire fragile and the diplomatic track uncertain, with major implications for regional security and global energy flows.",
-      "url": "stories/after-iran-talks-falter-the-big-question-is-what-happens-next.html",
-      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/5ad6/live/d13b6fd0-366b-11f1-879d-1b2f5c3919b8.jpg",
-      "published_at": "2026-04-12 12:48:01 UTC",
-      "source_signal_title": "After Iran talks falter, the big question is what happens next?",
+      "title": "Trump's blockade threat raises risks and leaves predicaments unchanged",
+      "summary": "The conflict has become a test of endurance: Iran\u2019s capacity to absorb pressure versus Trump\u2019s tolerance for the wider costs of disruption, retaliation and brinkmanship.",
+      "url": "stories/trumps-blockade-threat-raises-risks-and-leaves-predicaments-unchanged-2.html",
+      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/7a79/live/1fe25240-369c-11f1-a64d-95608276955d.jpg",
+      "published_at": "2026-04-12 22:57:22 UTC",
+      "source_signal_title": "Trump's blockade threat raises risks and leaves predicaments unchanged",
       "source_name": "BBC",
-      "source_link": "https://www.bbc.com/news/articles/c5y943x2g8qo?at_medium=RSS&at_campaign=rss",
+      "source_link": "https://www.bbc.com/news/articles/c8dl5mly2rzo?at_medium=RSS&at_campaign=rss",
       "body": [
-        "The collapse of the talks leaves the ceasefire and the wider diplomatic track in an uncertain place. Twenty-one hours of discussions were not enough to bridge the hostility that has defined relations between Iran and the US for decades.",
-        "That matters because the alternative to diplomacy is not stability but drift: a tense stand-off in which both sides test the limits of the ceasefire while trying to avoid being blamed for breaking it. In the region, that is often how fragile truces begin to unravel.",
-        "What happens next will depend on whether the US and Iran can keep channels open, and whether regional actors can restrain their allies and proxies. The risks are not only military but economic, because any renewed disruption around the Gulf quickly feeds into oil markets and shipping."
+        "The conflict has become a test of endurance, with Iran\u2019s capacity to absorb pressure matched against Donald Trump\u2019s tolerance for the wider costs of disruption and retaliation.",
+        "That makes the Strait of Hormuz the central pressure point. Any effort to block or tightly police the passage would threaten tanker traffic, unsettle energy markets and heighten the risk of direct clashes with US and allied forces.",
+        "But the basic strategic problem has not changed: neither side has a clean off-ramp. Iran can cause trouble, but it cannot do so without risking heavier punishment; Trump can escalate, but not without exposing the US and its partners to economic shock.",
+        "So the confrontation continues as brinkmanship rather than settlement. The question now is not only who blinks first, but who is prepared to pay the price if the standoff runs on."
       ]
     },
     {
       "section": "World",
-      "story_type": "News",
-      "title": "Ukraine and Russia accuse each other of hundreds of ceasefire violations",
-      "summary": "Both sides say the other has breached the truce repeatedly, underscoring how quickly pauses in fighting can unravel and how little trust remains.",
-      "url": "stories/ukraine-and-russia-accuse-each-other-of-hundreds-of-ceasefire-violations.html",
-      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/f639/live/b14356e0-3650-11f1-9d5c-8ba507d7dbde.jpg",
-      "published_at": "2026-04-12 11:53:37 UTC",
-      "source_signal_title": "Ukraine and Russia accuse each other of hundreds of ceasefire violations",
-      "source_name": "BBC",
-      "source_link": "https://www.bbc.com/news/articles/cz78y73v830o?at_medium=RSS&at_campaign=rss",
-      "body": [
-        "Ukraine and Russia have accused each other of carrying out hundreds of ceasefire violations, underlining how unstable even a short pause in fighting can be. The claims point to a truce that is already under severe strain.",
-        "President Volodymyr Zelensky said Ukrainian forces would respond symmetrically to Russian attacks, signalling that Kyiv does not intend to absorb fire without replying. Moscow, for its part, has also accused Ukraine of breaking the terms of the arrangement.",
-        "The dispute reflects a deeper problem: neither side trusts the other to observe limits on the battlefield, and each sees the truce as a tactical move rather than the start of a political settlement. If that remains the case, any pause may be brief and contested."
-      ]
-    },
-    {
-      "section": "World",
-      "story_type": "News",
-      "title": "At least 30 feared dead in crush at Haitian tourist site",
-      "summary": "A crush at a tourist event in Haiti has left dozens feared dead, adding to the country\u2019s long running security and public safety crisis.",
-      "url": "stories/at-least-30-feared-dead-in-crush-at-haitian-tourist-site.html",
-      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/97d6/live/002434b0-3637-11f1-ab65-2568beff0c21.jpg",
-      "published_at": "2026-04-12 07:22:28 UTC",
-      "source_signal_title": "At least 30 feared dead in crush at Haitian tourist site",
-      "source_name": "BBC",
-      "source_link": "https://www.bbc.com/news/articles/cwyj8d49wzxo?at_medium=RSS&at_campaign=rss",
-      "body": [
-        "At least 30 people are feared dead after a crush at a tourist event in Haiti, according to officials. The incident adds another layer to the country\u2019s prolonged crisis of insecurity, weak public services and limited emergency response capacity.",
-        "The crush is believed to have occurred at a popular site crowded with young people, making the toll especially alarming. In a country where large gatherings can quickly become dangerous, any mass-casualty incident raises immediate questions about crowd control and rescue arrangements.",
-        "Haiti has endured years of gang violence, political instability and repeated humanitarian shocks. That wider backdrop matters because it leaves little margin for managing accidents of this kind, and it means families often face delayed medical care and limited official information after disasters.",
-        "Authorities have yet to provide a full account of the cause, the number of injured or whether the site was properly secured. Those answers will be crucial both for accountability and for understanding whether this was a tragic accident or a preventable failure."
-      ]
-    },
-    {
-      "section": "World",
-      "story_type": "News",
-      "title": "Djibouti's president wins unprecedented sixth term with 97.8% of vote",
-      "summary": "Ismail Omar Guelleh has extended his long rule in an election boycotted by the main opposition, again highlighting the country\u2019s constrained political competition.",
-      "url": "stories/djiboutis-president-wins-unprecedented-sixth-term-with-978-of-vote.html",
-      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/6da6/live/7bd834e0-3587-11f1-879d-1b2f5c3919b8.jpg",
-      "published_at": "2026-04-11 09:42:39 UTC",
-      "source_signal_title": "Djibouti's president wins unprecedented sixth term with 97.8% of vote",
-      "source_name": "BBC",
-      "source_link": "https://www.bbc.com/news/articles/cgj0wg423n6o?at_medium=RSS&at_campaign=rss",
-      "body": [
-        "Djibouti\u2019s president, Ismail Omar Guelleh, has won an unprecedented sixth term after an election in which the main opposition was absent. The scale of the result reflects not only his long hold on power but also the weakness of political competition in the small Horn of Africa state.",
-        "Guelleh has now extended a rule that began more than two decades ago, while critics have long argued that opposition space in Djibouti is tightly constrained. Boycotts and limited contestation have made recent elections more about ratifying the status quo than testing it.",
-        "Djibouti matters well beyond its borders because of its strategic location at the mouth of the Red Sea and its role as a host to foreign military bases. That gives the country outsized geopolitical significance, even as domestic politics remain tightly managed."
-      ]
-    },
-    {
-      "section": "World",
-      "story_type": "News",
-      "title": "Artemis crew home safely after completing historic mission to the Moon",
-      "summary": "Four astronauts have returned safely after a nine-day mission that took them farther from Earth than any humans have been, marking a major milestone for the programme.",
-      "url": "stories/artemis-crew-home-safely-after-completing-historic-mission-to-the-moon.html",
-      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/8295/live/86e6de50-357c-11f1-9d5c-8ba507d7dbde.jpg",
-      "published_at": "2026-04-11 07:53:46 UTC",
-      "source_signal_title": "Artemis crew home safely after completing historic mission to the Moon",
-      "source_name": "BBC",
-      "source_link": "https://www.bbc.com/news/articles/cr51z54d5rpo?at_medium=RSS&at_campaign=rss",
-      "body": [
-        "Four astronauts have returned safely to Earth after completing a nine-day Artemis mission that took them farther from the planet than any humans have yet travelled. Their splashdown marks a milestone for a programme that is intended to take NASA back to the Moon on a sustained basis.",
-        "The mission matters not only for its symbolism but also for the testing it gives NASA on spacecraft systems, crew safety and deep-space operations. Each successful flight helps build confidence for longer journeys that will eventually be needed if the agency is to reach the lunar surface and beyond.",
-        "For now, the safe return is the immediate achievement. The next question is how quickly the programme can move from demonstration to routine missions, and whether funding, technical setbacks or shifting political priorities could slow that path."
-      ]
-    },
-    {
-      "section": "Markets & Economy",
-      "story_type": "Analysis",
-      "title": "Collapse of US-Iran talks heightens fears of prolonged energy shock",
-      "summary": "With tankers stranded and oil prices exposed to geopolitical risk, investors are weighing whether the disruption turns into a broader hit to growth and inflation.",
-      "url": "stories/collapse-of-us-iran-talks-heightens-fears-of-prolonged-energy-shock.html",
-      "thumbnail_url": "https://i.guim.co.uk/img/media/d6f4ebd4205f92b2c73b2daf92add650a87c9324/2292_0_3708_2966/master/3708.jpg?width=140&quality=85&auto=format&fit=max&s=39c71e24ca2e380a69d551747edfa114",
-      "published_at": "2026-04-12 13:07:45 UTC",
-      "source_signal_title": "Collapse of US-Iran talks heightens fears of prolonged energy shock",
-      "source_name": "The Guardian",
-      "source_link": "https://www.theguardian.com/business/2026/apr/12/collapse-us-iran-talks-energy-shock-oil-prices",
-      "body": [
-        "The collapse of US-Iran talks has left markets facing a longer period of energy risk rather than a clean diplomatic reset. With tanker traffic constrained and the Strait of Hormuz exposed to further disruption, investors are having to price in the possibility of a sustained shock.",
-        "That is important because oil and gas remain central to inflation expectations, shipping costs and consumer confidence. Even when prices ease from immediate peaks, the effects of a geopolitical disruption can take months to work through the system.",
-        "The bigger worry for markets is that the disruption becomes structural rather than temporary. If shipping companies avoid the strait, insurers raise premiums and governments struggle to restore confidence, the impact could spread beyond energy into growth forecasts and corporate earnings.",
-        "For now, traders are trying to separate a temporary spike from a broader macro hit. The problem is that the politics remain unsettled, which means the market damage could outlast any single flare-up in the conflict."
-      ]
-    },
-    {
-      "section": "Markets & Economy",
       "story_type": "Explainer",
       "title": "What is a naval blockade and how would it work in Strait of Hormuz?",
-      "summary": "A practical guide to how a blockade might be attempted, what it could and could not achieve, and why the legal and military risks are so high.",
+      "summary": "A practical guide to what a blockade would mean, how it might be enforced and why the Strait of Hormuz matters so much to global trade and energy flows.",
       "url": "stories/what-is-a-naval-blockade-and-how-would-it-work-in-strait-of-hormuz.html",
       "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/c1bb/live/05ad5410-368d-11f1-8c7c-3d26c824719f.jpg",
       "published_at": "2026-04-12 21:31:29 UTC",
@@ -2179,16 +2073,102 @@
       "source_name": "BBC",
       "source_link": "https://www.bbc.com/news/articles/c5yv6xr6me3o?at_medium=RSS&at_campaign=rss",
       "body": [
-        "A naval blockade is an attempt to stop ships entering or leaving an area by using naval forces, surveillance and the threat of interception. In the Strait of Hormuz, that would mean trying to control one of the world\u2019s most sensitive choke points, where even brief disruption can affect global trade.",
-        "In practice, a blockade would be difficult to enforce. Warships would need to identify vessels, issue warnings, stop or search them and deal with any challenge from Iran or from other states whose ships are caught up in the operation. That raises the risk of rapid escalation.",
-        "The legal position is also contested, especially if no broader international mandate exists. Even if Washington argued the move was necessary for security, allies, tanker operators and coastal states would need to decide whether to treat it as legitimate or as an unlawful act of coercion."
+        "A naval blockade is an attempt to stop ships entering or leaving a defined area, usually by using warships, aircraft and surveillance to enforce restrictions at sea. In practice, that means identifying, warning, inspecting or turning back vessels, and being ready to use force against those that do not comply.",
+        "In the Strait of Hormuz, that would be especially serious because the waterway is one of the world\u2019s most important energy chokepoints. Large volumes of oil and liquefied gas move through it every day, so even a partial interruption can quickly affect prices, insurance costs and supply chains far beyond the Gulf.",
+        "Whether a blockade could be sustained would depend on naval capacity, international law, and whether other powers treated it as legitimate. Even short of a formal blockade, the mere threat can deter shipping, slow traffic and create the kind of uncertainty that markets and governments are already trying to avoid."
+      ]
+    },
+    {
+      "section": "World",
+      "story_type": "News",
+      "title": "Ukraine and Russia accuse each other of hundreds of ceasefire violations",
+      "summary": "Moscow and Kyiv are again trading accusations over ceasefire breaches, a reminder that the battlefield truce remains unstable and vulnerable to collapse.",
+      "url": "stories/ukraine-and-russia-accuse-each-other-of-hundreds-of-ceasefire-violations.html",
+      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/f639/live/b14356e0-3650-11f1-9d5c-8ba507d7dbde.jpg",
+      "published_at": "2026-04-12 11:53:37 UTC",
+      "source_signal_title": "Ukraine and Russia accuse each other of hundreds of ceasefire violations",
+      "source_name": "BBC",
+      "source_link": "https://www.bbc.com/news/articles/cz78y73v830o?at_medium=RSS&at_campaign=rss",
+      "body": [
+        "Ukraine and Russia have again accused each other of hundreds of ceasefire violations, underscoring how fragile the battlefield truce remains despite repeated diplomatic attempts to stabilise it.",
+        "President Volodymyr Zelensky said Ukrainian forces would respond symmetrically to Russian attacks, signalling that Kyiv does not intend to absorb repeated breaches without reply. Moscow, for its part, has made similar accusations, continuing the pattern of mutual blame that has complicated efforts to keep the truce intact.",
+        "The exchanges matter because even limited violations can unravel agreements that are already under strain. Each side is trying to show it will not be outmanoeuvred, but that makes the risk of escalation higher if commanders on the ground decide restraint is no longer in their interests."
+      ]
+    },
+    {
+      "section": "World",
+      "story_type": "News",
+      "title": "Pope prioritises world's fastest-growing Catholic region in major Africa tour",
+      "summary": "Pope Leo XIV\u2019s Africa visit is being framed as an effort to focus attention on a continent central to the Church\u2019s future, influence and demographic growth.",
+      "url": "stories/pope-prioritises-worlds-fastest-growing-catholic-region-in-major-africa-tour.html",
+      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/d5de/live/3400fcd0-3503-11f1-879d-1b2f5c3919b8.png",
+      "published_at": "2026-04-12 23:08:40 UTC",
+      "source_signal_title": "Pope prioritises world's fastest-growing Catholic region in major Africa tour",
+      "source_name": "BBC",
+      "source_link": "https://www.bbc.com/news/articles/cvg0jyx4qq7o?at_medium=RSS&at_campaign=rss",
+      "body": [
+        "Pope Leo XIV has begun an Africa tour that is being framed inside the Vatican as a sign of where the Catholic Church\u2019s future lies: in a continent where the faith is growing quickly and where the Church still has major political and social influence.",
+        "The visit is intended to put Africa at the centre of global Catholic attention, not only as a mission field but as a source of new clergy, new congregations and new leadership for a changing Church. In many countries, Catholic institutions remain important providers of education, health care and civic authority.",
+        "The trip also comes at a moment when the Vatican is trying to balance pastoral diplomacy with the realities of conflict, poverty and demographic change across the continent. What the pope says about peace, governance and social justice will be watched closely both in Africa and beyond."
+      ]
+    },
+    {
+      "section": "World",
+      "story_type": "News",
+      "title": "Civilians feared killed after reports of air strike on Nigerian market",
+      "summary": "Reports of an air strike on a village market in north-east Nigeria have renewed scrutiny of the military campaign against militants and the risk to civilians.",
+      "url": "stories/civilians-feared-killed-after-reports-of-air-strike-on-nigerian-market.html",
+      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/e63c/live/97aefd80-3699-11f1-8606-05fe34b06e1b.jpg",
+      "published_at": "2026-04-12 18:11:04 UTC",
+      "source_signal_title": "Civilians feared killed after reports of air strike on Nigerian market",
+      "source_name": "BBC",
+      "source_link": "https://www.bbc.com/news/articles/cgk021z3ejpo?at_medium=RSS&at_campaign=rss",
+      "body": [
+        "Reports from north-east Nigeria say a village market was hit during an air strike aimed at militants, with civilians feared among the dead. The Nigerian Air Force has not yet addressed the claims, leaving the scale of the incident uncertain.",
+        "If confirmed, the episode would add to long-running concern about the civilian toll of Nigeria\u2019s campaign against Islamist insurgents in the north-east. Military operations there have repeatedly raised questions about intelligence failures, targeting and accountability.",
+        "The immediate issue is whether the strike hit a market by mistake and how many people were caught in it. But the wider significance is broader still: every such incident deepens mistrust between local communities and the security forces, while also complicating the fight against armed groups that continue to exploit instability."
+      ]
+    },
+    {
+      "section": "World",
+      "story_type": "News",
+      "title": "At least 30 feared dead in crush at Haitian tourist site",
+      "summary": "A crush at a tourist event in Haiti has left many feared dead, highlighting the country\u2019s continuing instability and weak public safety capacity.",
+      "url": "stories/at-least-30-feared-dead-in-crush-at-haitian-tourist-site.html",
+      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/97d6/live/002434b0-3637-11f1-ab65-2568beff0c21.jpg",
+      "published_at": "2026-04-12 07:22:28 UTC",
+      "source_signal_title": "At least 30 feared dead in crush at Haitian tourist site",
+      "source_name": "BBC",
+      "source_link": "https://www.bbc.com/news/articles/cwyj8d49wzxo?at_medium=RSS&at_campaign=rss",
+      "body": [
+        "At least 30 people are feared dead after a crush at a tourist event in Haiti, according to reports and the country\u2019s prime minister. The incident took place at a popular site attended by many young people, underlining how quickly large gatherings can turn deadly in a country with weak public safety capacity.",
+        "Haiti has endured years of political crisis, gang violence and fragile state institutions, and that context matters when emergencies unfold. Even routine crowd control, rescue and medical response can be difficult to organise quickly.",
+        "The immediate priorities are to establish the final death toll, identify those injured or missing, and understand how the crush began. But the broader picture is already clear: public events in Haiti remain vulnerable to catastrophe because basic protections that would reduce the danger elsewhere are often absent."
+      ]
+    },
+    {
+      "section": "Markets & Economy",
+      "story_type": "Analysis",
+      "title": "Collapse of US-Iran talks heightens fears of prolonged energy shock",
+      "summary": "With tanker traffic constrained and investors braced for more disruption, markets are pricing in a longer period of higher oil, gas and transport costs.",
+      "url": "stories/collapse-of-us-iran-talks-heightens-fears-of-prolonged-energy-shock.html",
+      "thumbnail_url": "https://i.guim.co.uk/img/media/d6f4ebd4205f92b2c73b2daf92add650a87c9324/2292_0_3708_2966/master/3708.jpg?width=140&quality=85&auto=format&fit=max&s=39c71e24ca2e380a69d551747edfa114",
+      "published_at": "2026-04-12 13:07:45 UTC",
+      "source_signal_title": "Collapse of US-Iran talks heightens fears of prolonged energy shock",
+      "source_name": "The Guardian",
+      "source_link": "https://www.theguardian.com/business/2026/apr/12/collapse-us-iran-talks-energy-shock-oil-prices",
+      "body": [
+        "The collapse of US-Iran talks has deepened fears that the energy shock caused by conflict in and around the Gulf may last longer than markets initially hoped. With tanker traffic still constrained, traders are increasingly assuming that disruption could persist rather than ease quickly.",
+        "That matters because oil, gas and shipping costs are already responding to the risk premium attached to the Strait of Hormuz. Even when cargoes continue moving, hesitation by shipowners, insurers and buyers can tighten supply and keep prices elevated.",
+        "The wider economy is exposed as well. Higher transport and fuel costs feed into food, aviation and manufacturing, while governments that had hoped for a quick de-escalation now face the prospect of a drawn-out period of instability in a critical energy corridor.",
+        "For investors, the key uncertainty is whether the disruption is temporary brinkmanship or the start of a more entrenched regional shock. The answer will determine how long energy and freight markets remain under pressure."
       ]
     },
     {
       "section": "Markets & Economy",
       "story_type": "News",
       "title": "Soaring pump prices drive US inflation to highest level in almost two years",
-      "summary": "Higher fuel costs linked to the Iran war have lifted US inflation, strengthening expectations that the shock is feeding through into the wider economy.",
+      "summary": "Higher fuel costs have fed through into the US inflation data, underlining how quickly the Iran conflict is transmitting into consumer prices.",
       "url": "stories/soaring-pump-prices-drive-us-inflation-to-highest-level-in-almost-two-years.html",
       "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/a376/live/e78465b0-34d8-11f1-9d5c-8ba507d7dbde.jpg",
       "published_at": "2026-04-10 16:20:58 UTC",
@@ -2196,16 +2176,16 @@
       "source_name": "BBC",
       "source_link": "https://www.bbc.com/news/articles/cde56g80xp5o?at_medium=RSS&at_campaign=rss",
       "body": [
-        "Higher fuel prices linked to the Iran conflict have pushed US inflation to its highest level in almost two years. The rise at the pump is feeding into the wider economy at a moment when households are already sensitive to the cost of living.",
-        "The immediate effect is straightforward: motorists pay more, transport costs rise and businesses that depend on fuel face tighter margins. Over time, that can feed through to food, travel and other everyday prices, making the inflation shock harder to dismiss as temporary.",
-        "The question for policymakers is whether this is a one-off energy spike or the start of a broader inflationary spell. If the strait remains constrained and oil prices stay elevated, the pressure on the Federal Reserve and the White House is likely to intensify."
+        "Rising pump prices have pushed US inflation to its highest level in almost two years, offering another sign of how quickly the Iran conflict is filtering into household costs.",
+        "The main transmission is fuel. As crude prices rise and refiners pass on higher costs, motorists feel the impact first, but the effect rarely stops there. Transport, food distribution and a range of consumer goods can all become more expensive if energy stays elevated.",
+        "That gives the dispute a domestic political dimension in the US as well as a global economic one. If fuel remains dear, it will complicate efforts to bring inflation down and may strengthen pressure on policymakers to avoid a prolonged confrontation in the Gulf."
       ]
     },
     {
       "section": "Markets & Economy",
       "story_type": "News",
       "title": "EU airline industry warns of fuel shortages if Strait of Hormuz stays closed",
-      "summary": "European airlines are warning that restricted access to jet fuel could begin to affect operations if shipping through the strait remains constrained.",
+      "summary": "Airlines are warning that prolonged disruption to Hormuz shipments could squeeze jet fuel supplies and raise the cost of travel.",
       "url": "stories/eu-airline-industry-warns-of-fuel-shortages-if-strait-of-hormuz-stays-closed.html",
       "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/ff5e/live/06b8a020-34f9-11f1-9d5c-8ba507d7dbde.jpg",
       "published_at": "2026-04-11 09:21:28 UTC",
@@ -2213,33 +2193,33 @@
       "source_name": "BBC",
       "source_link": "https://www.bbc.com/news/articles/c3w37ggp011o?at_medium=RSS&at_campaign=rss",
       "body": [
-        "European airlines are warning that restricted access to jet fuel could begin to hit operations if shipping through the Strait of Hormuz remains constrained. The concern is not just about price, but about availability and supply timing.",
-        "Airlines are among the industries most exposed to fuel disruptions because they rely on steady deliveries and relatively predictable costs. If refiners and shippers cannot move product freely from the Gulf, carriers may have to absorb higher prices or pass them on to passengers.",
-        "The warning is another sign that the conflict\u2019s effects are reaching well beyond the battlefield. Even where flights continue, prolonged fuel strain could force airlines to rethink schedules, routes and hedging strategies if the disruption persists."
+        "European airline groups are warning that prolonged disruption to shipments through the Strait of Hormuz could create fuel shortages and raise the cost of travel. Jet fuel supply is already a concern for carriers that rely on complex international refining and shipping networks.",
+        "The warning reflects how quickly an oil-and-gas shock in the Gulf can spread through aviation. Even when airlines are not directly buying crude from the region, they depend on fuel markets that are sensitive to any interruption in Middle Eastern exports.",
+        "If the strait remains constrained, carriers may face higher operating costs, tighter margins and pressure to pass some of that on to passengers. The bigger risk is that a regional security crisis becomes a broader travel and trade problem for Europe and beyond."
       ]
     },
     {
       "section": "Markets & Economy",
-      "story_type": "Explainer",
-      "title": "How many ships are crossing the Strait of Hormuz?",
-      "summary": "BBC Verify\u2019s analysis suggests only a few vessels are crossing, giving a sense of how severely traffic has been disrupted by the standoff.",
-      "url": "stories/how-many-ships-are-crossing-the-strait-of-hormuz.html",
-      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/8b21/live/5f2f50e0-3351-11f1-8606-05fe34b06e1b.png",
-      "published_at": "2026-04-10 16:08:19 UTC",
-      "source_signal_title": "How many ships are crossing the Strait of Hormuz?",
+      "story_type": "News",
+      "title": "Tankers urged not to pay toll to Iran for use of strait",
+      "summary": "Shipping groups are pushing back against any levies for passage, as operators weigh the commercial and security risks of keeping vessels in the Gulf.",
+      "url": "stories/tankers-urged-not-to-pay-toll-to-iran-for-use-of-strait.html",
+      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/37c6/live/94da2e60-34f3-11f1-955f-add91a6f90f4.jpg",
+      "published_at": "2026-04-10 18:45:33 UTC",
+      "source_signal_title": "Tankers urged not to pay toll to Iran for use of strait",
       "source_name": "BBC",
-      "source_link": "https://www.bbc.com/news/articles/c3w39lg84w2o?at_medium=RSS&at_campaign=rss",
+      "source_link": "https://www.bbc.com/news/articles/c3dl0gdvvveo?at_medium=RSS&at_campaign=rss",
       "body": [
-        "BBC Verify\u2019s analysis suggests only a few vessels are currently crossing the Strait of Hormuz, a sharp sign of how disrupted traffic has become since the ceasefire deal. That kind of slowdown points to caution from ship operators rather than a return to normality.",
-        "The figure matters because the strait is one of the world\u2019s most important maritime routes. Even a temporary drop in traffic can unsettle energy markets, delay deliveries and increase pressure on insurers and port authorities.",
-        "The next issue is whether traffic resumes once shipowners judge the risk acceptable, or whether the standoff keeps the corridor effectively constrained. Until that becomes clearer, every crossing will be read as a test of how much control either side really has."
+        "Shipping groups are advising tanker operators not to pay any Iranian levy for passage through the Strait of Hormuz, pushing back against the idea that safe transit should be bought rather than guaranteed.",
+        "The dispute matters because it turns a security question into a commercial one. If fees or informal tolls became common, they could alter the economics of Gulf shipping and create a precedent that other states and non-state actors might try to exploit.",
+        "At the same time, operators are weighing the danger of insisting on free passage against the cost of disruption. For many firms, the choice is between legal principle, commercial pressure and the practical need to keep ships moving through one of the world\u2019s most exposed waterways."
       ]
     },
     {
       "section": "Markets & Economy",
       "story_type": "News",
       "title": "Will UK petrol and diesel prices start going down?",
-      "summary": "Fuel costs in Britain have risen on the back of the conflict; the ceasefire may ease pressure, but the timing and scale of any fall remain uncertain.",
+      "summary": "British motorists are watching for any relief after the ceasefire talks, but fuel costs are still being driven by the wider shock to global supply.",
       "url": "stories/will-uk-petrol-and-diesel-prices-start-going-down.html",
       "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/26f2/live/5fbf6110-2e5d-11f1-9408-ab8675603e32.jpg",
       "published_at": "2026-04-10 10:42:48 UTC",
@@ -2247,50 +2227,33 @@
       "source_name": "BBC",
       "source_link": "https://www.bbc.com/news/articles/c20zgjzz0e4o?at_medium=RSS&at_campaign=rss",
       "body": [
-        "Fuel costs in Britain have risen sharply because of the conflict in the Middle East, leaving drivers waiting to see whether the ceasefire will bring relief at the pumps. The answer depends on how quickly wholesale oil and refined fuel prices settle.",
-        "In principle, lower crude prices should eventually feed through to petrol and diesel. But that process is neither immediate nor guaranteed, because retailers, wholesalers and forecourts all adjust at different speeds and may be cautious if markets remain volatile.",
-        "For households, the key question is timing as much as direction. If the Strait of Hormuz stays open and shipping risk falls, prices should ease; if uncertainty returns, any drop could be delayed or very limited."
+        "British drivers are looking for relief after talk of a ceasefire, but there is no guarantee that petrol and diesel prices will fall quickly. Fuel retailers price in global oil movements, shipping costs and the risk of renewed disruption, not just the latest headline.",
+        "That means any benefit from calmer diplomacy in the Gulf may take time to reach forecourts. Some of the recent rise was driven by the wider shock to crude markets, and retailers may be cautious about passing on reductions at once.",
+        "The key question is how stable the truce remains. If tensions flare again, wholesale costs could rise quickly; if supply routes remain open and markets steady, motorists may eventually see some easing, but not necessarily a dramatic one."
       ]
     },
     {
-      "section": "Business",
+      "section": "Markets & Economy",
       "story_type": "News",
-      "title": "British Steel 'needs nationalising by the summer'",
-      "summary": "Calls for state ownership reflect the scale of uncertainty around the company\u2019s future and the wider policy problem of keeping strategic industry viable.",
-      "url": "stories/british-steel-needs-nationalising-by-the-summer.html",
-      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/f7f2/live/19ee2220-342f-11f1-a207-8b959fccb503.jpg",
-      "published_at": "2026-04-12 06:25:11 UTC",
-      "source_signal_title": "British Steel 'needs nationalising by the summer'",
+      "title": "The Dutch village at risk of being demolished",
+      "summary": "A local case of infrastructure-led displacement in the Netherlands raises broader questions about the costs of Europe\u2019s energy transition and grid expansion.",
+      "url": "stories/the-dutch-village-at-risk-of-being-demolished.html",
+      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/06e8/live/0f638c80-33dc-11f1-8606-05fe34b06e1b.jpg",
+      "published_at": "2026-04-12 23:20:52 UTC",
+      "source_signal_title": "The Dutch village at risk of being demolished",
       "source_name": "BBC",
-      "source_link": "https://www.bbc.com/news/articles/cddq5zqvvejo?at_medium=RSS&at_campaign=rss",
+      "source_link": "https://www.bbc.com/news/articles/cm2k8v027k0o?at_medium=RSS&at_campaign=rss",
       "body": [
-        "British Steel is facing renewed pressure over its future, with one Labour MP arguing that nationalisation may be the best outcome by the summer. The comment reflects how far the company\u2019s troubles go beyond a single ownership dispute and into questions of industrial strategy.",
-        "The steelmaker has long symbolised Britain\u2019s difficulty in keeping heavy industry viable in a competitive global market. Energy costs, ageing infrastructure and uncertain investment have all made private rescue plans harder to sustain.",
-        "For ministers, the issue is not simply whether to intervene but how far. Any move towards state ownership would raise questions about cost, management and precedent, but inaction could leave a strategically important industry facing a further slide into uncertainty."
-      ]
-    },
-    {
-      "section": "Business",
-      "story_type": "News",
-      "title": "OpenAI pauses UK data centre deal over energy costs and regulation",
-      "summary": "The pause underlines the gap between ambitious AI investment rhetoric and the realities of power availability, regulation and project economics.",
-      "url": "stories/openai-pauses-uk-data-centre-deal-over-energy-costs-and-regulation.html",
-      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/4825/live/fa97e0f0-3433-11f1-a18c-d7e9f5df98a8.jpg",
-      "published_at": "2026-04-09 20:36:41 UTC",
-      "source_signal_title": "OpenAI pauses UK data centre deal over energy costs and regulation",
-      "source_name": "BBC",
-      "source_link": "https://www.bbc.com/news/articles/clyd032ej70o?at_medium=RSS&at_campaign=rss",
-      "body": [
-        "OpenAI has paused a planned UK data centre deal, citing pressures around energy costs and regulation. The decision is a reminder that even the biggest AI ambitions still depend on practical questions such as power supply, planning rules and project economics.",
-        "Data centres are among the most energy-intensive pieces of digital infrastructure, and the UK has been trying to attract more of them as part of its push to become a serious AI hub. But the scale of that ambition runs into a familiar constraint: the electricity grid is not always ready for it.",
-        "The pause will worry policymakers who have marketed the UK as open for frontier-tech investment. It also suggests that the race for AI infrastructure is not just about chips and talent, but about whether countries can provide cheap, reliable power at the scale the industry wants."
+        "A village in the Netherlands is facing removal to make way for a vast electricity substation, in a striking example of how the energy transition can impose costs on communities even as it promises wider benefits.",
+        "The case of Moerdijk highlights a familiar European problem: the infrastructure needed for cleaner power, stronger grids and industrial electrification often requires land, planning consent and difficult trade-offs. Local residents can end up carrying a disproportionate share of the burden.",
+        "That makes the story more than a narrow planning dispute. As governments race to expand networks and connect new sources of electricity, they will increasingly have to decide who is compensated, who is displaced and how far local opposition can slow projects deemed nationally necessary."
       ]
     },
     {
       "section": "Business",
       "story_type": "News",
       "title": "Faisal Islam: Why the government is relaxed about Chinese car imports",
-      "summary": "The government\u2019s stance suggests it sees cheap Chinese EVs as a consumer gain and an industrial challenge rather than an outright threat.",
+      "summary": "The UK government is treating the rise of Chinese carmakers as both a consumer issue and a competitive challenge for domestic industry.",
       "url": "stories/faisal-islam-why-the-government-is-relaxed-about-chinese-car-imports.html",
       "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/2801/live/f5b10fd0-3500-11f1-b057-1d9fee7490d8.jpg",
       "published_at": "2026-04-11 23:12:58 UTC",
@@ -2298,16 +2261,51 @@
       "source_name": "BBC",
       "source_link": "https://www.bbc.com/news/articles/cnv82v3n6yqo?at_medium=RSS&at_campaign=rss",
       "body": [
-        "The government appears relaxed about the rise of Chinese car imports because it sees them as both a consumer benefit and an industrial challenge. Cheap electric vehicles can help households and accelerate the shift away from petrol and diesel, even if they intensify pressure on domestic manufacturers.",
-        "That stance reflects a broader dilemma for ministers: protecting strategic industry versus giving consumers lower prices and more choice. On balance, the government seems to believe that blocking imports would do more harm than good, especially while the UK is trying to expand EV adoption.",
-        "The unanswered question is whether domestic producers can adapt quickly enough. If Chinese brands continue to gain ground, Britain may need to decide whether support should focus on competitiveness, resilience and supply chains rather than trying to hold back the market."
+        "The UK government is treating the rise of Chinese carmakers as a challenge, but not necessarily a threat, believing it could bring cheaper cars for consumers and fresh pressure on established manufacturers to improve.",
+        "That stance reflects a broader shift in industrial policy. Ministers are trying to balance support for domestic manufacturing with the realities of a global car market in which Chinese firms are increasingly competitive on price, technology and electric vehicles.",
+        "The risk is that imports strengthen consumer choice while intensifying the squeeze on UK industry. How far the government is prepared to tolerate that will matter for jobs, investment and the country\u2019s ability to build a competitive automotive base in the years ahead.",
+        "For now, the political calculation appears to be that a more open approach is better than trying to shut the door on a fast-moving market. The longer-term question is whether that confidence proves justified if domestic producers struggle to keep pace."
+      ]
+    },
+    {
+      "section": "Business",
+      "story_type": "Analysis",
+      "title": "British Steel 'needs nationalising by the summer'",
+      "summary": "Pressure is growing for a public intervention as ownership talks continue, with the future of the company tied to industrial policy and jobs.",
+      "url": "stories/british-steel-needs-nationalising-by-the-summer.html",
+      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/f7f2/live/19ee2220-342f-11f1-a207-8b959fccb503.jpg",
+      "published_at": "2026-04-12 06:25:11 UTC",
+      "source_signal_title": "British Steel 'needs nationalising by the summer'",
+      "source_name": "BBC",
+      "source_link": "https://www.bbc.com/news/articles/cddq5zqvvejo?at_medium=RSS&at_campaign=rss",
+      "body": [
+        "Pressure is building for public intervention at British Steel, with a Labour MP arguing that nationalisation may be the best outcome if ownership talks fail to produce a durable solution.",
+        "The case reflects the continuing tension between industrial policy and market logic. Steel remains strategically important for jobs, infrastructure and supply chains, but the sector is also exposed to heavy costs, volatile demand and long-term competition from abroad.",
+        "If the company cannot secure a stable private future, ministers may face a choice between acting to protect capacity or allowing further decline. Either course would carry political and financial consequences, especially in communities where steelmaking remains central to local employment."
+      ]
+    },
+    {
+      "section": "Business",
+      "story_type": "News",
+      "title": "OpenAI pauses UK data centre deal over energy costs and regulation",
+      "summary": "A flagship investment linked to the UK\u2019s AI ambitions has stalled, exposing the gap between rhetoric about growth and the realities of power, planning and regulation.",
+      "url": "stories/openai-pauses-uk-data-centre-deal-over-energy-costs-and-regulation.html",
+      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/4825/live/fa97e0f0-3433-11f1-a18c-d7e9f5df98a8.jpg",
+      "published_at": "2026-04-09 20:36:41 UTC",
+      "source_signal_title": "OpenAI pauses UK data centre deal over energy costs and regulation",
+      "source_name": "BBC",
+      "source_link": "https://www.bbc.com/news/articles/clyd032ej70o?at_medium=RSS&at_campaign=rss",
+      "body": [
+        "OpenAI has paused a planned UK data centre deal, a setback for a flagship investment that had been linked to ambitions for Britain to become an AI superpower.",
+        "The pause points to a familiar problem: large technology investments depend on more than political enthusiasm. They need affordable power, planning consent, clear regulation and a grid able to handle heavy demand. If those conditions are not in place, headline commitments can stall.",
+        "The issue matters beyond one company. Britain has tried to position itself as an attractive base for AI infrastructure, but this episode suggests that energy costs and regulatory uncertainty remain significant obstacles to turning rhetoric into concrete projects."
       ]
     },
     {
       "section": "Business",
       "story_type": "News",
       "title": "Tice \u00a391,000 tax row is 'minor administrative error', party claims",
-      "summary": "Reform UK is seeking to contain the political damage from allegations around a property company linked to its deputy leader and unpaid dividend tax.",
+      "summary": "Reform UK is trying to contain a tax controversy involving its deputy leader, adding another test of the party\u2019s claims to financial probity.",
       "url": "stories/tice-91000-tax-row-is-minor-administrative-error-party-claims.html",
       "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/bddc/live/34f595e0-368b-11f1-abe5-5d7d921c70a4.jpg",
       "published_at": "2026-04-12 16:34:31 UTC",
@@ -2315,16 +2313,16 @@
       "source_name": "BBC",
       "source_link": "https://www.bbc.com/news/articles/c8x7yj99jrwo?at_medium=RSS&at_campaign=rss",
       "body": [
-        "Reform UK is trying to contain the fallout after reports that a property company linked to its deputy leader failed to pay \u00a391,000 in dividend tax. The party says the issue amounts to a minor administrative error, but the row is politically awkward for a party that has made tax and waste central to its message.",
-        "The case matters because it touches on a familiar vulnerability for politicians who campaign on accountability. Even when the sums are limited, tax disputes tend to raise questions about judgment, compliance and whether leaders apply the rules they demand of others.",
-        "Reform will want to avoid letting the issue widen into a broader story about standards or financial opacity. Whether that happens will depend on what further details emerge and how convincingly the party can explain the lapse."
+        "Reform UK is trying to contain a tax controversy involving its deputy leader, Richard Tice, after reports that a property company he owns failed to pay \u00a391,000 in tax on dividends.",
+        "The party says the matter amounts to a minor administrative error, but the row is awkward for a movement that has tried to present itself as disciplined and financially responsible. Such disputes can be politically damaging even when they are technically narrow, because they invite broader scrutiny of judgement and standards.",
+        "What happens next will depend on whether the explanation satisfies both the media and voters. For Reform, the immediate challenge is to stop the issue becoming another test of whether its public claims match its private conduct."
       ]
     },
     {
       "section": "UK",
       "story_type": "News",
       "title": "Starmer urges US and Iran to 'find way through' after peace talks falter",
-      "summary": "The prime minister is warning against escalation after the collapse of talks, while trying to keep the UK clear of direct involvement in the conflict.",
+      "summary": "The prime minister is trying to keep Britain clear of direct escalation while urging a return to negotiations after the latest diplomatic breakdown.",
       "url": "stories/starmer-urges-us-and-iran-to-find-way-through-after-peace-talks-falter.html",
       "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/3267/live/66bfd960-3662-11f1-abac-374b30aeab76.jpg",
       "published_at": "2026-04-12 10:39:51 UTC",
@@ -2332,33 +2330,17 @@
       "source_name": "BBC",
       "source_link": "https://www.bbc.com/news/articles/c3dlmdl1v57o?at_medium=RSS&at_campaign=rss",
       "body": [
-        "Sir Keir Starmer has urged the US and Iran to \u201cfind a way through\u201d after talks collapsed without agreement, warning against further escalation. His intervention reflects Britain\u2019s interest in keeping the crisis contained while avoiding direct involvement.",
-        "The prime minister\u2019s comments also show how much the UK is trying to balance its alliance with Washington against the risks of a wider regional conflict. That is a familiar position for Britain, which has often backed de-escalation in the Gulf while relying on US military power for deterrence.",
-        "The uncertainty now is whether diplomacy can be revived quickly enough to prevent fresh disruption to shipping and energy markets. If it cannot, European allies may face growing pressure to respond to a crisis they do not control."
-      ]
-    },
-    {
-      "section": "UK",
-      "story_type": "News",
-      "title": "Votes for populist parties in May elections will put NHS at risk, Streeting says",
-      "summary": "Labour is trying to frame the local and devolved elections around the NHS, arguing that protest votes could weaken support for the health service.",
-      "url": "stories/votes-for-populist-parties-in-may-elections-will-put-nhs-at-risk-streeting-says.html",
-      "thumbnail_url": "https://i.guim.co.uk/img/media/5148d9412155ec2e6d9027ab48bf344310041e6e/1128_2_3631_2905/master/3631.jpg?width=140&quality=85&auto=format&fit=max&s=6d9dae080bbe81921baa9e4bc2128377",
-      "published_at": "2026-04-12 15:55:42 UTC",
-      "source_signal_title": "Votes for populist parties in May elections will put NHS at risk, Streeting says",
-      "source_name": "The Guardian",
-      "source_link": "https://www.theguardian.com/politics/2026/apr/12/voting-populist-parties-local-elections-nhs-risk-wes-streeting",
-      "body": [
-        "Wes Streeting is seeking to make the NHS the central issue in the May elections, warning that votes for populist parties could put the health service at risk. Labour\u2019s argument is that protest voting carries real consequences, not just symbolic ones.",
-        "The strategy reflects the continuing political power of the NHS in Britain, where trust in public services often shapes local and national voting. It also shows Labour trying to cast its rivals as a threat to stability rather than simply an outlet for dissatisfaction.",
-        "Whether that message lands will depend on whether voters see the health service as improving or still under strain. If waiting lists, staffing and morale remain dominant concerns, the NHS is likely to stay at the centre of the campaign."
+        "Keir Starmer has urged the US and Iran to find a way through their latest diplomatic breakdown, as Britain tries to avoid being pulled into a wider confrontation.",
+        "The prime minister\u2019s message is aimed at keeping negotiations alive while making clear that escalation would be dangerous. For London, the priority is to reduce the risk of regional conflict spilling into energy markets, shipping and the wider international order.",
+        "But Britain has limited leverage over events if Washington and Tehran remain locked in mutual distrust. The failure of the talks leaves Starmer in the familiar position of calling for restraint while events in the Gulf are increasingly shaped by the decisions of others.",
+        "The next stage will depend on whether either side is willing to re-enter talks, and on whether the ceasefire pressure around the region can hold long enough for diplomacy to resume."
       ]
     },
     {
       "section": "UK",
       "story_type": "News",
       "title": "Home Office to announce closure of 11 asylum hotels in next week",
-      "summary": "The planned closures are part of Labour\u2019s wider pledge to end the use of asylum hotels, though the political and logistical pressures remain substantial.",
+      "summary": "Labour is moving to shut more asylum hotels, but the policy still leaves difficult questions about accommodation, costs and political pressure.",
       "url": "stories/home-office-to-announce-closure-of-11-asylum-hotels-in-next-week.html",
       "thumbnail_url": "https://i.guim.co.uk/img/media/8b57ee2e2387a58b37b0df3f6f62a56927b646b0/484_0_4840_3872/master/4840.jpg?width=140&quality=85&auto=format&fit=max&s=34c138ccd57261a8f1873a7574f9911d",
       "published_at": "2026-04-12 11:00:16 UTC",
@@ -2366,16 +2348,17 @@
       "source_name": "The Guardian",
       "source_link": "https://www.theguardian.com/uk-news/2026/apr/12/asylum-seeker-hotels-closures-home-office",
       "body": [
-        "The Home Office is set to announce the closure of 11 asylum hotels, a move that forms part of Labour\u2019s pledge to end the use of hotels for asylum accommodation. The announcement will be welcomed by ministers who want to show progress on one of the most politically charged issues in migration policy.",
-        "But closing hotels is only part of the challenge. The government still has to find alternative accommodation for people whose claims are unresolved, while managing pressure from councils, local residents and campaigners over where they will be housed.",
-        "The question next is whether the closures represent genuine momentum or a reshuffling of the same problem. Unless the asylum system speeds up decisions and reduces backlogs, the pressure on the wider estate is likely to remain."
+        "The Home Office is expected to announce the closure of 11 asylum hotels next week, in another sign that Labour is trying to reduce the visible use of temporary accommodation for people seeking asylum.",
+        "The political pressure is obvious. Asylum hotels have become a symbol of a system under strain, with ministers facing criticism over cost, community impact and the long-running backlog in processing claims.",
+        "But closing hotels does not by itself solve the underlying problem. The government still needs more stable accommodation, faster decision-making and a plan that can survive legal, operational and political scrutiny.",
+        "The key question is whether the closures mark the start of a more durable reset or simply shift pressure elsewhere in an already overstretched asylum system."
       ]
     },
     {
       "section": "UK",
       "story_type": "News",
       "title": "Britain could adopt single market rules without MPs\u2019 vote as part of UK-EU reset",
-      "summary": "Ministers are considering legislation that could deepen alignment with EU rules, raising fresh questions over parliamentary scrutiny and sovereignty.",
+      "summary": "Ministers are weighing a closer EU alignment that could revive arguments over sovereignty, scrutiny and the practical limits of post-Brexit policy.",
       "url": "stories/britain-could-adopt-single-market-rules-without-mps-vote-as-part-of-uk-eu-reset.html",
       "thumbnail_url": "https://i.guim.co.uk/img/media/b66ba25d823bdb9d0a50f567c8ae2de763dd87a9/673_0_4418_3537/master/4418.jpg?width=140&quality=85&auto=format&fit=max&s=cdff72ddcf9d4b2fc84e2eadac99678d",
       "published_at": "2026-04-12 17:58:22 UTC",
@@ -2383,51 +2366,34 @@
       "source_name": "The Guardian",
       "source_link": "https://www.theguardian.com/politics/2026/apr/12/britain-single-market-rules-uk-eu-reset",
       "body": [
-        "Ministers are considering legislation that could allow Britain to adopt single market rules without a fresh vote by MPs, as part of a wider reset with the EU. The idea would deepen regulatory alignment, but it immediately raises questions about parliamentary scrutiny and sovereignty.",
-        "The proposal reflects a broader shift in post-Brexit politics: the practical benefits of closer alignment are increasingly being weighed against the symbolic costs. For businesses, more consistent rules could reduce friction; for critics, the democratic issue is whether such changes should be made explicitly in Parliament.",
-        "How far the government goes will depend on the final shape of the reset and the political appetite for confrontation. Any move seen as softening Brexit too quietly is likely to meet resistance, even if it improves trade relations."
+        "Ministers are considering a closer alignment with single market rules that could take Britain a step nearer to the European Union\u2019s regulatory orbit, possibly without a direct vote in Parliament.",
+        "The idea is politically sensitive because it revives old arguments about sovereignty, accountability and the degree to which post-Brexit Britain should tie itself to Brussels in order to ease trade and reduce friction.",
+        "Supporters will argue that closer alignment could make business easier and improve market access. Critics are likely to say it would amount to rule-taking by another name, especially if MPs are bypassed.",
+        "What happens next will show whether the government is prepared to spend political capital on a pragmatic reset with Europe, or whether the limits of that project remain as important as its ambitions."
       ]
     },
     {
-      "section": "Science & Technology",
-      "story_type": "Feature",
-      "title": "\u2018Too powerful for the public\u2019: Inside Anthropic\u2019s bid to win the AI publicity war",
-      "summary": "Anthropic\u2019s decision not to release a model has become a reputational and regulatory campaign, as firms compete to define AI safety, power and legitimacy.",
-      "url": "stories/too-powerful-for-the-public-inside-anthropics-bid-to-win-the-ai-publicity-war.html",
-      "thumbnail_url": "https://i.guim.co.uk/img/media/ba4542dd902ac8d6e942e6417a28bdb5305f5fad/457_0_5029_4024/master/5029.jpg?width=140&quality=85&auto=format&fit=max&s=4ecb126abfbd3bb4ae6192eb40cfb028",
-      "published_at": "2026-04-12 09:00:13 UTC",
-      "source_signal_title": "\u2018Too powerful for the public\u2019: Inside Anthropic\u2019s bid to win the AI publicity war",
-      "source_name": "The Guardian",
-      "source_link": "https://www.theguardian.com/technology/2026/apr/12/too-powerful-for-the-public-inside-anthropics-bid-to-win-the-ai-publicity-war",
+      "section": "UK",
+      "story_type": "News",
+      "title": "Deep-fried food banned in new plans for school dinners",
+      "summary": "New school food standards aim to push healthier diets in England, with childhood obesity and nutrition now central to education policy.",
+      "url": "stories/deep-fried-food-banned-in-new-plans-for-school-dinners.html",
+      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/3914/live/ff412930-34ed-11f1-be84-6f37fe66395b.jpg",
+      "published_at": "2026-04-12 21:55:13 UTC",
+      "source_signal_title": "Deep-fried food banned in new plans for school dinners",
+      "source_name": "BBC",
+      "source_link": "https://www.bbc.com/news/articles/c624vezv52do?at_medium=RSS&at_campaign=rss",
       "body": [
-        "Anthropic has made a strategic choice not to release one of its models, turning a technical decision into a broader argument about power, safety and legitimacy. In doing so, it is trying to position itself as the company that takes AI risks more seriously than its rivals.",
-        "That approach matters because the AI industry is fighting for public trust at the same time as regulators are asking harder questions about security, labour disruption and abuse. A firm that appears cautious may win credibility, but it also risks looking evasive or elitist.",
-        "The publicity battle is therefore not just about branding. It is about who gets to define what responsible AI looks like, who sets the standards and whether safety claims are backed by transparent evidence or simply by messaging.",
-        "Anthropic\u2019s challenge is that restraint can be read in two ways: as prudence or as a marketing tactic. As the technology becomes more capable, that distinction is likely to matter more, not less."
-      ]
-    },
-    {
-      "section": "Science & Technology",
-      "story_type": "Analysis",
-      "title": "AI companies know they have an image problem. Will funding policy papers and thinktanks dig them out?",
-      "summary": "The industry is trying to shift public debate through policy messaging, but public scepticism, regulatory scrutiny and product risks are all rising.",
-      "url": "stories/ai-companies-know-they-have-an-image-problem-will-funding-policy-papers-and-thin.html",
-      "thumbnail_url": "https://i.guim.co.uk/img/media/52f28e3778e0def3eb14d4cf2f324385763c3788/415_0_2671_2138/master/2671.jpg?width=140&quality=85&auto=format&fit=max&s=26ff57a198978e7226fd2c7798348d90",
-      "published_at": "2026-04-12 10:00:14 UTC",
-      "source_signal_title": "AI companies know they have an image problem. Will funding policy papers and thinktanks dig them out?",
-      "source_name": "The Guardian",
-      "source_link": "https://www.theguardian.com/technology/2026/apr/12/ai-image-problem-policy-papers-thinktanks",
-      "body": [
-        "AI companies are trying to improve their standing by funding policy papers, research groups and thinktanks. The aim is to shape the debate around safety, productivity and regulation before governments set the terms for them.",
-        "But there is a limit to how far policy messaging can repair public scepticism. The sector is still facing criticism over job losses, misinformation, copyright disputes and the concentration of power in a small number of firms.",
-        "That leaves companies with a difficult choice: engage more openly with regulators and critics, or risk looking as though they are trying to buy influence. Funding research may help with access and credibility, but it will not by itself solve the industry\u2019s trust deficit."
+        "New plans for school meals in England would ban deep-fried food and push schools towards more vegetables, whole grains and less sugary food, as ministers try to improve children\u2019s diets.",
+        "The reforms reflect a broader concern about childhood obesity and long-term health. School meals are one of the few places where government can shape nutrition at scale, especially for children who rely on them every day.",
+        "The challenge is whether schools can meet the new standards without making meals more expensive or less popular. The policy may improve dietary quality, but it will also test budgets, kitchens and the willingness of children to eat what is put in front of them."
       ]
     },
     {
       "section": "Science & Technology",
       "story_type": "News",
       "title": "\u2018Irresponsible failure\u2019: Google, Meta, Snap and Microsoft slam EU over child sexual abuse law lapse",
-      "summary": "Tech groups and child safety advocates are clashing over a legal gap that may reduce the detection of abuse material and grooming online.",
+      "summary": "The expiry of a key scanning exemption has reopened a hard contest between privacy rights and the detection of child abuse material online.",
       "url": "stories/irresponsible-failure-google-meta-snap-and-microsoft-slam-eu-over-child-sexual-a.html",
       "thumbnail_url": "https://i.guim.co.uk/img/media/c26e9c02fac62382c5e6a75c15356be34df5a02b/148_0_4389_3514/master/4389.jpg?width=140&quality=85&auto=format&fit=max&s=540fe7afb69d981ddd12cca19430be6f",
       "published_at": "2026-04-10 06:00:12 UTC",
@@ -2435,67 +2401,86 @@
       "source_name": "The Guardian",
       "source_link": "https://www.theguardian.com/technology/2026/apr/09/google-meta-snap-microsoft-eu-child-sexual-abuse",
       "body": [
-        "Major technology companies and child safety advocates are clashing over an EU legal gap that could affect the detection of child sexual abuse material and grooming online. The dispute centres on how to preserve protections without creating blanket surveillance powers.",
-        "The companies argue that the lapse risks making it harder to identify abusive content. Critics of the regulatory framework, however, have long warned that emergency powers or overbroad scanning requirements can threaten privacy and lawful communication.",
-        "The issue matters because it sits at the fault line between two public interests that are both hard to compromise: keeping children safe and preserving digital rights. The next steps from Brussels will determine whether the gap is closed quickly or becomes a wider political fight."
+        "Google, Meta, Snap and Microsoft have attacked the EU after a key exemption that allowed some scanning of child sexual abuse material expired, reopening a bitter debate over privacy, safety and platform responsibility.",
+        "The companies say the lapse is a failure that risks weakening efforts to detect abuse material online. Privacy advocates, by contrast, have long argued that broad scanning powers can create dangerous precedents and expand surveillance beyond their original purpose.",
+        "The stakes are high because the internet\u2019s biggest platforms sit at the centre of both enforcement and rights concerns. Regulators now face pressure to produce a system that protects children without handing firms or governments blanket powers over private communications.",
+        "What happens next will depend on whether Brussels can agree a durable legal framework before the issue becomes another prolonged fight between safety campaigners and civil liberties groups."
+      ]
+    },
+    {
+      "section": "Science & Technology",
+      "story_type": "Analysis",
+      "title": "AI companies know they have an image problem. Will funding policy papers and thinktanks dig them out?",
+      "summary": "Major AI firms are increasingly using policy, PR and institutional outreach to shape public opinion as regulation and scepticism intensify.",
+      "url": "stories/ai-companies-know-they-have-an-image-problem-will-funding-policy-papers-and-thin.html",
+      "thumbnail_url": "https://i.guim.co.uk/img/media/52f28e3778e0def3eb14d4cf2f324385763c3788/415_0_2671_2138/master/2671.jpg?width=140&quality=85&auto=format&fit=max&s=26ff57a198978e7226fd2c7798348d90",
+      "published_at": "2026-04-12 10:00:14 UTC",
+      "source_signal_title": "AI companies know they have an image problem. Will funding policy papers and thinktanks dig them out?",
+      "source_name": "The Guardian",
+      "source_link": "https://www.theguardian.com/technology/2026/apr/12/ai-image-problem-policy-papers-thinktanks",
+      "body": [
+        "Major AI firms are increasingly funding policy papers, academic-style projects and thinktank outreach as they try to improve their public standing in the face of rising scepticism and tighter regulation.",
+        "The strategy is not new, but it has become more important as AI moves from novelty to infrastructure. Companies are no longer just selling products; they are trying to shape the rules, the language and the assumptions that govern those products.",
+        "That raises obvious questions about independence. Supporters say such funding helps inform debate; critics say it risks laundering corporate priorities through respected institutions.",
+        "The bigger issue is whether reputation management can change the underlying concerns around safety, labour, copyright and power. If those questions remain unanswered, better messaging may only go so far."
       ]
     },
     {
       "section": "Science & Technology",
       "story_type": "News",
-      "title": "Dancer with MND performs on stage again through digital avatar",
-      "summary": "Brainwave and avatar technology has enabled a performer living with motor neurone disease to appear on stage again, showing a more humane use of advanced tech.",
-      "url": "stories/dancer-with-mnd-performs-on-stage-again-through-digital-avatar.html",
-      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/3f25/live/d71ac610-34bf-11f1-8bf0-3fa0c850deba.jpg",
-      "published_at": "2026-04-10 13:13:09 UTC",
-      "source_signal_title": "Dancer with MND performs on stage again through digital avatar",
+      "title": "Meta pulls Facebook ads recruiting for social media addiction lawsuits",
+      "summary": "The company\u2019s response to addiction litigation points to the growing legal and reputational risks around platform design and youth harm.",
+      "url": "stories/meta-pulls-facebook-ads-recruiting-for-social-media-addiction-lawsuits.html",
+      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/8906/live/b0f9e660-34d2-11f1-8606-05fe34b06e1b.jpg",
+      "published_at": "2026-04-10 15:44:12 UTC",
+      "source_signal_title": "Meta pulls Facebook ads recruiting for social media addiction lawsuits",
       "source_name": "BBC",
-      "source_link": "https://www.bbc.com/news/articles/cgqkz5lzvnwo?at_medium=RSS&at_campaign=rss",
+      "source_link": "https://www.bbc.com/news/articles/czjw0zgz9zyo?at_medium=RSS&at_campaign=rss",
       "body": [
-        "A dancer living with motor neurone disease has been able to perform on stage again through digital avatar technology, using brainwave systems to recreate movement and expression. The result is striking not only as a technical achievement but as a human one.",
-        "The story matters because it shows how advanced technology can be used for restoration rather than novelty. For people who lose physical control but remain fully aware and creative, tools that recover some form of performance can have profound emotional value.",
-        "It also points to the growing overlap between medicine, computing and the arts. As such systems improve, they may offer new ways for people with severe disabilities to communicate, work and appear in public life."
+        "Meta has removed Facebook ads that were recruiting people for social media addiction lawsuits, adding to the company\u2019s legal and reputational problems after a landmark defeat in California.",
+        "The move shows how closely platform design is now being scrutinised. Litigation over addiction and youth harm goes beyond one company\u2019s advertising policy and into the deeper question of whether social networks are engineered to maximise compulsive use.",
+        "For Meta, the risk is not only courtroom liability but a wider loss of trust, especially among parents, regulators and investors. As more cases emerge, the company may find that every response to legal challenge becomes part of the public debate over how social media should work."
+      ]
+    },
+    {
+      "section": "Science & Technology",
+      "story_type": "News",
+      "title": "Amazon to end support for older Kindles, prompting user outcry",
+      "summary": "The move again raises the question of how much control consumers really have over devices that depend on long-term software support.",
+      "url": "stories/amazon-to-end-support-for-older-kindles-prompting-user-outcry.html",
+      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/b53f/live/6fcfaf50-3417-11f1-9fad-db21ae1095d5.jpg",
+      "published_at": "2026-04-09 13:12:45 UTC",
+      "source_signal_title": "Amazon to end support for older Kindles, prompting user outcry",
+      "source_name": "BBC",
+      "source_link": "https://www.bbc.com/news/articles/c98k91yy4z4o?at_medium=RSS&at_campaign=rss",
+      "body": [
+        "Amazon\u2019s decision to end support for older Kindles has triggered user anger, particularly among owners of devices released before 2013 who will lose the ability to download new e-books.",
+        "The row highlights a persistent problem in consumer technology: ownership is rarely absolute when a device depends on software, updates and company servers. Even products that seem durable can become functionally obsolete when support ends.",
+        "For customers, the immediate concern is access to books already purchased or tied to the device\u2019s ecosystem. More broadly, the episode adds to criticism that big technology firms can quietly shorten product lifespans and leave consumers with fewer practical rights than they expect."
       ]
     },
     {
       "section": "Sport",
       "story_type": "News",
-      "title": "Man City smell blood - why Arsenal should fear title rivals",
-      "summary": "Manchester City\u2019s win over Chelsea has turned up the pressure on Arsenal, with the title race now feeling far less secure for the leaders.",
-      "url": "stories/man-city-smell-blood-why-arsenal-should-fear-title-rivals.html",
-      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/62c8/live/278b5820-36b5-11f1-879d-1b2f5c3919b8.jpg",
-      "published_at": "2026-04-12 21:21:58 UTC",
-      "source_signal_title": "Man City smell blood - why Arsenal should fear title rivals",
+      "title": "McIlroy proves he really is free with back-to-back Masters win",
+      "summary": "Rory McIlroy\u2019s repeat Masters victory gives golf its most significant weekend result and cements one of the sport\u2019s defining recent achievements.",
+      "url": "stories/mcilroy-proves-he-really-is-free-with-back-to-back-masters-win.html",
+      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/eb7a/live/5c0f70d0-6139-11ee-ac8c-9d18dbc280ea.png",
+      "published_at": "2026-04-12 23:16:50 UTC",
+      "source_signal_title": "McIlroy proves he really is free with back-to-back Masters win",
       "source_name": "BBC Sport",
-      "source_link": "https://www.bbc.com/sport/football/articles/cpd58x923jyo?at_medium=RSS&at_campaign=rss",
+      "source_link": "https://www.bbc.com/sport/golf/articles/cgqkgvxgv2xo?at_medium=RSS&at_campaign=rss",
       "body": [
-        "Manchester City\u2019s latest win has tightened the Premier League title race and put fresh pressure on Arsenal. After a strong run from the leaders, Pep Guardiola\u2019s side have now made it clear they are closing in.",
-        "The significance is not just the three points but the timing. When City start to build momentum, rivals know how quickly a lead can disappear, especially with a game in hand and a squad used to handling late-season pressure.",
-        "For Arsenal, the warning is obvious: any slip now invites scrutiny and doubt. In a title race, that can matter as much as the numbers on the table."
-      ]
-    },
-    {
-      "section": "Sport",
-      "story_type": "News",
-      "title": "Will Romero's tears become the enduring image of Tottenham's season?",
-      "summary": "Tottenham\u2019s defeat at Sunderland has deepened fears of relegation and raised the prospect of a defining image for a season gone wrong.",
-      "url": "stories/will-romeros-tears-become-the-enduring-image-of-tottenhams-season.html",
-      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/7826/live/993a11b0-3696-11f1-879d-1b2f5c3919b8.jpg",
-      "published_at": "2026-04-12 17:35:37 UTC",
-      "source_signal_title": "Will Romero's tears become the enduring image of Tottenham's season?",
-      "source_name": "BBC Sport",
-      "source_link": "https://www.bbc.com/sport/football/articles/ce8lnjd7n4po?at_medium=RSS&at_campaign=rss",
-      "body": [
-        "Cristian Romero\u2019s tears after Tottenham\u2019s defeat at Sunderland may become the defining image of a season that has gone badly wrong. With Spurs now in the relegation zone, the symbolism of the moment is hard to ignore.",
-        "The result matters because it deepens the sense that the club is not merely out of form but in crisis. Defensive mistakes, managerial upheaval and poor results have combined to leave Tottenham with little room for optimism.",
-        "If the season ends in relegation or a desperate fight for survival, Romero\u2019s reaction will likely be remembered as more than an emotional afterthought. It could become the image that sums up the collapse."
+        "Rory McIlroy\u2019s second straight Masters victory is one of the defining results of modern golf and a rare repeat triumph at Augusta National.",
+        "The significance goes beyond another major title. After years in which McIlroy\u2019s Augusta narrative was shaped by disappointment and near-misses, retaining the green jacket confirms that his first win was not a one-off but the start of a new phase in his career.",
+        "It also strengthens his place among the game\u2019s leading figures of the era. Back-to-back victories at the Masters are exceptionally hard to achieve, and doing so under pressure will only deepen the sense that McIlroy has finally settled into the role that eluded him for so long."
       ]
     },
     {
       "section": "Sport",
       "story_type": "News",
       "title": "Van Aert beats Pogacar in thrilling Paris-Roubaix sprint",
-      "summary": "Wout van Aert has won Paris-Roubaix after edging Tadej Pogacar in a dramatic sprint finish on the cobbles.",
+      "summary": "Wout van Aert\u2019s victory in one of cycling\u2019s biggest races ended a long wait and delivered a major result against an elite field.",
       "url": "stories/van-aert-beats-pogacar-in-thrilling-paris-roubaix-sprint.html",
       "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/9ff0/live/6d1ec020-3688-11f1-991f-79d0d362bba2.jpg",
       "published_at": "2026-04-12 16:25:57 UTC",
@@ -2503,26 +2488,43 @@
       "source_name": "BBC Sport",
       "source_link": "https://www.bbc.com/sport/cycling/articles/cp8dr18gd0eo?at_medium=RSS&at_campaign=rss",
       "body": [
-        "Wout van Aert has won Paris-Roubaix after beating Tadej Pogacar in a dramatic sprint finish. The result gives the Belgian one of cycling\u2019s most prized one-day victories on the sport\u2019s roughest terrain.",
-        "The race mattered because it pitted two of the biggest names in cycling against each other in a contest that combines endurance, nerve and luck. On the cobbles, even the strongest riders can be undone by a puncture, a crash or a split-second mistake.",
-        "Van Aert\u2019s victory will sharpen the rivalry at the top of the sport, while Pogacar\u2019s performance again shows how far he has extended his ambitions beyond stage racing."
+        "Wout van Aert won Paris-Roubaix after beating Tadej Pogacar in a sprint finish, a major result in one of cycling\u2019s most punishing and prestigious races.",
+        "The victory matters because Roubaix is built on endurance, positioning and survival as much as speed. Beating a rider of Pogacar\u2019s calibre in that setting gives Van Aert one of the standout wins of his career and ends a long wait for another major triumph.",
+        "For the rest of the peloton, the result underlines how thin the margins are at the top of cycling. In a race where crashes, cobbles and fatigue shape the outcome, one decisive finish can reset the balance of an entire spring season."
       ]
     },
     {
       "section": "Sport",
       "story_type": "News",
-      "title": "Sinner beats Alcaraz to return to world top spot",
-      "summary": "Jannik Sinner has reclaimed world number one after beating Carlos Alcaraz in Monte Carlo, tightening one of tennis\u2019s defining rivalries.",
-      "url": "stories/sinner-beats-alcaraz-to-return-to-world-top-spot.html",
-      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/f6a9/live/aaf12aa0-3688-11f1-991f-79d0d362bba2.jpg",
-      "published_at": "2026-04-12 16:19:03 UTC",
-      "source_signal_title": "Sinner beats Alcaraz to return to world top spot",
+      "title": "Man City smell blood - why Arsenal should fear title rivals",
+      "summary": "Manchester City\u2019s latest win has tightened the Premier League title race and put Arsenal under renewed pressure in the run-in.",
+      "url": "stories/man-city-smell-blood-why-arsenal-should-fear-title-rivals.html",
+      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/62c8/live/278b5820-36b5-11f1-879d-1b2f5c3919b8.jpg",
+      "published_at": "2026-04-12 21:21:58 UTC",
+      "source_signal_title": "Man City smell blood - why Arsenal should fear title rivals",
       "source_name": "BBC Sport",
-      "source_link": "https://www.bbc.com/sport/tennis/articles/c8dl5qge2r8o?at_medium=RSS&at_campaign=rss",
+      "source_link": "https://www.bbc.com/sport/football/articles/cpd58x923jyo?at_medium=RSS&at_campaign=rss",
       "body": [
-        "Jannik Sinner has returned to world number one after beating Carlos Alcaraz in Monte Carlo. The result adds another chapter to a rivalry that is increasingly shaping the men\u2019s game.",
-        "The significance goes beyond ranking points. Sinner and Alcaraz are now the pair most likely to define the next era of men\u2019s tennis, and their meetings are beginning to carry the feel of major turning points rather than isolated matches.",
-        "For now, Sinner has the edge and the status that comes with it. The challenge for Alcaraz is to respond quickly, because in a rivalry this tight, momentum can shift fast."
+        "Manchester City\u2019s latest win has tightened the Premier League title race and put Arsenal under renewed pressure in the run-in.",
+        "The broader point is not just that City are winning, but that they are doing so with the familiar relentlessness that has defined their most successful seasons. Once they sense momentum, they rarely give rivals much room to recover.",
+        "Arsenal now have to absorb the psychological effect of being chased by a side that has made late-season pressure its speciality. With each dropped point becoming more costly, the title race is moving into the kind of stretch where City usually make the difference."
+      ]
+    },
+    {
+      "section": "Sport",
+      "story_type": "News",
+      "title": "Sunderland sink Spurs in De Zerbi's opening game in charge",
+      "summary": "Tottenham\u2019s defeat, and the turmoil around their relegation fight, is the main football state-of-play story from the weekend.",
+      "url": "stories/sunderland-sink-spurs-in-de-zerbis-opening-game-in-charge.html",
+      "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/6880/live/c8ee8d60-3695-11f1-879d-1b2f5c3919b8.jpg",
+      "published_at": "2026-04-12 19:00:11 UTC",
+      "source_signal_title": "Sunderland sink Spurs in De Zerbi's opening game in charge",
+      "source_name": "BBC Sport",
+      "source_link": "https://www.bbc.com/sport/football/videos/cjr9q4zddj8o?at_medium=RSS&at_campaign=rss",
+      "body": [
+        "Tottenham\u2019s defeat at Sunderland deepens a season already drifting towards crisis, with Roberto De Zerbi losing his first game in charge and Spurs left in the relegation zone.",
+        "The result matters because it shows there is no instant fix. A new manager can alter mood and shape, but not erase structural problems in one match, especially when the stakes are as severe as they are for Tottenham now.",
+        "Sunderland\u2019s win gives them a major boost and leaves Spurs facing a far more serious fight than they would have expected at this stage of the season. The longer the relegation battle runs, the more damaging it becomes for confidence, planning and the club\u2019s wider future."
       ]
     }
   ]
