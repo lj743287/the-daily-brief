@@ -1,0 +1,77 @@
+name: Daily Brief Control Panel
+
+permissions:
+  contents: write
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "Choose what to refresh"
+        required: true
+        default: "refresh_everything"
+        type: choice
+        options:
+          - refresh_everything
+          - refresh_news
+          - refresh_features
+
+jobs:
+  run-control-panel:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Set refresh mode
+        run: |
+          if [ "${{ github.event.inputs.action }}" = "refresh_everything" ]; then
+            echo "REFRESH_MODE=everything" >> $GITHUB_ENV
+          elif [ "${{ github.event.inputs.action }}" = "refresh_news" ]; then
+            echo "REFRESH_MODE=news" >> $GITHUB_ENV
+          elif [ "${{ github.event.inputs.action }}" = "refresh_features" ]; then
+            echo "REFRESH_MODE=features" >> $GITHUB_ENV
+          else
+            echo "Unknown action"
+            exit 1
+          fi
+
+      - name: Reset generated files
+        run: python scripts/reset_generated.py
+        env:
+          REFRESH_MODE: ${{ env.REFRESH_MODE }}
+
+      - name: Generate feature
+        if: ${{ env.REFRESH_MODE == 'everything' || env.REFRESH_MODE == 'features' }}
+        run: python scripts/generate_feature.py
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
+
+      - name: Generate news
+        if: ${{ env.REFRESH_MODE == 'everything' || env.REFRESH_MODE == 'news' }}
+        run: python scripts/generate_news.py
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
+
+      - name: Rebuild homepage after feature-only refresh
+        if: ${{ env.REFRESH_MODE == 'features' }}
+        run: python scripts/rebuild_homepage.py
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add .
+          git commit -m "Control panel: ${{ github.event.inputs.action }}" || echo "No changes"
+          git push
