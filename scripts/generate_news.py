@@ -193,6 +193,33 @@ SOURCE_CONFIG = [
     },
 ]
 
+SPORT_PRIORITY_TERMS = [
+    "cardiff city",
+    "cardiff",
+    "bluebirds",
+    "tampa bay buccaneers",
+    "buccaneers",
+    "bucs",
+    "nfl",
+    "football transfer",
+    "transfer",
+    "window",
+    "cycling",
+    "tour de france",
+    "giro",
+    "vuelta",
+    "tour of britain",
+]
+
+BAD_BODY_PHRASES = [
+    "this remains a brief",
+    "the daily brief is keeping this item on the agenda",
+    "readers wanting the originating report",
+    "source signal",
+    "workflow",
+    "how the paper is being generated",
+]
+
 OUTLINE_SCHEMA = {
     "type": "object",
     "additionalProperties": False,
@@ -365,14 +392,6 @@ def parse_response_json(response) -> dict:
     return json.loads(response.output_text)
 
 
-def slugify(text):
-    text = text.lower().strip()
-    text = re.sub(r"[^a-z0-9\s-]", "", text)
-    text = re.sub(r"\s+", "-", text)
-    text = re.sub(r"-+", "-", text)
-    return text[:80].strip("-") or "story"
-
-
 def clean_text(raw_text):
     if not raw_text:
         return ""
@@ -380,6 +399,14 @@ def clean_text(raw_text):
     text = html.unescape(text)
     text = re.sub(r"\s+", " ", text)
     return text.strip()
+
+
+def slugify(text):
+    text = text.lower().strip()
+    text = re.sub(r"[^a-z0-9\s-]", "", text)
+    text = re.sub(r"\s+", "-", text)
+    text = re.sub(r"-+", "-", text)
+    return text[:80].strip("-") or "story"
 
 
 def normalise_title(title):
@@ -410,52 +437,6 @@ def coerce_section(section):
     if section in SECTION_ORDER:
         return section
     return "World"
-
-
-def load_feature():
-    feature_file = DATA_DIR / "feature.json"
-    if not feature_file.exists():
-        return None
-    with open(feature_file, "r", encoding="utf-8") as f:
-        return json.load(f)
-
-
-def load_previous_news():
-    stories_file = DATA_DIR / "stories.json"
-    if not stories_file.exists():
-        return {}
-
-    with open(stories_file, "r", encoding="utf-8") as f:
-        try:
-            return json.load(f)
-        except Exception:
-            return {}
-
-
-def index_previous_items(previous_data):
-    index = {}
-
-    lead = previous_data.get("lead_story")
-    if isinstance(lead, dict):
-        key = normalise_title(lead.get("source_signal_title") or lead.get("title", ""))
-        if key:
-            index[key] = lead
-
-    for item in previous_data.get("stories", []):
-        key = normalise_title(item.get("source_signal_title") or item.get("title", ""))
-        if key and key not in index:
-            index[key] = item
-
-    return index
-
-
-def fetch_url(url):
-    request = urllib.request.Request(
-        url,
-        headers={"User-Agent": "Mozilla/5.0 (compatible; TheDailyBrief/1.0)"},
-    )
-    with urllib.request.urlopen(request, timeout=20) as response:
-        return response.read()
 
 
 def extract_thumbnail_from_entry(entry):
@@ -505,6 +486,55 @@ def extract_published_at(entry):
     return ""
 
 
+def extract_numeric_hints(title, summary, published_at):
+    text = f"{title}. {summary}. {published_at}"
+    parts = re.split(r"(?<=[.!?])\s+", text)
+    hints = []
+    for part in parts:
+        if re.search(r"\d", part):
+            cleaned = part.strip()
+            if cleaned and cleaned not in hints:
+                hints.append(cleaned)
+    return hints[:5]
+
+
+def body_needs_regeneration(body):
+    if not body or len(body) < 3:
+        return True
+    joined = " ".join(body).lower()
+    for phrase in BAD_BODY_PHRASES:
+        if phrase in joined:
+            return True
+    return False
+
+
+def score_sport_signal(signal):
+    blob = f"{signal.get('title', '')} {signal.get('summary', '')}".lower()
+    score = 0
+    if "cardiff city" in blob or "bluebirds" in blob:
+        score += 100
+    if "tampa bay buccaneers" in blob or "buccaneers" in blob or "bucs" in blob:
+        score += 90
+    if "nfl" in blob:
+        score += 80
+    if "transfer" in blob or "window" in blob:
+        score += 70
+    if "cycling" in blob or "tour de france" in blob or "giro" in blob or "vuelta" in blob:
+        score += 60
+    if "cardiff" in blob:
+        score += 40
+    return score
+
+
+def fetch_url(url):
+    request = urllib.request.Request(
+        url,
+        headers={"User-Agent": "Mozilla/5.0 (compatible; TheDailyBrief/1.0)"},
+    )
+    with urllib.request.urlopen(request, timeout=20) as response:
+        return response.read()
+
+
 def parse_rss_source(config, max_items=20):
     parsed = feedparser.parse(config["url"])
     signals = []
@@ -529,6 +559,7 @@ def parse_rss_source(config, max_items=20):
             "link": link,
             "thumbnail_url": thumbnail_url,
             "published_at": published_at,
+            "numeric_hints": extract_numeric_hints(title, summary, published_at),
         })
 
     return signals
@@ -562,37 +593,21 @@ def parse_aljazeera_sitemap(config, max_items=20):
         if not title:
             continue
 
+        clean_title = clean_text(title)
         signals.append({
             "source": config["source"],
             "region": config["region"],
             "viewpoint_group": config["viewpoint_group"],
             "section": config["section"],
-            "title": clean_text(title),
+            "title": clean_title,
             "summary": "",
             "link": loc,
             "thumbnail_url": "",
             "published_at": published_at,
+            "numeric_hints": extract_numeric_hints(clean_title, "", published_at),
         })
 
     return signals
-
-
-def score_sport_signal(signal):
-    blob = f"{signal.get('title', '')} {signal.get('summary', '')}".lower()
-    score = 0
-    if "cardiff city" in blob or "bluebirds" in blob:
-        score += 100
-    if "tampa bay buccaneers" in blob or "buccaneers" in blob or "bucs" in blob:
-        score += 90
-    if "nfl" in blob:
-        score += 80
-    if "transfer" in blob or "window" in blob:
-        score += 70
-    if "cycling" in blob or "tour de france" in blob or "giro" in blob or "vuelta" in blob:
-        score += 60
-    if "cardiff" in blob:
-        score += 40
-    return score
 
 
 def get_source_signals():
@@ -622,6 +637,42 @@ def get_source_signals():
             signals.append(signal)
 
     return signals[:180]
+
+
+def load_feature():
+    feature_file = DATA_DIR / "feature.json"
+    if not feature_file.exists():
+        return None
+    with open(feature_file, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def load_previous_news():
+    stories_file = DATA_DIR / "stories.json"
+    if not stories_file.exists():
+        return {}
+    with open(stories_file, "r", encoding="utf-8") as f:
+        try:
+            return json.load(f)
+        except Exception:
+            return {}
+
+
+def index_previous_items(previous_data):
+    index = {}
+
+    lead = previous_data.get("lead_story")
+    if isinstance(lead, dict):
+        key = normalise_title(lead.get("source_signal_title") or lead.get("title", ""))
+        if key:
+            index[key] = lead
+
+    for item in previous_data.get("stories", []):
+        key = normalise_title(item.get("source_signal_title") or item.get("title", ""))
+        if key and key not in index:
+            index[key] = item
+
+    return index
 
 
 def build_story_page(
@@ -1219,7 +1270,6 @@ def build_homepage_page(updated_time, at_a_glance_items, lead_story, story_cards
 
 
 def build_outline_prompt(signals):
-    story_counts_json = json.dumps(SECTION_STORY_COUNTS, indent=2)
     sport_signals = [s for s in signals if s["section"] == "Sport"]
     sport_signals = sorted(sport_signals, key=score_sport_signal, reverse=True)
 
@@ -1264,6 +1314,9 @@ EDITORIAL RULES:
 - Use timestamps and recency intelligently.
 - Reuse source titles closely. Do not write theatrical or overly rewritten headlines.
 - Every story must include a source_signal_title that exactly matches one source signal title from the list, except sport state-of-play items may use the closest relevant matching source title.
+- In every summary, explicitly name the main person, place, institution or location when the source title or summary gives it.
+- Do not replace a known name or place with vague labels like "a British computer scientist", "a location in Haiti", "a senior official", or "a company".
+- If the source title or source summary contains a concrete date, count, percentage, money figure, casualty number, or other quantifiable detail, include at least one such detail in the summary.
 - Do not invent direct quotes.
 - Do not make up precise statistics not clearly supported by the source signals.
 - Treat source metadata seriously.
@@ -1272,9 +1325,6 @@ EDITORIAL RULES:
 - Mention framing differences only when meaningful.
 - Do not automatically treat all viewpoints as equally well supported.
 - Story types allowed: News, Analysis, Explainer, Profile, Feature.
-
-SECTION STORY COUNTS:
-{story_counts_json}
 
 Return JSON matching the schema exactly.
 """
@@ -1288,7 +1338,7 @@ STORIES TO WRITE:
 {json.dumps(stories_to_write, ensure_ascii=False, indent=2)}
 
 SOURCE SIGNALS:
-{json.dumps(signals[:110], ensure_ascii=False, indent=2)}
+{json.dumps(signals[:120], ensure_ascii=False, indent=2)}
 
 EDITORIAL RULES:
 - British English.
@@ -1303,8 +1353,11 @@ EDITORIAL RULES:
 - For major geopolitical tensions, explain what earlier phases, flashpoints or negotiations form the backdrop.
 - For Sport, stay tightly focused on Cardiff City, Tampa Bay Buccaneers, NFL, football transfer developments or gossip, and cycling.
 - Do not drift into generic sport.
-- No invented quotes.
-- No unsupported precise figures.
+- In paragraph 1, explicitly name the main person, place, institution or location if the source title or source summary gives it.
+- Do not replace a known name or place with vague labels like "a British computer scientist", "a location in Haiti", "a senior official", or "a company".
+- If numeric_hints are provided for a story, include at least one concrete fact, figure, count, percentage, date, or measurable detail from those hints somewhere in the body.
+- Do not invent direct quotes.
+- Do not invent unsupported precise figures.
 - Avoid robotic phrasing.
 - Keep the prose tight but useful.
 - Every paragraph must add substance.
@@ -1406,6 +1459,8 @@ for section_name in SECTION_ORDER:
 
 previous_lead = previous_index.get(lead_key, {})
 lead_body = previous_lead.get("body", []) if previous_lead else []
+if body_needs_regeneration(lead_body):
+    lead_body = []
 
 stories_to_generate = []
 if not lead_body:
@@ -1415,6 +1470,11 @@ if not lead_body:
         "story_type": lead_type,
         "summary": lead_summary,
         "source_signal_title": lead_source_signal_title,
+        "source_title": lead_signal.get("title", ""),
+        "source_summary": lead_signal.get("summary", ""),
+        "source_name": lead_signal.get("source", ""),
+        "published_at": lead_signal.get("published_at", ""),
+        "numeric_hints": lead_signal.get("numeric_hints", []),
         "paragraph_count": 6,
     })
 
@@ -1422,7 +1482,10 @@ for story in planned_stories:
     key = normalise_title(story["source_signal_title"] or story["title"])
     previous_story = previous_index.get(key, {})
     story["previous"] = previous_story
+    signal = signal_by_title.get(story["source_signal_title"]) or signal_by_key.get(key, {})
     body = previous_story.get("body", []) if previous_story else []
+    if body_needs_regeneration(body):
+        body = []
     if not body:
         stories_to_generate.append({
             "title": story["title"],
@@ -1430,6 +1493,11 @@ for story in planned_stories:
             "story_type": story["story_type"],
             "summary": story["summary"],
             "source_signal_title": story["source_signal_title"],
+            "source_title": signal.get("title", ""),
+            "source_summary": signal.get("summary", ""),
+            "source_name": signal.get("source", ""),
+            "published_at": signal.get("published_at", ""),
+            "numeric_hints": signal.get("numeric_hints", []),
             "paragraph_count": 4 if story["is_section_lead"] else 3,
         })
 
@@ -1510,6 +1578,8 @@ for story in planned_stories:
         story_url = f"stories/{filename}"
 
     body = previous_story.get("body", []) if previous_story else []
+    if body_needs_regeneration(body):
+        body = []
     body = body or generated_bodies.get(title, [])
 
     if not body:
